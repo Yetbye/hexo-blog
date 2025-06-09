@@ -21,7 +21,7 @@ menu:
   # List||fas fa-list:
   #   Music: /music/ || fas fa-music
   #   Movie: /movies/ || fas fa-video
-  Hone: / || fas fa-skull
+  Home: / || fas fa-skull
   Note: /notes/ || fas fa-crown
   Moments: /moments/ || fas fa-camera
   八音盒: /music/ || fas fa-compact-disc
@@ -57,14 +57,14 @@ social:
   # fab fa-github: https://github.com/xxxxx || Github || '#24292e'
   # fas fa-envelope: mailto:xxxxxx@gmail.com || Email || '#4a7dbe'
   fab fa-github: https://github.com/Yetbye || Github
-  fas fa-envelope: mailto:3111309629@qq.com || Email
+  # fas fa-envelope: mailto:3111309629@qq.com || Email
   fab fa-zhihu: https://www.zhihu.com/people/80-34-65-84-64 || Zhihu
 
 # --------------------------------------
 # Image Settings
 # --------------------------------------
 
-favicon: /image/media/favion.jpg
+favicon: /image/media/favion.ico
 
 avatar:
   img: /image/media/avatar.jpg
