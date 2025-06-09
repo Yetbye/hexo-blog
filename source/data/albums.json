@@ -1,0 +1,51 @@
+[
+    {
+        "title": "LADY",
+        "artist": "米津玄师",
+        "cover": "/image/albums/lady.jpg",
+        "year": 2023,
+        "audio": "/audio/lady.mp3"
+    },
+    {
+        "title": "カナタハルカ",
+        "artist": "RADWIMPS",
+        "cover": "/image/albums/遥远的彼方.jpg",
+        "year": 2023,
+        "audio": "/audio/カナタハルカ.mp3"
+    },
+    {
+        "title": "BLUE",
+        "artist": "Troye Sivan",
+        "cover": "/image/albums/blue.jpg",
+        "year": 2015,
+        "audio": "/audio/blue.mp3"
+    },
+    {
+        "title": "Beautiful World",
+        "artist": "宇多田光",
+        "cover": "",
+        "year": 2021,
+        "audio": "/audio/宇多田光 - Beautiful World (Da Capo Version).mp3"
+    },
+    {
+        "title": "Lonely",
+        "artist": "Justin Bieber",
+        "cover": "",
+        "year": 2021,
+        "audio": "/audio/Justin Bieber、Benny Blanco - Lonely.flac"
+    },
+    {
+        "title": "Walk on Water",
+        "artist": "Eminem",
+        "cover": "",
+        "year": 2015,
+        "audio": "/audio/Eminem、Beyoncé - Walk On Water (Explicit).mp3"
+    },
+    {
+        "title": "YOU",
+        "artist": "Troye Sivan",
+        "cover": "",
+        "year": 2022,
+        "audio":"/audio/Regard、Troye Sivan、Tate McRae - You (Explicit).mp3"
+    }
+]

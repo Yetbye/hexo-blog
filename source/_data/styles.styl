@@ -1,0 +1,27 @@
+/* 导航栏居中 */
+#nav .menu.menum {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
+}
+
+/* 菜单项样式调整 */
+#nav .menus_items {
+    display: flex;
+    align-items: center;
+}
+
+#nav .menus_item {
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 900px) {
+    #nav .menu.menum {
+        position: static;
+        transform: none;
+        width: 100%;
+    }
+}

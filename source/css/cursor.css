@@ -1,0 +1,19 @@
+/* 定义鼠标指针样式 */
+:root {
+  --cursor-default: url('/image/media/goust.cur'), default;
+  --cursor-pointer: url('/image/media/goust.cur'), pointer;
+  /* --cursor-text: url('cute'), text; */
+}
+
+/* 应用鼠标样式 */
+body, html {
+  cursor: var(--cursor-default);
+}
+
+a, [href], button, input[type='button'], input[type='submit'] {
+  cursor: var(--cursor-pointer);
+}
+
+/* input[type='text'], input[type='password'], textarea {
+  cursor: var(--cursor-text);  
+}

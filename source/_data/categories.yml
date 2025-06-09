@@ -1,0 +1,19 @@
+# 格式说明：
+# name: 分类名称（必须与你的实际分类名称完全匹配）
+# cover: 封面图片路径
+# description: 分类描述文本
+
+- name: DL-cards
+  cover: /image/postcover/DL-cards.jpeg
+  description: "深度学习基础概念"
+
+- name: algo模板题解
+  cover: /image/postcover/algo.jpeg
+  description: "解题模板集合"
+
+- name: Quant-cards
+  cover: /image/postcover/quant.jpeg
+  description: "quant基础概念"
+
+# 为所有需要特殊封面的分类添加配置
+# 未配置的分类将使用默认封面

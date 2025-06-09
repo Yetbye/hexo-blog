@@ -1,0 +1,53 @@
+[
+  {
+    "name": "DL-cards",
+    "slug": "dl-cards",
+    "icon": "fas fa-brain",
+    "subtitle": "深度学习基础概念笔记",
+    "articles": [
+      {"title": "基础梯度下降方法介绍", "slug":"Gradient Descent", "date": "2025-06-02", "icon": "fas fa-microchip"},
+      {"title": "验证集", "slug": "Validation Set", "date": "2025-06-02", "icon": "fas fa-project-diagram"},
+      {"title": "Transformer模型详解", "date": "2025-06-03", "icon": "fas fa-network-wired"},
+      {"title": "生成对抗网络(GAN)实战", "date": "2025-06-03", "icon": "fas fa-robot"}
+    ]
+  },
+  {
+    "name": "诗词格律",
+    "slug": "poetry",
+    "icon": "fas fa-feather-alt",
+    "subtitle": "初二的手抄笔记，摘自启功《诗词格律》，闲时更新",
+    "articles": [
+      {"title": "唐诗格律基础与演变", "date": "2025-06-03", "icon": "fas fa-dragon"},
+      {"title": "宋词常见词牌解析", "date": "2025-06-03", "icon": "fas fa-music"},
+      {"title": "平仄规律与创作技巧", "date": "2025-06-03", "icon": "fas fa-pen-nib"},
+      {"title": "现代诗歌的韵律探索", "date": "2025-06-03", "icon": "fas fa-book"}
+    ]
+  },
+  {
+    "name": "quant-cards",
+    "slug": "quant-cards",
+    "icon": "fas fa-chart-line",
+    "subtitle": "量化基础概念卡片，先挖坑",
+    "articles": []
+  },
+  {
+    "name": "NLP",
+    "slug": "nlp",
+    "icon": "fas fa-language",
+    "subtitle": "自然语言处理技术",
+    "articles": [
+      {"title": "BERT模型原理与应用", "date": "2025-06-04", "icon": "fas fa-comment-dots"},
+      {"title": "文本情感分析实战", "date": "2025-06-04", "icon": "fas fa-smile"}
+    ]
+  },
+  {
+    "name": "YOLO-od",
+    "slug": "yolo-od",
+    "icon": "fas fa-eye",
+    "subtitle": "目标检测算法研究",
+    "articles": [
+      {"title": "YOLOv1原理解析", "slug": "YOLOv1", "date": "2025-06-06", "icon": "fas fa-project-diagram"},
+      {"title": "YOLOv5架构详解", "slug": "YOLOv5", "date": "2025-06-05", "icon": "fas fa-bullseye"}
+    ]
+  }
+]

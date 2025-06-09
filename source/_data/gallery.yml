@@ -1,0 +1,18 @@
+# 相册文件
+blue:
+  images:
+    - path: "/image/gallery/blue/1.jpg"
+    - path: "/image/gallery/blue/2.jpg"
+    - path: "/image/gallery/blue/3.jpg"
+
+green:
+  images:
+    - path: "/image/gallery/green/1.png"
+    - path: "/image/gallery/green/2.jpg"
+    - path: "/image/gallery/green/3.jpg"
+
+pink:
+  images:
+    - path: "/image/gallery/pink/1.jpg"
+    - path: "/image/gallery/pink/2.jpg"
+    - path: "/image/gallery/pink/3.jpg"

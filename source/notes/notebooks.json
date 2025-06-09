@@ -1,0 +1,45 @@
+[
+  {
+    "name": "DL-cards",
+    "slug": "dl-cards",
+    "icon": "fas fa-brain",
+    "subtitle": "深度学习基础概念笔记",
+    "articles": [
+      {"title": "基础梯度下降方法介绍", "slug":"Gradient Descent", "date": "2025-06-02", "icon": "fas fa-microchip"},
+      {"title": "验证集", "slug": "Validation Set", "date": "2025-06-02", "icon": "fas fa-project-diagram"}
+    ]
+  },
+  {
+    "name": "诗词格律",
+    "slug": "poetry",
+    "icon": "fas fa-feather-alt",
+    "subtitle": "初二的手抄笔记，摘自启功《诗词格律》，闲时更新",
+    "articles": []
+  },
+  {
+    "name": "quant-cards",
+    "slug": "quant-cards",
+    "icon": "fas fa-chart-line",
+    "subtitle": "量化基础概念卡片，先挖坑",
+    "articles": []
+  },
+  {
+    "name": "NLP",
+    "slug": "nlp",
+    "icon": "fas fa-language",
+    "subtitle": "自然语言处理技术及应用",
+    "articles": [
+      {"title": "文本情感分析实战", "slug": "RealW_2", "date": "2025-06-04", "icon": "fas fa-smile"}
+    ]
+  },
+  {
+    "name": "YOLO-od",
+    "slug": "yolo-od",
+    "icon": "fas fa-eye",
+    "subtitle": "目标检测算法探究",
+    "articles": [
+      {"title": "YOLOv1原理解析", "slug": "YOLOv1", "date": "2025-06-06", "icon": "fas fa-project-diagram"},
+      {"title": "YOLOv2架构详解", "slug": "YOLOv2", "date": "2025-06-07", "icon": "fas fa-bullseye"}
+    ]
+  }
+]
