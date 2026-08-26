@@ -1,0 +1,123 @@
+/* ============================================================
+   Venus 樱吹雪 · 全站文章排版预设
+   通过 _config.butterfly.yml 的 inject.head 加载
+   作用于 .article-container（博客文章正文），自定义页有独立作用域不受影响
+   ============================================================ */
+/* 注：导航栏保持主题默认布局（用户明确不要居中，2025-08 回退） */
+
+/* ---- 文章正文排版 ---- */
+.article-container {
+    --v-ink: #3A2828;
+    --v-ink2: #6A5050;
+    --v-ink3: #A08888;
+    --v-plum: #8B4570;
+    --v-sakura: #E86B8A;
+    --v-line: #F0E0D8;
+    --v-paper2: #FFF5F0;
+}
+
+/* 标题：衬线体 + 樱色书脊线 */
+.article-container h1,
+.article-container h2,
+.article-container h3 {
+    font-family: 'Noto Serif SC', 'Playfair Display', Georgia, serif;
+    color: var(--v-ink);
+    letter-spacing: 0.03em;
+}
+.article-container h2 {
+    border-left: 4px solid var(--v-sakura);
+    padding-left: 0.7em;
+    margin-top: 2em;
+}
+.article-container h3::before {
+    content: '✿ ';
+    color: var(--v-sakura);
+    font-size: 0.75em;
+    opacity: 0.85;
+}
+
+/* 引用：宣纸底 + 双色渐变竖线 */
+.article-container blockquote {
+    background: linear-gradient(135deg, var(--v-paper2), #fff);
+    border-left: 4px solid;
+    border-image: linear-gradient(to bottom, var(--v-sakura), var(--v-plum)) 1;
+    border-radius: 0 12px 12px 0;
+    color: var(--v-ink2);
+    padding: 0.6em 1.2em;
+    margin: 1.2em 0;
+}
+.article-container blockquote p { margin: 0.35em 0; }
+
+/* 分隔线：波浪点 */
+.article-container hr {
+    border: none;
+    text-align: center;
+    margin: 2.2em 0;
+}
+.article-container hr::after {
+    content: '✿ ✿ ✿';
+    color: var(--v-sakura);
+    font-size: 0.85rem;
+    letter-spacing: 1.2em;
+    padding-left: 1.2em;
+    opacity: 0.75;
+}
+
+/* 链接：底部红线滑入 */
+.article-container a:not(.fancybox) {
+    color: var(--v-plum);
+    text-decoration: none;
+    background: linear-gradient(var(--v-sakura), var(--v-sakura)) no-repeat left bottom / 0% 1.5px;
+    transition: background-size 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    padding-bottom: 2px;
+}
+.article-container a:not(.fancybox):hover { background-size: 100% 1.5px; }
+
+/* 表格：细樱线 + 斑马纹 */
+.article-container table {
+    border-collapse: collapse;
+    margin: 1.4em auto;
+    font-size: 0.92em;
+    max-width: 100%;
+}
+.article-container th {
+    font-family: 'Noto Serif SC', serif;
+    background: var(--v-paper2);
+    color: var(--v-ink);
+    border-bottom: 2px solid var(--v-sakura);
+}
+.article-container th,
+.article-container td {
+    border: 1px solid var(--v-line);
+    padding: 0.5em 1em;
+}
+.article-container tr:nth-child(even) td { background: rgba(255, 245, 240, 0.55); }
+
+/* 行内代码与列表 */
+.article-container code:not(pre code) {
+    background: var(--v-paper2);
+    color: var(--v-plum);
+    border: 1px solid var(--v-line);
+    border-radius: 6px;
+    padding: 1px 7px;
+}
+.article-container ul li,
+.article-container ol li { margin: 0.3em 0; }
+.article-container li::marker { color: var(--v-sakura); }
+
+/* 图片圆角 */
+.article-container img { border-radius: 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+    .article-container a:not(.fancybox) { transition: none; }
+}
+
+/* ---- 页脚鱼缸定位保障（T1）：鲸鱼属于页尾，不固定视口 ----
+   fish.js 将 .fish_container 追加进 <footer> 并占 160px 高度；
+   #footer 需为定位上下文，#footer-wrap 的 absolute 才会框在页脚内。
+   注：此前此处曾有 .fish_container{position:fixed} 覆盖层，导致
+   页尾塌陷、鲸鱼悬浮视口 —— 已按用户要求移除，恢复鱼在页尾游。 */
+#footer {
+    position: relative;
+    overflow: hidden;
+}

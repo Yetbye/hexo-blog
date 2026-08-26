@@ -3,9 +3,30 @@
     "date": "2025-6-7",
     "content": "主播爆照",
     "images": ["/image/moment/1.jpg"],
-    "likes": 42,
+    "likes": 72,
     "liked": true,
     "location": "活动中心",
-    "tags": ["彭于晏"]
+    "tags": ["锕系噶亚库奶龙"]
+  },
+  {
+    "date": "2025-6-12",
+    "content": "期待大富翁😍😍😍",
+    "likes": 43,
+    "liked": false,
+    "locatoin": "集中营"
+  },
+  {
+    "date": "2025-6-17",
+    "content": "这是一层上等的抽象",
+    "images": ["/image/moment/3.jpg"],
+    "likes": 188,
+    "liked": false,
+    "location": "集中营"
+  },
+  {
+    "date": "2025-11-1",
+    "content": "感觉之前好颠，完全在这里发疯了",
+    "likes": 0,
+    "liked": false
   }
 ]

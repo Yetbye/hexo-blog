@@ -6,3 +6,6 @@ node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+# 论文库（668MB junction），不入博客仓库
+docs/
+source/docs/

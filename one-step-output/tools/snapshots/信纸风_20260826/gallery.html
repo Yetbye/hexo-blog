@@ -1,0 +1,185 @@
+<!-- ============ 调色盘 · 复古信纸风（SHUOSHUO_DESIGN_SPEC v1）============ -->
+<!-- 设计 DNA：米黄格纹信纸底 + paper 卡片（近直角/硬投影/随机微旋转） +
+     衬线大字渐变下划线 + 朱砂印章「藏」 + 青海波饰带降饱和入棕调 -->
+<div class="pt-scroll">
+  <!-- 信纸饰带：青海波（棕调降饱和） -->
+  <div class="pt-seigaiha-band" aria-hidden="true"></div>
+
+  <div class="pt-inner">
+    <header class="pt-hero">
+      <div class="pt-hero-text">
+        <span class="pt-eyebrow">COLOR PALETTE · GALLERY</span>
+        <h1 class="pt-title">调 色 盘</h1>
+        <p class="pt-sub">四册画集，收在信纸里的颜色</p>
+      </div>
+      <span class="pt-seal" aria-hidden="true">藏</span>
+    </header>
+
+    <section class="pt-grid">
+      <a class="pt-card" href="blue/" style="--acc:#4E6E85">
+        <div class="pt-cover" style="background-image:url('/image/gallery/blue/cover.jpg')"></div>
+        <div class="pt-meta">
+          <b>Blue <span class="pt-cn">青</span></b>
+          <p>海与远方的蓝</p>
+          <span class="pt-date">第一卷 · 海的信笺</span>
+          <span class="pt-go">入卷 →</span>
+        </div>
+      </a>
+      <a class="pt-card" href="green/" style="--acc:#5F7D63">
+        <div class="pt-cover" style="background-image:url('/image/gallery/green/cover.jpg')"></div>
+        <div class="pt-meta">
+          <b>Green <span class="pt-cn">苍</span></b>
+          <p>草木生长的绿</p>
+          <span class="pt-date">第二卷 · 草木的信笺</span>
+          <span class="pt-go">入卷 →</span>
+        </div>
+      </a>
+      <a class="pt-card" href="pink/" style="--acc:#B03A5B">
+        <div class="pt-cover" style="background-image:url('/image/gallery/pink/cover.jpg')"></div>
+        <div class="pt-meta">
+          <b>Pink <span class="pt-cn">桃</span></b>
+          <p>春日将尽未尽的粉</p>
+          <span class="pt-date">第三卷 · 春的信笺</span>
+          <span class="pt-go">入卷 →</span>
+        </div>
+      </a>
+      <a class="pt-card" href="Impressionism/" style="--acc:#8F6B8F">
+        <div class="pt-cover pt-cover-imp" aria-hidden="true"><b>🎨</b></div>
+        <div class="pt-meta">
+          <b>Impressionism <span class="pt-cn">彩</span></b>
+          <p>印象派的碎光</p>
+          <span class="pt-date">第四卷 · 光的信笺</span>
+          <span class="pt-go">入卷 →</span>
+        </div>
+      </a>
+    </section>
+
+    <!-- 纸边褐波浪分隔 -->
+    <div class="pt-wave-divider" aria-hidden="true">
+      <svg viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><path d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z" fill="#8a7560" opacity=".22"/></svg>
+    </div>
+
+    <footer class="pt-foot"><span>✿</span><p>光落进信纸里，就成了画</p></footer>
+  </div>
+</div>
+
+<style>
+/* ===== 容器：米黄底 + 格纹信纸底纹 ===== */
+.pt-scroll{
+  --light-bg:#f5f1e8; --paper:#fff9e6; --border:#d9c7a1;
+  --ink:#3e2723; --secondary:#5d4037; --shadow:rgba(93,64,55,.2); --brass:#8a7560;
+  position:relative; min-height:100vh; padding:20px;
+  background:var(--light-bg) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><rect fill="none" width="100" height="100"/><path d="M0,50 L100,50" stroke="%233e2723" stroke-width="1"/><path d="M50,0 L50,100" stroke="%233e2723" stroke-width="1"/></svg>');
+  background-size:100px 100px;
+  font-family:'Noto Serif SC',Georgia,serif; color:var(--ink);
+  overflow-x:hidden; line-height:1.6;
+}
+.pt-inner{max-width:1100px;margin:0 auto;position:relative;z-index:2}
+
+/* ===== 饰带：青海波降饱和入棕调 ===== */
+.pt-seigaiha-band{
+  height:56px;border-radius:6px 6px 0 0;opacity:.75;
+  background-color:var(--secondary);
+  background-image:radial-gradient(circle at 50% 100%, transparent 9px, rgba(255,249,230,.85) 10px, transparent 11px),
+                   radial-gradient(circle at 50% 100%, transparent 19px, rgba(255,249,230,.55) 20px, transparent 21px),
+                   radial-gradient(circle at 50% 100%, transparent 29px, rgba(255,249,230,.35) 30px, transparent 31px);
+  background-size:40px 20px;
+}
+
+/* ===== header：衬线大字 + 渐变下划线 + italic 副题 ===== */
+.pt-hero{position:relative;display:flex;align-items:center;justify-content:center;padding:2.6rem 1rem 2.1rem;text-align:center}
+.pt-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.4em;color:var(--brass);display:inline-block;margin-bottom:.55rem}
+.pt-title{
+  font-weight:700;font-size:clamp(2.3rem,5.5vw,3.5rem);letter-spacing:3px;margin:.15rem 0 .9rem;color:var(--ink);
+  position:relative;display:inline-block;
+}
+.pt-title::after{
+  content:"";position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);
+  width:200px;height:4px;background:linear-gradient(90deg,transparent,var(--secondary),transparent);
+}
+.pt-sub{font-size:1.4rem;color:var(--secondary);font-style:italic;margin:.9rem 0 0}
+.pt-seal{
+  position:absolute;left:4%;top:48px;width:58px;height:58px;display:grid;place-items:center;
+  background:#B03A5B;color:#fff;font-size:1.5rem;font-weight:900;
+  border-radius:6px;transform:rotate(-5deg);box-shadow:3px 3px 10px var(--shadow);
+}
+.pt-seal::after{content:'';position:absolute;inset:4px;border:1.5px solid rgba(255,255,255,.55);border-radius:4px}
+
+/* ===== 入口卡：motto-card 变体 ===== */
+.pt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:35px;padding-bottom:.6rem}
+.pt-card{
+  position:relative;display:block;text-decoration:none;color:var(--ink);
+  background:var(--paper);border:1px solid var(--border);border-radius:4px;overflow:hidden;
+  box-shadow:3px 3px 10px var(--shadow);
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+/* 斜线纹理 */
+.pt-card::before{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.08"><rect fill="none" width="100" height="100"/><path d="M20,0 L0,20" stroke="%235d4037" stroke-width="0.5" stroke-dasharray="5,5"/><path d="M40,0 L0,40" stroke="%235d4037" stroke-width="0.5" stroke-dasharray="5,5"/></svg>');
+  background-size:30px 30px;
+}
+/* 随机微旋转——手贴便签的灵魂 */
+.pt-card:nth-child(3n+1){transform:rotate(-1deg)}
+.pt-card:nth-child(3n+2){transform:rotate(.5deg)}
+.pt-card:nth-child(3n+3){transform:rotate(1.2deg)}
+.pt-card:hover{transform:rotate(0) scale(1.02);box-shadow:5px 5px 15px rgba(0,0,0,.2);z-index:2}
+
+.pt-cover{position:relative;height:225px;background-size:cover;background-position:center;border-bottom:1px solid var(--border);transition:transform .5s ease}
+.pt-card:hover .pt-cover{transform:scale(1.04)}
+/* 无封面的印象派卡：paper 底 + 褪色颜料点 */
+.pt-cover-imp{
+  display:grid;place-items:center;font-size:54px;
+  background:
+   radial-gradient(circle 42px at 18% 28%, rgba(176,58,91,.22), transparent 70%),
+   radial-gradient(circle 34px at 80% 22%, rgba(93,64,55,.16), transparent 70%),
+   radial-gradient(circle 46px at 72% 78%, rgba(143,107,143,.26), transparent 72%),
+   radial-gradient(circle 30px at 28% 80%, rgba(201,168,108,.3), transparent 70%),
+   linear-gradient(135deg,#fff9e6,#f3ecd9);
+}
+.pt-cover-imp b{filter:drop-shadow(0 3px 8px rgba(62,39,35,.22))}
+
+.pt-meta{padding:1.05rem 1.25rem 1.1rem}
+.pt-meta b{font-size:1.08rem;letter-spacing:.05em;color:var(--ink)}
+.pt-cn{
+  float:right;width:30px;height:30px;border-radius:4px;display:grid;place-items:center;
+  background:var(--acc,var(--secondary));color:#fff;font-size:.95rem;
+  box-shadow:2px 2px 6px var(--shadow);
+}
+.pt-meta p{margin:.3rem 0 .45rem;color:var(--brass);font-size:.87rem}
+/* 日期行：dashed 分隔 · 右对齐 · italic */
+.pt-date{
+  display:block;text-align:right;font-style:italic;font-size:.82rem;color:var(--secondary);
+  border-top:1px dashed var(--border);padding-top:.55rem;margin-top:.55rem;
+}
+.pt-go{
+  display:inline-block;margin-top:.55rem;font-size:.78rem;letter-spacing:.16em;
+  color:var(--acc,var(--secondary));border-bottom:1px dashed var(--acc,var(--secondary));padding-bottom:2px;
+  opacity:0;transition:opacity .3s;
+}
+.pt-card:hover .pt-go{opacity:1}
+
+.pt-wave-divider{line-height:0;margin-top:2.2rem}
+.pt-wave-divider svg{width:100%;height:26px}
+
+.pt-foot{text-align:center;margin-top:1.2rem}
+.pt-foot span{color:var(--brass);font-size:1.05rem}
+.pt-foot p{font-family:'Ma Shan Zheng',cursive;color:var(--secondary);font-size:1.05rem;margin:.3rem 0 0}
+
+/* ===== 响应式 ===== */
+@media (max-width:900px){
+  .pt-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:30px}
+  .pt-title{font-size:clamp(2rem,6vw,3rem)}
+}
+@media (max-width:640px){
+  .pt-scroll{padding:14px}
+  .pt-grid{grid-template-columns:1fr;gap:25px}
+  .pt-hero{padding:1.9rem .4rem 1.5rem}
+  .pt-seal{width:48px;height:48px;font-size:1.25rem;top:38px}
+  .pt-sub{font-size:1.2rem}
+}
+/* 动效可停 */
+@media (prefers-reduced-motion:reduce){
+  .pt-scroll *,.pt-scroll *::before,.pt-scroll *::after{transition:none!important;animation:none!important}
+}
+</style>

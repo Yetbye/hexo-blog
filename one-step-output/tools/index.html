@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>花间小筑 · 内容管理</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&family=Ma+Shan+Zheng&family=JetBrains+Mono&display=swap" rel="stylesheet">
+<style>
+/* ================= Venus Base ================= */
+:root {
+  /* Palette D 樱吹雪 (admin-adapted) */
+  --bg-primary:#FFFBF8; --bg-secondary:#FFF5F0; --bg-tertiary:#F0E0D8;
+  --ink-1:#3A2828; --ink-2:#6A5050; --ink-3:#A08888;
+  --plum:#8B4570; --pine:#5A7B6B; --wisteria:#6B5B8B;
+  --sakura:#E86B8A; --gold:#D4A87A; --blush:#FFB7C5;
+  --danger:#C44D3F; --ok:#5A7B6B;
+
+  --font-display:'Noto Serif SC',Georgia,serif;
+  --font-body:'Noto Sans SC',-apple-system,sans-serif;
+  --font-hand:'Ma Shan Zheng',cursive;
+  --font-mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --r-sm:6px; --r-md:12px; --r-lg:18px;
+  --shadow-sm:0 2px 8px rgba(139,69,112,.07);
+  --shadow-md:0 4px 20px rgba(139,69,112,.12);
+  --shadow-lg:0 10px 40px rgba(139,69,112,.16);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { height:100%; }
+body {
+  font-family:var(--font-body); background:var(--bg-primary); color:var(--ink-1);
+  font-size:15px; line-height:1.7; display:flex; overflow:hidden;
+}
+::selection { background:var(--blush); }
+button { font-family:inherit; cursor:pointer; border:none; background:none; }
+input,select,textarea { font-family:inherit; font-size:14px; color:var(--ink-1); }
+h1,h2,h3,h4 { font-family:var(--font-display); }
+
+/* paper texture */
+body::before {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .96 0 0 0 0 .93 0 0 0 0 .91 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ================= Sidebar ================= */
+aside {
+  width:232px; flex-shrink:0; height:100vh; overflow-y:auto;
+  background:linear-gradient(180deg,#FFF5F0 0%,#FFFBF8 60%);
+  border-right:1px solid var(--bg-tertiary); padding:28px 14px 20px;
+  display:flex; flex-direction:column; gap:4px; position:relative; z-index:2;
+}
+.brand { display:flex; align-items:center; gap:10px; padding:0 10px 22px; }
+.brand .mark {
+  width:42px; height:42px; border-radius:50%; background:var(--plum); color:#fff;
+  font-family:var(--font-hand); font-size:24px; display:grid; place-items:center;
+  box-shadow:var(--shadow-md); flex-shrink:0;
+}
+.brand b { font-family:var(--font-display); font-size:17px; letter-spacing:.06em; }
+.brand small { display:block; font-size:11px; color:var(--ink-3); font-weight:400; }
+.nav-item {
+  display:flex; align-items:center; gap:11px; padding:9px 13px; border-radius:10px;
+  color:var(--ink-2); font-size:14px; transition:all .25s var(--ease); text-align:left; width:100%;
+}
+.nav-item .ico { width:19px; text-align:center; font-size:15px; opacity:.85; }
+.nav-item:hover { background:rgba(232,107,138,.08); color:var(--plum); transform:translateX(3px); }
+.nav-item.active { background:var(--plum); color:#fff; box-shadow:0 4px 14px rgba(139,69,112,.3); }
+.nav-sep { margin:14px 10px 6px; font-size:11px; color:var(--ink-3); letter-spacing:.15em; }
+.side-foot { margin-top:auto; padding:12px 10px 0; border-top:1px dashed var(--bg-tertiary); }
+.token-pill {
+  display:flex; align-items:center; gap:7px; font-size:12px; color:var(--ink-3);
+  padding:7px 10px; border-radius:8px; width:100%; transition:background .2s;
+}
+.token-pill:hover { background:rgba(90,123,107,.1); color:var(--pine); }
+.dot { width:7px; height:7px; border-radius:50%; background:var(--ink-3); }
+.dot.on { background:var(--ok); box-shadow:0 0 6px var(--ok); }
+
+/* ================= Main ================= */
+main { flex:1; height:100vh; overflow-y:auto; padding:34px 40px 60px; position:relative; z-index:1; scroll-behavior:smooth; }
+.view { display:none; max-width:1080px; margin:0 auto; animation:fadein .35s var(--ease); }
+.view.active { display:block; }
+@keyframes fadein { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+.page-head { display:flex; align-items:baseline; gap:14px; margin-bottom:24px; flex-wrap:wrap; }
+.page-head h1 { font-size:26px; font-weight:900; letter-spacing:.04em; }
+.page-head .sub { color:var(--ink-3); font-size:13px; }
+.page-head .spacer { flex:1; }
+
+/* ================= Cards & stats ================= */
+.card {
+  background:#fff; border:1px solid var(--bg-tertiary); border-radius:var(--r-lg);
+  padding:22px 24px; box-shadow:var(--shadow-sm); margin-bottom:20px;
+}
+.stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin-bottom:22px; }
+.stat {
+  background:#fff; border:1px solid var(--bg-tertiary); border-radius:var(--r-lg);
+  padding:18px 20px; position:relative; overflow:hidden; transition:transform .3s var(--ease),box-shadow .3s;
+}
+.stat:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.stat .num { font-family:var(--font-display); font-size:32px; font-weight:900; color:var(--plum); line-height:1.2; }
+.stat .lbl { font-size:12.5px; color:var(--ink-3); margin-top:2px; }
+.stat::after { content:''; position:absolute; right:-18px; top:-18px; width:64px; height:64px; border-radius:50%; background:var(--bg-secondary); }
+
+/* ================= Buttons ================= */
+.btn {
+  display:inline-flex; align-items:center; gap:7px; padding:8px 18px; border-radius:999px;
+  font-size:13.5px; font-weight:500; letter-spacing:.03em; transition:all .25s var(--ease);
+  border:1px solid transparent;
+}
+.btn-p { background:var(--plum); color:#fff; }
+.btn-p:hover { background:#74385c; transform:translateY(-2px); box-shadow:0 6px 18px rgba(139,69,112,.35); }
+.btn-o { border-color:var(--plum); color:var(--plum); background:transparent; }
+.btn-o:hover { background:var(--plum); color:#fff; transform:translateY(-2px); }
+.btn-g { color:var(--ink-2); border-color:var(--bg-tertiary); background:#fff; }
+.btn-g:hover { border-color:var(--sakura); color:var(--sakura); }
+.btn-d { color:var(--danger); border-color:transparent; background:rgba(196,77,63,.07); }
+.btn-d:hover { background:var(--danger); color:#fff; }
+.btn-s { padding:4px 12px; font-size:12px; }
+.btn:disabled { opacity:.45; cursor:not-allowed; transform:none!important; box-shadow:none!important; }
+
+/* ================= Forms ================= */
+.field { margin-bottom:14px; }
+.field label { display:block; font-size:12.5px; color:var(--ink-2); font-weight:500; margin-bottom:5px; letter-spacing:.05em; }
+.inp, textarea.inp, select.inp {
+  width:100%; padding:9px 13px; border:1.5px solid var(--bg-tertiary); border-radius:10px;
+  background:var(--bg-primary); outline:none; transition:border-color .2s,box-shadow .2s;
+}
+.inp:focus { border-color:var(--sakura); box-shadow:0 0 0 3px rgba(232,107,138,.12); }
+textarea.inp { resize:vertical; line-height:1.75; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+
+/* ================= Tables / lists ================= */
+.tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
+.tbl th { text-align:left; padding:9px 12px; color:var(--ink-3); font-weight:500; font-size:12px; letter-spacing:.08em; border-bottom:1.5px solid var(--bg-tertiary); }
+.tbl td { padding:11px 12px; border-bottom:1px solid var(--bg-secondary); vertical-align:top; }
+.tbl tr:hover td { background:rgba(255,245,240,.7); }
+.tag-chip {
+  display:inline-block; padding:1px 10px; border-radius:999px; font-size:11.5px;
+  background:var(--bg-secondary); color:var(--ink-2); border:1px solid var(--bg-tertiary); margin:1px 3px 1px 0;
+}
+
+/* ================= Composer (说说/动态) ================= */
+.composer { border-left:4px solid var(--sakura); }
+.composer h3 { font-size:16px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.timeline { position:relative; padding-left:26px; }
+.timeline::before { content:''; position:absolute; left:8px; top:6px; bottom:6px; width:2px; background:linear-gradient(var(--blush),var(--bg-tertiary)); border-radius:2px; }
+.tl-item { position:relative; padding:14px 18px; background:#fff; border:1px solid var(--bg-tertiary); border-radius:14px; margin-bottom:14px; transition:all .25s var(--ease); }
+.tl-item:hover { border-color:var(--blush); box-shadow:var(--shadow-sm); }
+.tl-item::before { content:'✿'; position:absolute; left:-27px; top:16px; color:var(--sakura); font-size:13px; background:var(--bg-primary); }
+.tl-meta { display:flex; gap:10px; align-items:center; font-size:12px; color:var(--ink-3); margin-bottom:5px; }
+.tl-content { font-size:14.5px; }
+.tl-actions { margin-top:8px; display:flex; gap:6px; justify-content:flex-end; opacity:0; transition:opacity .2s; }
+.tl-item:hover .tl-actions { opacity:1; }
+
+/* moments grid */
+.mo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+.mo-card { background:#fff; border:1px solid var(--bg-tertiary); border-radius:16px; overflow:hidden; transition:all .3s var(--ease); }
+.mo-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-md); border-color:var(--blush); }
+.mo-imgs { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:2px; background:var(--bg-secondary); }
+.mo-imgs img { width:100%; aspect-ratio:1; object-fit:cover; display:block; cursor:zoom-in; }
+.mo-body { padding:14px 16px; }
+.mo-date { font-family:var(--font-mono); font-size:11.5px; color:var(--ink-3); }
+.up-list { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+.up-thumb { position:relative; width:74px; height:74px; border-radius:10px; overflow:hidden; border:1.5px solid var(--bg-tertiary); }
+.up-thumb img { width:100%; height:100%; object-fit:cover; }
+.up-thumb button { position:absolute; top:3px; right:3px; width:20px; height:20px; border-radius:50%; background:rgba(0,0,0,.55); color:#fff; font-size:11px; display:grid; place-items:center; }
+
+/* ================= Editor ================= */
+.ed-layout { display:grid; grid-template-columns:minmax(340px,430px) 1fr; gap:20px; align-items:start; }
+@media (max-width:1000px){ .ed-layout { grid-template-columns:1fr; } }
+.ed-pane { background:#fff; border:1px solid var(--bg-tertiary); border-radius:var(--r-lg); padding:20px 22px; }
+.md-area { min-height:420px; font-family:var(--font-mono); font-size:13.5px; line-height:1.8; tab-size:2; }
+.preview { min-height:420px; padding:4px 8px; overflow-y:auto; max-height:70vh; }
+.preview h1,.preview h2,.preview h3 { margin:.9em 0 .4em; }
+.preview p { margin:.6em 0; }
+.preview pre { background:#2d2a26; color:#f5efe6; padding:14px 16px; border-radius:10px; overflow-x:auto; font-family:var(--font-mono); font-size:12.5px; margin:.8em 0; }
+.preview code { font-family:var(--font-mono); background:var(--bg-secondary); padding:1px 6px; border-radius:5px; font-size:.9em; }
+.preview pre code { background:none; padding:0; }
+.preview blockquote { border-left:3px solid var(--blush); padding:2px 16px; color:var(--ink-2); background:var(--bg-secondary); border-radius:0 10px 10px 0; margin:.8em 0; }
+.preview img { max-width:100%; border-radius:10px; }
+.mode-switch { display:inline-flex; background:var(--bg-secondary); border-radius:999px; padding:3px; }
+.mode-switch button { padding:5px 16px; border-radius:999px; font-size:12.5px; color:var(--ink-3); transition:all .2s; }
+.mode-switch button.on { background:#fff; color:var(--plum); box-shadow:var(--shadow-sm); font-weight:700; }
+
+/* ================= Terminal ================= */
+.term {
+  background:#2b2126; color:#e8d8ce; font-family:var(--font-mono); font-size:12.5px;
+  border-radius:14px; padding:16px 18px; min-height:180px; max-height:380px; overflow-y:auto;
+  white-space:pre-wrap; word-break:break-all; line-height:1.65;
+}
+.term .dim { color:#8a7266; }
+
+/* ================= Misc ================= */
+.empty { text-align:center; color:var(--ink-3); padding:44px 0; font-size:13.5px; }
+.empty .big { font-size:34px; display:block; margin-bottom:8px; opacity:.6; }
+.spin { display:inline-block; width:14px; height:14px; border:2px solid var(--bg-tertiary); border-top-color:var(--sakura); border-radius:50%; animation:sp .7s linear infinite; }
+@keyframes sp { to { transform:rotate(360deg); } }
+
+.toast-wrap { position:fixed; top:22px; right:22px; z-index:99; display:flex; flex-direction:column; gap:10px; }
+.toast {
+  background:#fff; border:1px solid var(--bg-tertiary); border-left:4px solid var(--ok);
+  border-radius:12px; padding:11px 18px; font-size:13.5px; box-shadow:var(--shadow-lg);
+  animation:tin .3s var(--ease); max-width:360px;
+}
+.toast.err { border-left-color:var(--danger); }
+.toast.info { border-left-color:var(--plum); }
+@keyframes tin { from{opacity:0;transform:translateX(30px)} to{opacity:1} }
+
+.modal-mask { position:fixed; inset:0; background:rgba(58,40,40,.4); backdrop-filter:blur(3px); z-index:50; display:none; place-items:center; }
+.modal-mask.show { display:grid; }
+.modal { background:#fff; border-radius:20px; padding:28px 30px; max-width:520px; width:92%; box-shadow:var(--shadow-lg); animation:fadein .25s var(--ease); }
+.modal h3 { font-size:18px; margin-bottom:14px; }
+.lightbox { position:fixed; inset:0; background:rgba(30,20,22,.88); z-index:80; display:none; place-items:center; cursor:zoom-out; }
+.lightbox.show { display:grid; }
+.lightbox img { max-width:92vw; max-height:92vh; border-radius:10px; box-shadow:0 20px 80px rgba(0,0,0,.5); }
+
+.siteplan h2 { font-size:19px; margin:26px 0 10px; color:var(--plum); }
+.siteplan p { color:var(--ink-2); margin-bottom:10px; }
+.siteplan .quote { font-family:var(--font-hand); font-size:19px; color:var(--wisteria); }
+.flow { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:12px 0; }
+.flow .step { background:var(--bg-secondary); border:1px solid var(--bg-tertiary); padding:6px 14px; border-radius:999px; font-size:12.5px; }
+.flow .arr { color:var(--sakura); }
+
+::-webkit-scrollbar { width:9px; height:9px; }
+::-webkit-scrollbar-thumb { background:var(--bg-tertiary); border-radius:9px; border:2px solid var(--bg-primary); }
+::-webkit-scrollbar-thumb:hover { background:var(--blush); }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+@media (max-width:800px){
+  aside{width:170px;padding:20px 8px}
+  main{padding:20px 16px 60px}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<aside>
+  <div class="brand">
+    <div class="mark">花</div>
+    <div><b>花间小筑</b><small>Yetbye 的内容管理</small></div>
+  </div>
+  <button class="nav-item active" data-view="dashboard"><span class="ico">🏮</span>总览</button>
+  <div class="nav-sep">内 容</div>
+  <button class="nav-item" data-view="posts"><span class="ico">📖</span>文章</button>
+  <button class="nav-item" data-view="notebooks"><span class="ico">📓</span>笔记本</button>
+  <button class="nav-item" data-view="shuoshuo"><span class="ico">🎐</span>小纸条</button>
+  <button class="nav-item" data-view="moments"><span class="ico">📷</span>日常动态</button>
+  <button class="nav-item" data-view="pages"><span class="ico">🏠</span>页面</button>
+  <button class="nav-item" data-view="data"><span class="ico">🗂️</span>数据文件</button>
+  <button class="nav-item" data-view="docs"><span class="ico">📚</span>论文库</button>
+  <div class="nav-sep">运 维</div>
+  <button class="nav-item" data-view="deploy"><span class="ico">🚀</span>部署中心</button>
+  <button class="nav-item" data-view="activity"><span class="ico">📜</span>行动记录</button>
+  <div class="nav-sep">规 划</div>
+  <button class="nav-item" data-view="siteplan"><span class="ico">🗺️</span>站点规划</button>
+  <div class="side-foot">
+    <button class="token-pill" onclick="setToken()"><span class="dot" id="tok-dot"></span><span id="tok-txt">设置访问令牌</span></button>
+  </div>
+</aside>
+
+<main>
+<!-- ============ 总览 ============ -->
+<section class="view active" id="view-dashboard">
+  <div class="page-head"><h1>总览</h1><span class="sub" id="dash-theme"></span></div>
+  <div class="stats-row" id="stats"></div>
+  <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:20px" class="dash-cols">
+    <div class="card">
+      <h3 style="margin-bottom:12px;font-size:16px">⚡ 快速发布</h3>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-p" onclick="goto('shuoshuo')">🎐 写小纸条</button>
+        <button class="btn btn-o" onclick="goto('moments')">📷 发日常</button>
+        <button class="btn btn-o" onclick="newPost()">📖 写文章</button>
+      </div>
+      <h3 style="margin:20px 0 10px;font-size:16px">🔄 发布流程</h3>
+      <div class="flow">
+        <span class="step">写内容</span><span class="arr">→</span>
+        <span class="step">本地预览</span><span class="arr">→</span>
+        <span class="step">满意后部署</span>
+        <button class="btn btn-s btn-o" style="margin-left:8px" onclick="startJob('preview')">启动预览</button>
+        <button class="btn btn-s btn-p" onclick="startJob('deploy')">一键部署</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:12px;font-size:16px">📜 最近行动</h3>
+      <div id="recent-activity"></div>
+    </div>
+  </div>
+  <style>@media(max-width:900px){.dash-cols{grid-template-columns:1fr!important}}</style>
+</section>
+
+<!-- ============ 文章 ============ -->
+<section class="view" id="view-posts">
+  <div class="page-head">
+    <h1>文章</h1><span class="sub">Markdown · 支持 DL-cards 子目录</span>
+    <span class="spacer"></span>
+    <button class="btn btn-p" onclick="newPost()">＋ 新文章</button>
+  </div>
+  <div class="ed-layout">
+    <div>
+      <div class="card" style="padding:14px 16px;margin-bottom:14px"><input class="inp" id="post-search" placeholder="🔍 搜索标题 / 文件名 / 标签…" oninput="renderPostList()">
+        <div id="tag-bar" style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px"></div>
+      </div>
+      <div class="card" style="padding:8px 6px;max-height:calc(100vh - 220px);overflow-y:auto"><table class="tbl"><tbody id="post-list"></tbody></table></div>
+    </div>
+    <div class="ed-pane" id="post-editor" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <h3 id="pe-title" style="flex:1;font-size:17px"></h3>
+        <div class="mode-switch"><button class="on" id="pe-mode-edit" onclick="setPeMode('edit')">编辑</button><button id="pe-mode-preview" onclick="setPeMode('preview')">预览</button></div>
+      </div>
+      <div class="field"><label>标题</label><input class="inp" id="pe-f-title"></div>
+      <div class="grid-3">
+        <div class="field"><label>日期</label><input class="inp" id="pe-f-date" placeholder="YYYY-MM-DD"></div>
+        <div class="field"><label>slug</label><input class="inp" id="pe-f-slug"></div>
+        <div class="field"><label>文件名</label><input class="inp" id="pe-f-file" placeholder="xxx.md"></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label>分类（逗号分隔，可自动补全）</label><input class="inp" id="pe-f-cats" list="dl-cats"></div>
+        <div class="field"><label>标签（逗号分隔，可自动补全）</label><input class="inp" id="pe-f-tags" list="dl-tags"></div>
+        <datalist id="dl-tags"></datalist>
+        <datalist id="dl-cats"></datalist>
+      </div>
+      <div class="field">
+        <label>封面图 <small style="color:var(--ink-3)">— 可直接上传到 postcover</small></label>
+        <div style="display:flex;gap:8px">
+          <input class="inp" id="pe-f-cover" placeholder="/image/postcover/xxx.jpg">
+          <label class="btn btn-g btn-s" style="white-space:nowrap">上传<input type="file" accept="image/*" hidden onchange="uploadCover(this)"></label>
+        </div>
+        <img id="pe-cover-prev" style="max-height:110px;border-radius:10px;margin-top:8px;display:none" onerror="this.style.display='none'">
+      </div>
+      <div class="field"><label>正文 Markdown</label>
+        <textarea class="inp md-area" id="pe-body" spellcheck="false"></textarea>
+        <div class="preview" id="pe-preview" style="display:none"></div>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:8px">
+        <button class="btn btn-d" onclick="deletePost()">删除</button>
+        <button class="btn btn-p" onclick="savePost()">💾 保存</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 小纸条 ============ -->
+<section class="view" id="view-shuoshuo">
+  <div class="page-head"><h1>小纸条</h1><span class="sub">信条墙 · source/data/shuoshuo.json</span></div>
+  <div class="card composer">
+    <h3>✍️ 写一条新的</h3>
+    <div class="field"><textarea class="inp" id="ss-content" rows="2" placeholder="写点什么…（Ctrl+Enter 发送）"></textarea></div>
+    <div style="display:flex;justify-content:flex-end;gap:8px">
+      <span style="font-size:12px;color:var(--ink-3);align-self:center" id="ss-date-hint"></span>
+      <button class="btn btn-p" onclick="addShuoshuo()">贴上墙 ✿</button>
+    </div>
+  </div>
+  <h3 style="font-size:16px;margin:20px 0 14px">已张贴 <span id="ss-count" style="color:var(--ink-3);font-weight:400;font-size:13px"></span></h3>
+  <div class="timeline" id="ss-list"></div>
+</section>
+
+<!-- ============ 动态 ============ -->
+<section class="view" id="view-moments">
+  <div class="page-head"><h1>日常动态</h1><span class="sub">发疯日常 · moments.json + 图片上传</span></div>
+  <div class="card composer">
+    <h3>📷 记录此刻</h3>
+    <div class="field"><textarea class="inp" id="mo-content" rows="2" placeholder="这一刻…"></textarea></div>
+    <div class="grid-3">
+      <div class="field"><label>地点（可选）</label><input class="inp" id="mo-location"></div>
+      <div class="field"><label>标签（逗号分隔）</label><input class="inp" id="mo-tags"></div>
+      <div class="field"><label>日期</label><input class="inp" id="mo-date"></div>
+    </div>
+    <div class="field">
+      <label>图片（可多选，自动上传到 image/moment/）</label>
+      <label class="btn btn-g btn-s">＋ 选择图片<input type="file" accept="image/*" multiple hidden onchange="momentPick(this)"></label>
+      <div class="up-list" id="mo-uploads"></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end"><button class="btn btn-p" onclick="addMoment()">发布动态</button></div>
+  </div>
+  <h3 style="font-size:16px;margin:20px 0 14px">时间线 <span id="mo-count" style="color:var(--ink-3);font-weight:400;font-size:13px"></span></h3>
+  <div class="mo-grid" id="mo-list"></div>
+</section>
+
+<!-- ============ 页面 ============ -->
+<section class="view" id="view-pages">
+  <div class="page-head"><h1>页面</h1><span class="sub">关于我 / 友链 等 index.md</span></div>
+  <div class="ed-layout">
+    <div class="card" style="padding:10px">
+      <table class="tbl"><tbody id="page-list"></tbody></table>
+    </div>
+    <div class="ed-pane" id="page-editor" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <h3 id="pg-title" style="flex:1;font-size:16px"></h3>
+        <div class="mode-switch"><button class="on" id="pg-mode-edit" onclick="setPgMode('edit')">编辑</button><button id="pg-mode-preview" onclick="setPgMode('preview')">预览</button></div>
+      </div>
+      <div class="field"><label>frontmatter 标题</label><input class="inp" id="pg-fm-title"></div>
+      <div class="field"><label>内容（Markdown 或 HTML，自动识别）</label>
+        <textarea class="inp md-area" id="pg-body" spellcheck="false"></textarea>
+        <div class="preview" id="pg-preview" style="display:none"></div>
+      </div>
+      <div style="text-align:right"><button class="btn btn-p" onclick="savePage()">💾 保存页面</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 数据文件 ============ -->
+<section class="view" id="view-data">
+  <div class="page-head"><h1>数据文件</h1><span class="sub">JSON 集合由「小纸条/动态」管理；此处为 _data/ 高级编辑</span></div>
+  <div class="ed-layout">
+    <div class="card" style="padding:10px"><table class="tbl"><tbody id="df-list"></tbody></table></div>
+    <div class="ed-pane" id="df-editor" style="display:none">
+      <h3 id="df-title" style="font-size:16px;margin-bottom:12px"></h3>
+      <div class="field"><textarea class="inp md-area" id="df-text" spellcheck="false" style="min-height:380px"></textarea></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn btn-g" onclick="formatDf()">格式化 JSON</button>
+        <button class="btn btn-p" onclick="saveDatafile()">💾 保存</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 部署 ============ -->
+<section class="view" id="view-deploy">
+  <div class="page-head"><h1>部署中心</h1><span class="sub">hexo clean / generate / server / deploy</span></div>
+  <div class="card">
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-g" onclick="startJob('clean')">🧹 清理缓存</button>
+      <button class="btn btn-o" onclick="startJob('build')">🔨 构建 generate</button>
+      <button class="btn btn-o" id="btn-preview" onclick="togglePreview()">👁 启动本地预览</button>
+      <button class="btn btn-p" onclick="confirmDeploy()">🚀 部署上线</button>
+    </div>
+    <p style="font-size:12.5px;color:var(--ink-3);margin-top:10px">建议流程：清理 → 构建 → 本地预览确认 → 部署。部署会推送 <code>.deploy_git</code> 到 GitHub Pages。</p>
+  </div>
+  <div class="term" id="job-term"><span class="dim">// 任务输出将显示在这里。选择上方按钮开始。</span></div>
+  <div class="card" style="margin-top:20px">
+    <h3 style="font-size:15px;margin-bottom:10px">🌿 Git 变更（源码仓库）</h3>
+    <div id="git-changes" style="font-family:var(--font-mono);font-size:12px;color:var(--ink-2);white-space:pre-wrap"></div>
+  </div>
+</section>
+
+<!-- ============ 行动记录 ============ -->
+<section class="view" id="view-activity">
+  <div class="page-head"><h1>行动记录</h1><span class="sub">所有写入操作都会留痕（activity.jsonl）</span><span class="spacer"></span><button class="btn btn-s btn-g" onclick="loadActivity()">刷新</button></div>
+  <div class="card"><table class="tbl">
+    <thead><tr><th style="width:170px">时间</th><th style="width:160px">操作</th><th>详情</th></tr></thead>
+    <tbody id="act-list"></tbody>
+  </table></div>
+</section>
+
+<!-- ============ 笔记本 ============ -->
+<section class="view" id="view-notebooks">
+  <div class="page-head"><h1>笔记本</h1><span class="sub">notebooks.json · 新建 / 加文章 / 打开分类页</span></div>
+  <div class="card composer">
+    <h3>＋ 新建笔记本</h3>
+    <div class="grid-2">
+      <div class="field"><label>名称 *</label><input class="inp" id="nb-name" placeholder="如：RL-cards"></div>
+      <div class="field"><label>slug *（用于分类页地址）</label><input class="inp" id="nb-slug" placeholder="如：rl-cards"></div>
+      <div class="field"><label>图标（FontAwesome 类名）</label><input class="inp" id="nb-icon" placeholder="fas fa-book"></div>
+      <div class="field"><label>一句话简介</label><input class="inp" id="nb-subtitle"></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end"><button class="btn btn-p" onclick="createNotebook()">创建</button></div>
+  </div>
+  <div id="nb-list"></div>
+</section>
+
+<!-- ============ 论文库 ============ -->
+<section class="view" id="view-docs">
+  <div class="page-head"><h1>论文库</h1><span class="sub">source/docs/ 下的独立 HTML 博客（原样发布于 /docs/）</span><span class="spacer"></span><button class="btn btn-s btn-g" onclick="loadDocs()">刷新</button></div>
+  <div class="card"><div id="docs-list"></div></div>
+</section>
+
+<!-- ============ 站点规划 ============ -->
+<section class="view" id="view-siteplan">
+  <div class="page-head"><h1>站点规划</h1><span class="sub">站在访客视角的功能区设计提案（不改动现有样式）</span></div>
+  <div class="card siteplan" id="siteplan-body">
+    <p class="quote">「除了死亡，每一天都是婚礼」— 你的站子已经有一套很有个人气质的语言：八音盒、调色盘、小纸条。规划沿用这套语言。</p>
+
+    <h2>一、现状盘点</h2>
+    <p>当前导航：首页 / Note / Moments(发疯日常) / 八音盒(音乐) / 调色盘(相册) / 小纸条(信条墙) / 关于我。<br>
+    问题：① 「Note」是英文而其他是中文意象名，风格断裂；② 笔记(DL-cards)、博客文章、小纸条、动态四类内容的入口分散且层级不清；③ links/flinks 双空页残留；④ 新访客不知道「小纸条」和「Moments」区别是什么。</p>
+
+    <h2>二、访客旅程设计</h2>
+    <div class="flow">
+      <span class="step">首屏 · 是谁</span><span class="arr">→</span>
+      <span class="step">日常 · 在生活</span><span class="arr">→</span>
+      <span class="step">思考 · 在学什么</span><span class="arr">→</span>
+      <span class="step">收藏 · 审美沉淀</span><span class="arr">→</span>
+      <span class="step">连接 · 找到我</span>
+    </div>
+
+    <h2>三、建议导航（两级）</h2>
+    <table class="tbl">
+      <thead><tr><th>一级栏目</th><th>意象命名</th><th>内容</th><th>理由</th></tr></thead>
+      <tbody>
+        <tr><td>首页</td><td>花间</td><td>精选文章 + 最新动态卡片流</td><td>一屏建立人格印象</td></tr>
+        <tr><td>随笔</td><td>拾光</td><td>博客文章（含技术文）按分类聚合</td><td>统一中文名，替代 Note</td></tr>
+        <tr><td>日常</td><td>发疯现场</td><td>Moments 动态流（保留现名亦可）</td><td>高频轻内容，访客最常刷</td></tr>
+        <tr><td>手账</td><td>小纸条</td><td>信条墙（说说）并入或紧邻日常</td><td>两者都是碎片表达，相邻降低理解成本</td></tr>
+        <tr><td>相册</td><td>调色盘</td><td>摄影/画廊</td><td>保留，已是很好的名字</td></tr>
+        <tr><td>声音</td><td>八音盒</td><td>音乐页</td><td>保留</td></tr>
+        <tr><td>关于</td><td>花主自述</td><td>自我介绍 + 更新日志 + 友链合并于此</td><td>友链空页不再独立存在</td></tr>
+      </tbody>
+    </table>
+
+    <h2>四、落地步骤（全部可在本系统完成）</h2>
+    <p>① 「页面」里改 about/index.md 加入更新日志与友链 → 删除 flinks/<br>
+    ② themes/butterfly/_config.yml 的 menu 改为上表（此步需改主题配置文件，属一次性变更）<br>
+    ③ 首页 index.md 加一段欢迎语 + 指向各区的卡片链接<br>
+    ④ 数据源统一：小纸条以 shuoshuo.json 为准，废弃 shuoshuo.yml 与 _data/shuoshuo.yml（本系统只读写 json，天然一致）</p>
+
+    <h2>五、视觉红线</h2>
+    <p>樱花飘落、游鱼 footer、波浪 hero 这些是你站的灵魂装饰，重构时一律保留；本管理系统采用樱吹雪配色正是为了「后台与前台同源」——管理时看到的粉调，就是访客看到的粉调。</p>
+  </div>
+</section>
+</main>
+
+<div class="toast-wrap" id="toasts"></div>
+<div class="modal-mask" id="modal"><div class="modal" id="modal-body"></div></div>
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('show')"><img id="lightbox-img"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script>
+'use strict';
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const API = '';
+let TOKEN = localStorage.getItem('yetbye-cms-token') || '';
+
+// ---------- utils ----------
+function esc(s){ return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+function today(){ const d=new Date(); return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; }
+function nowTime(){ return new Date().toLocaleString('zh-CN',{hour12:false}); }
+function md(text){ try { return marked.parse(text||'',{breaks:true}); } catch { return '<pre>'+esc(text)+'</pre>'; } }
+
+function toast(msg,type=''){ const t=document.createElement('div'); t.className='toast '+type; t.textContent=msg; $('#toasts').appendChild(t); setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(()=>t.remove(),320)},3200); }
+
+async function api(path,opts={}){
+  const r = await fetch(API+path,{ headers:{'Content-Type':'application/json','X-Auth-Token':TOKEN,...(opts.headers||{})}, ...opts });
+  let j; try { j = await r.json(); } catch { throw new Error('响应解析失败 ('+r.status+')'); }
+  if (!r.ok) throw new Error(j.error || ('HTTP '+r.status));
+  return j;
+}
+function setToken(){
+  const t = prompt('请输入访问令牌（启动 node server.js 时控制台显示）：', TOKEN || '');
+  if (t===null) return;
+  TOKEN = t.trim(); localStorage.setItem('yetbye-cms-token',TOKEN); refreshTokUI();
+  if (TOKEN) api('/api/status').then(()=>toast('令牌验证通过')).catch(e=>toast('令牌无效：'+e.message,'err'));
+}
+function refreshTokUI(){ $('#tok-dot').className = 'dot'+(TOKEN?' on':''); $('#tok-txt').textContent = TOKEN ? '令牌已设置 ✓' : '设置访问令牌'; }
+
+// ---------- navigation ----------
+$$('.nav-item').forEach(b => b.addEventListener('click',()=>goto(b.dataset.view)));
+function goto(v){
+  $$('.nav-item').forEach(x=>x.classList.toggle('active',x.dataset.view===v));
+  $$('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v));
+  ({dashboard:loadDashboard,posts:loadPosts,notebooks:loadNotebooks,shuoshuo:loadShuoshuo,moments:loadMoments,pages:loadPages,data:loadDatafiles,docs:loadDocs,deploy:refreshDeploy,activity:loadActivity}[v]||(()=>{}))();
+}
+
+// ---------- dashboard ----------
+async function loadDashboard(){
+  try{
+    const s = await api('/api/status');
+    $('#stats').innerHTML = [
+      ['📖',s.posts,'文章'], ['🎐',s.shuoshuo,'小纸条'], ['📷',s.moments,'动态'],
+      ['🖼️',s.momentImages,'日常图片'], ['🎨',s.postcovers,'封面图'], ['🌿',s.gitChanges.length,'未提交变更'],
+    ].map(([i,n,l])=>`<div class="stat"><div class="num">${n}</div><div class="lbl">${i} ${l}</div></div>`).join('');
+    $('#dash-theme').textContent = s.theme;
+    $('#git-changes') && ($('#git-changes').textContent = s.gitChanges.join('\n')||'(工作区干净)');
+  }catch(e){ $('#stats').innerHTML = `<div class="empty"><span class="big">🥀</span>无法获取状态：${esc(e.message)}</div>`; }
+  try{ renderActivity($('#recent-activity'), 8);}catch{}
+}
+
+// ---------- posts ----------
+let POSTS=[], peFile=null, peOriginal=null, peOriginalFm={}, peMode='edit', TAG_FILTER='', FILTERED=[];
+async function loadPosts(){ try{ POSTS = await api('/api/posts'); renderPostList(); loadTagBar(); }catch(e){ toast('加载文章失败：'+e.message,'err'); } }
+
+// 标签栏：来自 /api/tags 的全站标签+分类汇总，点击即筛选
+// （chip 不用内联 onclick：标签名含引号时属性内联会被二次解析，改用 data-* + 捕获阶段委托）
+document.addEventListener('click', function(e){
+  const el = e.target.closest('[data-tagfilter]');
+  if (!el) return;
+  e.stopPropagation(); // 捕获阶段拦截，避免冒泡触发行点击
+  toggleTagFilter(el.dataset.tagfilter);
+}, true);
+
+async function loadTagBar(){
+  try{
+    const { tags, categories } = await api('/api/tags');
+    const chip = (name,count,kind) => `<span class="tag-chip" style="cursor:pointer;${TAG_FILTER===name?'background:var(--sakura);color:#fff;border-color:var(--sakura)':''}"
+      data-tagfilter="${esc(name)}" title="${kind} · ${count} 篇">${kind==='分类'?'📁':'#'}${esc(name)} <b>${count}</b></span>`;
+    $('#tag-bar').innerHTML =
+      (TAG_FILTER?`<span class="tag-chip" style="cursor:pointer;background:var(--plum);color:#fff" data-tagfilter="">✕ 清除筛选</span>`:'')
+      + categories.map(c=>chip(c.name,c.count,'分类')).join('')
+      + tags.map(t=>chip(t.name,t.count,'标签')).join('');
+    // 编辑器自动补全数据源
+    const dlT=document.getElementById('dl-tags'), dlC=document.getElementById('dl-cats');
+    if(dlT) dlT.innerHTML = tags.map(t=>`<option value="${esc(t.name)}">`).join('');
+    if(dlC) dlC.innerHTML = categories.map(c=>`<option value="${esc(c.name)}">`).join('');
+  }catch{}
+}
+function toggleTagFilter(name){ TAG_FILTER = (TAG_FILTER===name)?'':name; renderPostList(); loadTagBar(); }
+
+function renderPostList(){
+  const q = ($('#post-search').value||'').toLowerCase();
+  const list = POSTS.filter(p=>{
+    if (TAG_FILTER && !(p.tags||[]).includes(TAG_FILTER) && !(p.categories||[]).includes(TAG_FILTER)) return false;
+    return !q||p.title.toLowerCase().includes(q)||p.file.toLowerCase().includes(q)
+      ||(p.tags||[]).some(t=>String(t).toLowerCase().includes(q));
+  });
+  FILTERED = list; // 渲染与点击共用同一份过滤结果，避免索引错位
+  $('#post-list').innerHTML = list.map((p,i)=>`<tr style="cursor:pointer" onclick="openPostIdx(${i})" class="${p.file===peFile?'on':''}">
+      <td><b>${esc(p.title)}</b><br><small style="color:var(--ink-3)">${esc(p.file)}</small>
+        ${(p.tags||[]).length?`<div style="margin-top:2px">${p.tags.map(t=>`<span class="tag-chip" style="cursor:pointer" data-tagfilter="${esc(t)}">#${esc(t)}</span>`).join('')}</div>`:''}
+      </td>
+      <td style="white-space:nowrap;color:var(--ink-3);font-size:12px">${p.url?`<a href="${esc(p.url)}" target="_blank" onclick="event.stopPropagation()" title="打开文章">↗</a>`:''} ${esc(p.date)?esc(String(p.date)).slice(0,10):'—'}</td></tr>`).join('')
+    || '<tr><td class="empty">没有匹配的文章</td></tr>';
+}
+function openPostIdx(i){
+  const p = FILTERED[i];
+  if (p) openPost(p.file);
+}
+function newPost(){ goto('posts'); peFile=null; peOriginal=null; peOriginalFm={};
+  $('#post-editor').style.display='block'; $('#pe-title').textContent='新文章';
+  $('#pe-f-title').value=''; $('#pe-f-date').value=today(); $('#pe-f-slug').value='';
+  $('#pe-f-file').value=`post-${Date.now()%100000}.md`; $('#pe-f-cats').value=''; $('#pe-f-tags').value='';
+  $('#pe-f-cover').value=''; $('#pe-body').value='---\n\n> 引言\n\n正文\n';
+  $('#pe-cover-prev').style.display='none'; setPeMode('edit');
+}
+async function openPost(file){
+  try{
+    const d = await api('/api/posts/file/'+encodeURIComponent(file));
+    goto('posts'); peFile=file; peOriginal=file; peOriginalFm=d.fm||{};
+    $('#post-editor').style.display='block'; $('#pe-title').textContent=d.fm.title||file;
+    $('#pe-f-title').value=d.fm.title||''; $('#pe-f-date').value=d.fm.date||'';
+    $('#pe-f-slug').value=d.fm.slug||''; $('#pe-f-file').value=file;
+    $('#pe-f-cats').value=[].concat(d.fm.categories||[]).join(', ');
+    $('#pe-f-tags').value=[].concat(d.fm.tags||[]).join(', ');
+    $('#pe-f-cover').value=d.fm.cover||''; $('#pe-body').value=d.body;
+    updateCoverPrev(); setPeMode('edit'); renderPostList();
+  }catch(e){ toast('打开失败：'+e.message,'err'); }
+}
+function collectPe(){
+  const cats=$('#pe-f-cats').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+  const tags=$('#pe-f-tags').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+  // 保留原 frontmatter 中编辑器未覆盖的键（top_img/mathjax/comments 等），编辑器字段优先
+  const fm={...peOriginalFm};
+  if($('#pe-f-title').value)fm.title=$('#pe-f-title').value; else delete fm.title;
+  if($('#pe-f-date').value)fm.date=$('#pe-f-date').value; else delete fm.date;
+  if($('#pe-f-slug').value)fm.slug=$('#pe-f-slug').value; else delete fm.slug;
+  if(cats.length)fm.categories=cats; else delete fm.categories;
+  if(tags.length)fm.tags=tags; else delete fm.tags;
+  if($('#pe-f-cover').value)fm.cover=$('#pe-f-cover').value; else delete fm.cover;
+  return { originalFile:peOriginal, file:$('#pe-f-file').value.trim(), fm, body:$('#pe-body').value };
+}
+async function savePost(){
+  const p = collectPe();
+  if(!p.file.endsWith('.md')) return toast('文件名必须以 .md 结尾','err');
+  if(!TOKEN){ setToken(); if(!TOKEN) return; }
+  try{ await api('/api/posts/save',{method:'POST',body:JSON.stringify(p)});
+    toast('已保存「'+(p.fm.title||p.file)+'」'); await loadPosts(); openPost(p.file);
+  }catch(e){ toast('保存失败：'+e.message,'err'); }
+}
+async function deletePost(){
+  if(!peOriginal) return toast('先选择要删除的文章','err');
+  if(!confirm(`确定删除「${$('#pe-f-title').value}」？\n（会移入工具目录 trash/，可手动找回）`)) return;
+  if(!TOKEN){ setToken(); if(!TOKEN) return; }
+  try{ await api('/api/posts/delete',{method:'POST',body:JSON.stringify({file:peOriginal})});
+    toast('已移入回收站'); peFile=null; $('#post-editor').style.display='none'; loadPosts(); loadDashboard();
+  }catch(e){ toast('删除失败：'+e.message,'err'); }
+}
+function setPeMode(m){ peMode=m;
+  $('#pe-mode-edit').classList.toggle('on',m==='edit'); $('#pe-mode-preview').classList.toggle('on',m==='preview');
+  $('#pe-body').style.display=m==='edit'?'':'none'; $('#pe-preview').style.display=m==='preview'?'':'block';
+  if(m==='preview') $('#pe-preview').innerHTML=md($('#pe-body').value);
+}
+function updateCoverPrev(){ const v=$('#pe-f-cover').value; const img=$('#pe-cover-prev');
+  if(v){ img.src='/img/'+v.replace(/^\/image\//,''); img.style.display='block'; } else img.style.display='none'; }
+$('#pe-f-cover').addEventListener('input',updateCoverPrev);
+
+async function uploadCover(input){
+  const f=input.files[0]; if(!f)return;
+  await uploadTo(f,'/image/postcover/',url=>{ $('#pe-f-cover').value=url; updateCoverPrev(); toast('封面上传成功'); });
+}
+async function uploadTo(file,target,cb){
+  if(!TOKEN){ setToken(); if(!TOKEN)return; }
+  const buf=await file.arrayBuffer(); let bin=''; const bytes=new Uint8Array(buf);
+  for(let i=0;i<bytes.length;i+=8192) bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+8192));
+  try{ const r=await api('/api/upload/image',{method:'POST',body:JSON.stringify({target,filename:file.name,base64:btoa(bin)})}); cb(r.url); }
+  catch(e){ toast('上传失败：'+e.message,'err'); }
+}
+
+// ---------- shuoshuo ----------
+let SS=[];
+async function loadShuoshuo(){
+  $('#ss-date-hint').textContent='日期 '+today();
+  try{ SS=await api('/api/collection/shuoshuo'); renderSs(); }catch(e){ toast('加载失败：'+e.message,'err'); }
+}
+function renderSs(){
+  $('#ss-count').textContent='共 '+SS.length+' 条';
+  $('#ss-list').innerHTML = SS.map((s,i)=>`
+    <div class="tl-item">
+      <div class="tl-meta"><span>${esc(s.date||'')}</span></div>
+      <div class="tl-content">${esc(s.content)}</div>
+      <div class="tl-actions">
+        <button class="btn btn-s btn-g" onclick="editSs(${i})">改</button>
+        <button class="btn btn-s btn-d" onclick="delItem('shuoshuo',${i},'这条小纸条')">撕掉</button>
+      </div>
+    </div>`).join('') || '<div class="empty"><span class="big">🎐</span>墙上还没有纸条</div>';
+}
+function editSs(i){
+  const c=prompt('修改内容：',SS[i].content); if(c===null)return;
+  SS[i].content=c.trim(); persistCollection('shuoshuo',SS).then(loadShuoshuo);
+}
+async function addShuoshuo(){
+  const c=$('#ss-content').value.trim(); if(!c)return toast('先写点内容','err');
+  if(!TOKEN){ setToken(); if(!TOKEN)return; }
+  SS.push({content:c,date:today()});
+  try{ await persistCollection('shuoshuo',SS); $('#ss-content').value=''; toast('纸条已贴上墙 ✿'); loadShuoshuo(); loadDashboard(); }
+  catch(e){ toast('发布失败：'+e.message,'err'); loadShuoshuo(); } // 失败后与磁盘重同步
+}
+async function persistCollection(name,items){ return api('/api/collection/'+name,{method:'POST',body:JSON.stringify(items)}); }
+async function delItem(name,i,label){
+  if(!confirm(`确定删除${label}？`))return;
+  if(!TOKEN){ setToken(); if(!TOKEN)return; }
+  const arr = name==='moments'?MO:SS; arr.splice(i,1);
+  try{ await persistCollection(name,arr); toast('已删除');
+    if(name==='moments') loadMoments(); else loadShuoshuo();
+    loadDashboard();
+  }catch(e){ toast('删除失败：'+e.message,'err');
+    if(name==='moments') loadMoments(); else loadShuoshuo(); }
+}
+
+// ---------- moments ----------
+let MO=[], MO_PEND=[]; // pending uploads [{file,url}]
+async function loadMoments(){
+  try{
+    MO=await api('/api/collection/moments'); MO.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
+    $('#mo-count').textContent='共 '+MO.length+' 条';
+    $('#mo-date').placeholder=today();
+    $('#mo-list').innerHTML = MO.map((m,i)=>`
+      <div class="mo-card">
+        ${m.images&&m.images.length?`<div class="mo-imgs">${m.images.map(u=>`<img src="/img/${esc(u.replace(/^\/image\//,''))}" loading="lazy" onclick="lb(this.src)">`).join('')}</div>`:''}
+        <div class="mo-body">
+          <div class="mo-date">${esc(m.date||'')} ${m.location?'· 📍'+esc(m.location):''} ${typeof m.likes==='number'?'· ♥'+m.likes:''}</div>
+          <div class="tl-content" style="margin-top:4px">${esc(m.content)}</div>
+          ${(m.tags||[]).length?`<div style="margin-top:6px">${m.tags.map(t=>`<span class="tag-chip">#${esc(t)}</span>`).join('')}</div>`:''}
+          <div class="tl-actions"><button class="btn btn-s btn-d" onclick="delMoment(${i})">删除</button></div>
+        </div>
+      </div>`).join('') || '<div class="empty"><span class="big">📷</span>还没有动态，发第一条吧</div>';
+  }catch(e){ toast('加载失败：'+e.message,'err'); }
+}
+function momentPick(input){
+  [...input.files].forEach(f=>{
+    const holder=document.createElement('div'); holder.className='up-thumb';
+    const img=document.createElement('img'); img.src=URL.createObjectURL(f);
+    const x=document.createElement('button'); x.textContent='✕';
+    const item={file:f,url:null};
+    x.onclick=e=>{ e.preventDefault(); MO_PEND=MO_PEND.filter(p=>p!==item); holder.remove(); };
+    holder.append(img,x); $('#mo-uploads').appendChild(holder);
+    item.holder=holder; MO_PEND.push(item);
+  });
+  input.value='';
+}
+async function addMoment(){
+  const content=$('#mo-content').value.trim(); if(!content&&!MO_PEND.length)return toast('写点内容或选张图','err');
+  if(!TOKEN){ setToken(); if(!TOKEN)return; }
+  try{
+    const urls=[];
+    for(const p of MO_PEND){ const r=await uploadRaw(p.file,'/image/moment/'); urls.push(r); }
+    MO.unshift({
+      date:$('#mo-date').value.trim()||today(), content,
+      ...(urls.length?{images:urls}:{}),
+      ...( $('#mo-location').value.trim()?{location:$('#mo-location').value.trim()}:{} ),
+      ...( $('#mo-tags').value.trim()?{tags:$('#mo-tags').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean)}:{} ),
+      likes:0, liked:false,
+    });
+    await persistCollection('moments',MO);
+    $('#mo-content').value=''; $('#mo-location').value=''; $('#mo-tags').value=''; $('#mo-date').value='';
+    MO_PEND.forEach(p=>p.holder.remove()); MO_PEND=[];
+    toast('动态已发布 📷'); loadMoments(); loadDashboard();
+  }catch(e){ toast('发布失败：'+e.message,'err'); MO_PEND=[]; loadMoments(); }
+}
+async function delMoment(i){
+  if(!confirm('确定删除这条动态？（不会删除已上传的图片文件）'))return;
+  if(!TOKEN){ setToken(); if(!TOKEN)return; }
+  MO.splice(i,1);
+  try{ await persistCollection('moments',MO); toast('已删除'); loadMoments(); loadDashboard(); }
+  catch(e){ toast('失败：'+e.message,'err'); loadMoments(); }
+}
+function lb(src){ $('#lightbox-img').src=src; $('#lightbox').classList.add('show'); }
+async function uploadRaw(file,target){
+  const buf=await file.arrayBuffer(); let bin=''; const bytes=new Uint8Array(buf);
+  for(let i=0;i<bytes.length;i+=8192) bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+8192));
+  const r=await api('/api/upload/image',{method:'POST',body:JSON.stringify({target,filename:file.name,base64:btoa(bin)})});
+  return r.url;
+}
+
+// ---------- pages ----------
+const PAGE_FILES=['about/index.md','links/index.md','flinks/index.md'];
+let pgFile=null, pgOriginalFm={};
+async function loadPages(){
+  $('#page-list').innerHTML=PAGE_FILES.map(f=>`<tr style="cursor:pointer" onclick="openPage('${f}')"><td>📄 ${esc(f)}</td></tr>`).join('');
+}
+async function openPage(f){
+  try{ const d=await api('/api/page/'+f);
+    goto('pages'); pgFile=f; pgOriginalFm=d.fm||{};
+    $('#page-editor').style.display='block';
+    $('#pg-title').textContent=f; $('#pg-fm-title').value=d.fm.title||'';
+    $('#pg-body').value=d.body; setPgMode('edit');
+  }catch(e){ toast('打开失败：'+e.message,'err'); }
+}
+function setPgMode(m){
+  $('#pg-mode-edit').classList.toggle('on',m==='edit'); $('#pg-mode-preview').classList.toggle('on',m==='preview');
+  $('#pg-body').style.display=m==='edit'?'':'none';
+  $('#pg-preview').style.display=m==='preview'?'':'none';
+  if(m==='preview'){
+    const t=$('#pg-body').value.trim();
+    $('#pg-preview').innerHTML = t.startsWith('<') ? t : md(t);
+  }
+}
+async function savePage(){
+  if(!pgFile)return; if(!TOKEN){ setToken(); if(!TOKEN)return; }
+  const fm={...pgOriginalFm};
+  if($('#pg-fm-title').value) fm.title=$('#pg-fm-title').value;
+  try{ await api('/api/page/'+pgFile,{method:'POST',body:JSON.stringify({fm,body:$('#pg-body').value})});
+    toast('页面已保存'); loadDashboard();
+  }catch(e){ toast('保存失败：'+e.message,'err'); }
+}
+
+// ---------- data files ----------
+const DF_FILES=['_data/categories.yml','_data/essay.yml','_data/gallery.yml','_data/link.yml','_data/shuoshuo.yml','data/places.json','data/albums.json','data/notebooks.json'];
+let dfFile=null;
+async function loadDatafiles(){
+  $('#df-list').innerHTML=DF_FILES.map(f=>`<tr style="cursor:pointer" onclick="openDf('${f}')"><td>🗂️ ${esc(f)}${f==='_data/shuoshuo.yml'?' <span class="tag-chip" title="实际生效的是 data/shuoshuo.json">疑似废弃</span>':''}</td></tr>`).join('');
+}
+async function openDf(f){
+  try{
+    const d=await api('/api/datafile/'+f);
+    dfFile=f; $('#df-editor').style.display='block'; $('#df-title').textContent=f;
+    $('#df-text').value = typeof d.data==='string'?d.data:JSON.stringify(d.data,null,2);
+  }catch(e){ toast('读取失败：'+e.message+'（styles.styl 等非数据文件请用编辑器）','err'); }
+}
+function formatDf(){ try{ $('#df-text').value=JSON.stringify(JSON.parse($('#df-text').value),null,2); }catch(e){ toast('不是合法 JSON：'+e.message,'err'); } }
+async function saveDatafile(){
+  if(!dfFile)return; if(!TOKEN){ setToken(); if(!TOKEN)return; }
+  const txt=$('#df-text').value;
+  if(dfFile.endsWith('.json')){
+    try{ JSON.parse(txt); }catch(e){ return toast('JSON 解析失败：'+e.message,'err'); }
+  }
+  if(!confirm('以原文保存到 '+dfFile+' ？\n（YAML 文件按原文直写，注释与格式完整保留）'))return;
+  try{ await api('/api/datafile/'+dfFile,{method:'POST',body:JSON.stringify({raw:txt})}); toast('已保存 '+dfFile); }
+  catch(e){ toast('保存失败：'+e.message,'err'); }
+}
+
+// ---------- 笔记本管理 ----------
+let NB=[];
+async function loadNotebooks(){
+  try{
+    if(!POSTS.length){ try{ POSTS=await api('/api/posts'); }catch{} } // 供「从文章选取」
+    NB=await api('/api/collection/notebooks'); renderNotebooks();
+  }catch(e){ toast('加载失败：'+e.message,'err'); }
+}
+function renderNotebooks(){
+  $('#nb-list').innerHTML = NB.map((nb,bi)=>{
+    const arts=(nb.articles||[]).map((a,ai)=>`
+      <div class="editor-row">
+        <input type="text" value="${esc(a.title)}" data-bi="${bi}" data-ai="${ai}" data-f="title" placeholder="文章标题" style="flex:2">
+        <input type="text" value="${esc(a.slug||'')}" data-bi="${bi}" data-ai="${ai}" data-f="slug" placeholder="slug（留空则按标题匹配）" style="max-width:150px">
+        <input type="text" value="${esc(a.date||'')}" data-bi="${bi}" data-ai="${ai}" data-f="date" placeholder="日期" style="max-width:100px">
+        ${a.url?`<a class="btn btn-s btn-g" href="${esc(a.url)}" target="_blank" title="打开文章">↗</a>`:''}
+        <button class="btn-del" onclick="removeArticle(${bi},${ai})" title="移除文章">✕</button>
+      </div>`).join('') || '<div class="empty" style="padding:14px 0">这一册还没有文章</div>';
+    const pickable = POSTS.filter(p=>!(nb.articles||[]).some(a=>a.url===p.url));
+    const picker = pickable.length ? `
+      <div class="editor-row" style="margin-top:6px">
+        <select id="pick-${bi}" class="inp" style="flex:3;padding:6px 10px">
+          ${pickable.map((p,pi)=>`<option value="${POSTS.indexOf(p)}">${esc(p.title)}${p.date?' · '+esc(String(p.date)).slice(0,10):''}</option>`).join('')}
+        </select>
+        <button class="btn btn-s btn-o" onclick="addArticleFromPost(${bi})">＋ 收入本册</button>
+      </div>` : '';
+    return `
+    <div class="card" style="border-left:4px solid var(--sakura)">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <h3 style="font-size:1rem;margin:0">${nb.icon?`<i class="${esc(nb.icon)}"></i> `:''}${esc(nb.name)}</h3>
+        <span class="tag-chip">/notes/${esc(nb.slug)}/</span>
+        <span class="spacer" style="flex:1"></span>
+        <a class="btn btn-s btn-p" href="/notes/${encodeURIComponent(nb.slug)}/" target="_blank">打开笔记本页 ↗</a>
+        <button class="btn btn-s btn-d" onclick="removeNotebook(${bi})">删除笔记本</button>
+      </div>
+      <p style="color:var(--ink3);font-size:.85rem;margin:.4rem 0 .8rem">${esc(nb.subtitle||'')}</p>
+      <div style="font-size:.8rem;color:var(--ink3);margin-bottom:8px">
+        文章（标题 / slug / 日期）— URL 按当前文章自动计算，保存时回填
+      </div>
+      <div class="data-editor">${arts}</div>
+      ${picker}
+      <div class="btn-group" style="margin-top:.4rem">
+        <button class="btn btn-s btn-ghost" onclick="addArticle(${bi})">＋ 手动加一行</button>
+        <button class="btn btn-s btn-p" onclick="saveNotebooks()">💾 保存全部</button>
+      </div>
+    </div>`;
+  }).join('');
+  // 绑定行内编辑
+  $$('#nb-list input[data-f]').forEach(inp=>inp.addEventListener('change',()=>{
+    NB[+inp.dataset.bi].articles[+inp.dataset.ai][inp.dataset.f]=inp.value.trim();
+  }));
+}
+function addArticleFromPost(bi){
+  const sel=document.getElementById('pick-'+bi);
+  if(!sel)return;
+  const p=POSTS[+sel.value];
+  if(!p)return;
+  NB[bi].articles=NB[bi].articles||[];
+  if(NB[bi].articles.some(a=>a.url===p.url))return toast('该文章已在本册中','info');
+  NB[bi].articles.push({
+    title:p.title,
+    slug:p.slug||(decodeURIComponent((p.url||'').replace('/articles/','').replace(/\/$/,''))),
+    date:p.date?String(p.date).slice(0,10):'',
+    url:p.url,
+    icon:'fas fa-file-alt'
+  });
+  renderNotebooks();
+}
+function addArticle(bi){
+  NB[bi].articles=NB[bi].articles||[];
+  NB[bi].articles.push({title:'新文章',slug:'',date:today(),icon:'fas fa-file-alt'});
+  renderNotebooks();
+}
+function removeArticle(bi,ai){ NB[bi].articles.splice(ai,1); renderNotebooks(); }
+async function removeNotebook(bi){
+  if(!confirm(`删除笔记本「${NB[bi].name}」？（不影响已发布文章）`))return;
+  NB.splice(bi,1); renderNotebooks(); saveNotebooks();
+}
+async function createNotebook(){
+  const name=$('#nb-name').value.trim(), slug=$('#nb-slug').value.trim().replace(/[^\w-]/g,'');
+  if(!name||!slug)return toast('名称和 slug 必填','err');
+  if(NB.some(n=>n.slug===slug))return toast('slug 已存在','err');
+  NB.push({name,slug,icon:$('#nb-icon').value.trim()||'fas fa-book',subtitle:$('#nb-subtitle').value.trim(),articles:[]});
+  $('#nb-name').value='';$('#nb-slug').value='';$('#nb-icon').value='';$('#nb-subtitle').value='';
+  renderNotebooks(); saveNotebooks();
+}
+async function saveNotebooks(){
+  if(!TOKEN){ setToken(); if(!TOKEN)return; }
+  try{ await persistCollection('notebooks',NB); toast('笔记本已保存'); loadDashboard(); }
+  catch(e){ toast('保存失败：'+e.message,'err'); loadNotebooks(); }
+}
+
+// ---------- 论文库 ----------
+async function loadDocs(){
+  const el=$('#docs-list');
+  try{
+    const docs=await api('/api/docs');
+    el.innerHTML = docs.length ? `<table class="tbl">
+      <thead><tr><th>论文博客</th><th style="width:90px">首页大小</th><th style="width:100px"></th></tr></thead>
+      <tbody>${docs.map(d=>`
+        <tr><td><b>${esc(d.title)}</b><br><small style="color:var(--muted)">/docs/${esc(d.dir)}/</small></td>
+        <td style="color:var(--muted);font-size:.8rem">${d.sizeKB} KB</td>
+        <td><a class="btn btn-s btn-o" href="${esc(d.url)}" target="_blank">打开 ↗</a></td></tr>`).join('')}
+      </tbody></table>`
+      : '<div class="empty"><span class="big">📚</span>source/docs/ 下还没有论文博客</div>';
+  }catch(e){ el.innerHTML=`<div class="empty">加载失败：${esc(e.message)}</div>`; }
+}
+
+// ---------- deploy ----------
+let pollTimer=null, curJobId=null, previewOn=false;
+async function startJob(type){
+  if(!TOKEN){ setToken(); if(!TOKEN)return; }
+  try{
+    const r=await api('/api/job/start',{method:'POST',headers:type==='deploy'?{'X-Confirm':'deploy'}:{},body:JSON.stringify({type})});
+    curJobId=r.id; toast('任务已启动：'+type,'info'); watchJob();
+    if(type==='preview'){ previewOn=true; $('#btn-preview').textContent='⏹ 停止预览'; }
+  }catch(e){ toast('启动失败：'+e.message,'err'); }
+}
+async function togglePreview(){ 
+  if(previewOn){ try{ await api('/api/job/start',{method:'POST',headers:{'X-Confirm':'deploy'},body:JSON.stringify({type:'stop-preview'})}); }catch{}
+    previewOn=false; $('#btn-preview').textContent='👁 启动本地预览'; toast('预览已停止','info');
+  } else startJob('preview');
+}
+function confirmDeploy(){
+  if(!confirm('确认部署到生产环境 yetbye.top ？'))return;
+  startJob('deploy');
+}
+async function refreshDeploy(){ try{ const s=await api('/api/status'); $('#git-changes').textContent=s.gitChanges.join('\n')||'(工作区干净)'; }catch{} }
+async function watchJob(){
+  clearInterval(pollTimer);
+  pollTimer=setInterval(async()=>{
+    try{
+      const list=await api('/api/job/list');
+      const mine=curJobId?list.find(j=>j.id===curJobId):list[list.length-1];
+      if(!mine)return;
+      $('#job-term').textContent=mine.log||'(无输出)';
+      $('#job-term').scrollTop=$('#job-term').scrollHeight;
+      if(mine.done){
+        clearInterval(pollTimer);
+        if(mine.type==='preview'&&mine.exitCode!==null&&previewOn){ previewOn=false; $('#btn-preview').textContent='👁 启动本地预览'; }
+        toast(`${mine.type} 结束（exit ${mine.exitCode}）`, mine.exitCode===0?'':'err');
+        loadDashboard();
+      }
+    }catch{}
+  },1200);
+}
+
+// ---------- activity ----------
+async function loadActivity(){ try{ renderActivity($('#act-list'),100,true); }catch(e){ toast('加载失败：'+e.message,'err'); } }
+async function renderActivity(target,limit,asTable){
+  const acts=await api('/api/activity?limit='+limit);
+  const fmt=t=>new Date(t).toLocaleString('zh-CN',{hour12:false});
+  target.innerHTML = acts.map(a=> asTable
+    ? `<tr><td style="font-family:var(--font-mono);font-size:12px;color:var(--ink-3)">${fmt(a.ts)}</td><td><span class="tag-chip">${esc(a.action)}</span></td><td>${esc(a.detail)}</td></tr>`
+    : `<div class="tl-item" style="padding:8px 14px;margin-bottom:8px"><div class="tl-meta"><span>${fmt(a.ts)}</span><span class="tag-chip">${esc(a.action)}</span></div><div style="font-size:13px">${esc(a.detail)}</div></div>`
+  ).join('') || '<div class="empty">还没有记录</div>';
+}
+
+// ---------- init ----------
+window.addEventListener('DOMContentLoaded',()=>{
+  refreshTokUI();
+  loadDashboard();
+  $('#ss-content').addEventListener('keydown',e=>{ if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)) addShuoshuo(); });
+});
+</script>
+</body>
+</html>

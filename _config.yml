@@ -32,7 +32,8 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
-  # - "data/**"
+  # 独立 HTML 文章：docs/ 下原样发布不做渲染（例 source/docs/x.html → /docs/x.html）
+  - "docs/**"
 
 # Writing
 new_post_name: :title.md # File name of new posts

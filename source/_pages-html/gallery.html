@@ -1,0 +1,147 @@
+<!-- ============ 调色盘 · 大理石 × 浮世绘 × 印象派 ============ -->
+<!-- 设计 DNA（frontend-design brief）：
+     · 希腊暖金大理石：纸底 #FBF9F3，金脉纹理 hero 铭牌，衬线大字
+     · 浮世绘蓝调：青海波饰带 + 藤黄波分隔，靛青 #1B4B6F
+     · 印象派：封面上的点彩笔触叠层，hover 时苏醒 -->
+<div class="pt-scroll">
+  <!-- 浮世绘：青海波饰带 -->
+  <div class="pt-seigaiha-band" aria-hidden="true"></div>
+
+  <header class="pt-hero">
+    <!-- 大理石铭牌 -->
+    <div class="pt-marble" aria-hidden="true"></div>
+    <div class="pt-hero-text">
+      <span class="pt-eyebrow">COLOR PALETTE · GALLERY</span>
+      <h1 class="pt-title">调 色 盘</h1>
+      <p class="pt-hand">大理石的静、浮世绘的浪、印象派的光</p>
+    </div>
+    <span class="pt-seal" aria-hidden="true">藏</span>
+  </header>
+
+  <section class="pt-grid">
+    <a class="pt-card" href="blue/" style="--acc:#1B4B6F;--acc2:#7FA8C4">
+      <div class="pt-cover" style="background-image:url('/image/gallery/blue/cover.jpg')"><i class="pt-dabs" style="--d1:#1B4B6F;--d2:#7FA8C4;--d3:#F4D03F"></i></div>
+      <div class="pt-meta">
+        <b>Blue <span class="pt-cn">青</span></b>
+        <p>海与远方的蓝</p>
+        <span class="pt-go">入卷 →</span>
+      </div>
+    </a>
+    <a class="pt-card" href="green/" style="--acc:#5A8F7B;--acc2:#A7C4B5">
+      <div class="pt-cover" style="background-image:url('/image/gallery/green/cover.jpg')"><i class="pt-dabs" style="--d1:#2E5E4E;--d2:#8FA68E;--d3:#E8D5B8"></i></div>
+      <div class="pt-meta">
+        <b>Green <span class="pt-cn">苍</span></b>
+        <p>草木生长的绿</p>
+        <span class="pt-go">入卷 →</span>
+      </div>
+    </a>
+    <a class="pt-card" href="pink/" style="--acc:#C9556E;--acc2:#FFB7C5">
+      <div class="pt-cover" style="background-image:url('/image/gallery/pink/cover.jpg')"><i class="pt-dabs" style="--d1:#B03A5B;--d2:#FFB7C5;--d3:#F4D03F"></i></div>
+      <div class="pt-meta">
+        <b>Pink <span class="pt-cn">桃</span></b>
+        <p>春日将尽未尽的粉</p>
+        <span class="pt-go">入卷 →</span>
+      </div>
+    </a>
+    <a class="pt-card" href="Impressionism/" style="--acc:#8B5B8B;--acc2:#C4A8D4">
+      <div class="pt-cover pt-cover-imp" aria-hidden="true"><i class="pt-dabs" style="--d1:#8B5B8B;--d2:#4A9EFF;--d3:#F4D03F"></i><b>🎨</b></div>
+      <div class="pt-meta">
+        <b>Impressionism <span class="pt-cn">彩</span></b>
+        <p>印象派的碎光</p>
+        <span class="pt-go">入卷 →</span>
+      </div>
+    </a>
+  </section>
+
+  <!-- 藤黄金色分隔线 -->
+  <div class="pt-wave-divider" aria-hidden="true">
+    <svg viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><path d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z" fill="#1B4B6F" opacity=".16"/></svg>
+  </div>
+
+  <footer class="pt-foot"><span>✿</span><p>光落进颜料里，就成了画</p></footer>
+</div>
+
+<style>
+.pt-scroll{
+  --paper:#FBF9F3; --paper2:#F5F0E5; --line:#E8DFD0;
+  --ink:#2A2520; --ink3:#9A8E80; --indigo:#1B4B6F; --gold:#C9A86C;
+  position:relative; max-width:1100px; margin:0 auto; padding:0 .5rem 3rem;
+  font-family:'Noto Sans SC',-apple-system,sans-serif; color:var(--ink);
+}
+/* 浮世绘饰带：青海波 */
+.pt-seigaiha-band{
+  height:56px; border-radius:14px 14px 0 0; opacity:.9;
+  background-color:var(--indigo);
+  background-image:radial-gradient(circle at 50% 100%, transparent 9px, rgba(244,208,63,.85) 10px, transparent 11px),
+                   radial-gradient(circle at 50% 100%, transparent 19px, rgba(244,208,63,.55) 20px, transparent 21px),
+                   radial-gradient(circle at 50% 100%, transparent 29px, rgba(244,208,63,.35) 30px, transparent 31px);
+  background-size:40px 20px;
+}
+/* 大理石铭牌：金脉纹理 */
+.pt-marble{
+  position:absolute; right:4%; top:34px; width:190px; height:130px; border-radius:14px;
+  border:1px solid var(--line); box-shadow:0 12px 34px rgba(42,37,32,.14);
+  background:
+    linear-gradient(115deg, transparent 46%, rgba(201,168,108,.5) 47%, transparent 49%),
+    linear-gradient(65deg,  transparent 61%, rgba(154,142,128,.4) 62%, transparent 64.5%),
+    linear-gradient(150deg, #FCFAF5 0%, #F5F0E5 45%, #EFE7D6 100%);
+}
+.pt-marble::after{
+  content:''; position:absolute; inset:7px; border:1px solid var(--gold); opacity:.55; border-radius:9px;
+}
+.pt-hero{position:relative; z-index:1; display:flex; align-items:center; justify-content:center; gap:1.4rem; padding:2.8rem 1rem 2.2rem; min-height:170px}
+.pt-eyebrow{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:.4em;color:var(--gold);display:inline-block;margin-bottom:.55rem}
+.pt-title{font-family:'Noto Serif SC',Georgia,serif;font-weight:900;font-size:clamp(2.1rem,5vw,3.2rem);letter-spacing:.14em;margin:.15rem 0 .5rem;color:var(--ink)}
+.pt-hand{font-family:'Ma Shan Zheng',cursive;font-size:1.18rem;color:var(--ink3);margin:0}
+.pt-seal{
+  position:absolute; left:4%; top:52px; width:58px;height:58px;display:grid;place-items:center;
+  background:#B03A5B;color:#fff;font-family:'Noto Serif SC',serif;font-size:1.5rem;font-weight:900;
+  border-radius:9px;transform:rotate(-5deg);box-shadow:0 6px 18px rgba(176,58,91,.35);
+}
+.pt-seal::after{content:'';position:absolute;inset:4px;border:1.5px solid rgba(255,255,255,.55);border-radius:6px}
+
+/* 卡片网格：印象派点彩 */
+.pt-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.6rem}
+.pt-card{
+  position:relative;border-radius:16px;overflow:hidden;text-decoration:none;display:block;background:#fff;
+  border:1px solid var(--line);box-shadow:0 3px 14px rgba(42,37,32,.08);
+  transition:transform .38s cubic-bezier(.16,1,.3,1),box-shadow .38s;
+}
+.pt-card:hover{transform:translateY(-8px);box-shadow:0 16px 38px rgba(42,37,32,.18)}
+.pt-cover{position:relative;height:230px;background-size:cover;background-position:center;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+.pt-card:hover .pt-cover{transform:scale(1.05)}
+/* 点彩层：多团半透明圆斑，印象派碎光 */
+.pt-dabs{
+  position:absolute;inset:0;display:block;
+  background:
+   radial-gradient(circle 26px at 12% 22%, var(--d1), transparent 70%),
+   radial-gradient(circle 18px at 78% 16%, var(--d3), transparent 70%),
+   radial-gradient(circle 30px at 86% 74%, var(--d1), transparent 72%),
+   radial-gradient(circle 14px at 30% 82%, var(--d3), transparent 70%),
+   radial-gradient(circle 22px at 55% 48%, var(--d2), transparent 72%);
+  mix-blend-mode:soft-light;opacity:.85;transition:opacity .4s;
+}
+.pt-card:hover .pt-dabs{opacity:.35}
+.pt-cover-imp{display:grid;place-items:center;font-size:60px;background:linear-gradient(135deg,#F5F0E5,#E8DFD0 50%,#C4A8D4)}
+.pt-cover-imp b{filter:drop-shadow(0 4px 10px rgba(42,37,32,.25))}
+.pt-meta{padding:1.05rem 1.25rem 1.1rem;border-top:3px solid var(--acc)}
+.pt-meta b{font-family:'Noto Serif SC',serif;font-size:1.08rem;letter-spacing:.05em}
+.pt-cn{
+  float:right;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:var(--acc);color:#fff;font-size:.95rem;box-shadow:0 3px 10px color-mix(in srgb,var(--acc) 40%,transparent);
+}
+.pt-meta p{margin:.25rem 0 .4rem;color:var(--ink3);font-size:.86rem}
+.pt-go{font-size:.78rem;letter-spacing:.16em;color:var(--acc);border-bottom:1px solid var(--acc);padding-bottom:2px;opacity:0;transition:opacity .3s}
+.pt-card:hover .pt-go{opacity:1}
+
+.pt-wave-divider{position:relative;z-index:1;margin-top:2.4rem;line-height:0}
+.pt-wave-divider svg{width:100%;height:26px}
+
+.pt-foot{position:relative;z-index:1;text-align:center;margin-top:1.4rem}
+.pt-foot span{color:var(--gold);font-size:1.05rem}
+.pt-foot p{font-family:'Ma Shan Zheng',cursive;color:var(--ink3);font-size:1.02rem;margin:.3rem 0 0}
+
+@media (max-width:900px){ .pt-marble{display:none} }
+@media (max-width:640px){ .pt-grid{grid-template-columns:1fr} .pt-hero{padding:2rem .5rem 1.6rem} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>

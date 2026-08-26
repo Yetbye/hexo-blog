@@ -23,7 +23,7 @@ copyright: false
 
 - 逻辑：仅使用一个卷积神经网络来端到端地检测目标（not two-stage）
 
-![](/image/postcover/yopo1.ipg)
+![](/image/postcover/yopo1.jpg)
 
 - 遗风：图像分类网络都会将特征图展平(flatten)，得到一个一维特征向量，然后连接全连接层去做预测。（如图）
 
@@ -55,11 +55,11 @@ copyright: false
 	> 展开实际上是为了方便计算与处理，因为展开后还要还原shape，本质上是从feature map直接获取 information map  （具体如何设计获取，我不知道。根据每个grid的特征来预测该grid是否有目标的中心点坐标，以及相应的目标类别。）
 
 - 我们将输出的information map 看作一个 $7\times7\times\times30$ 的立方体，而 $7\times7$ 可视作将原图像划作成49个网格（grid）
-	![](/image/postcover/yopo2.ipg)
+	![](/image/postcover/yopo2.jpg)
 
 - 每一个网格对应了一个维度为 30 的向量，该向量包含了  *两个*预测边界框的置信度与位置参数    以及    目标检测类别的  *one-hat* 表示 （20是因为使用的是VOC数据集）
 
-	![](/image/postcover/yopo3.ipg) 
+	![](/image/postcover/yopo3.jpg) 
 
 - 其中每一个边界框都包括一个置信度  $C(confidence)$、边界框位置$(t_x, t_y,w, h)$参数，表示边界框的中心点相较于网格左上角点的偏移量$(t_x, t_y)$以及边界框的宽和高$(w ,h)$
 
@@ -72,7 +72,7 @@ copyright: false
 
 ### recap
 
-![](/image/postcover/yopo4.ipg)
+![](/image/postcover/yopo4.jpg)
 
 
 
@@ -94,7 +94,7 @@ YOLOv1是通过检测图像中的目标中心点来实现检测目标，即只�
 - 该网格内所要预测的边界框，其置信度会尽可能接近1。
 - 有物体的网格会被标记为正样本候选区域
 - 在训练过程中，训练的正样本(positive sample)只会从此网格处的预测中得到，而其他区域的预测都是该目标的负样本（置信度接近0）。
-![](/image/postcover/yopo5.ipg)
+![](/image/postcover/yopo5.jpg)
 
 
 

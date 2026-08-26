@@ -24,6 +24,7 @@ menu:
   Home: / || fas fa-skull
   Note: /notes/ || fas fa-crown
   Moments: /moments/ || fas fa-camera
+  行迹: /map/ || fas fa-route
   八音盒: /music/ || fas fa-compact-disc
   调色盘: /gallery/ || fas fa-images
   小纸条: /shuoshuo/ || fas fa-sticky-note
@@ -1009,8 +1010,16 @@ note:
 pjax:
   enable: true
   # Exclude the specified pages from pjax, such as '/music/'
+  # 这些页面依赖内联脚本 fetch 数据渲染，pjax 局部替换不会重跑脚本，
+  # 排除后走整页加载（修复：首次点击内容不全、刷新才显示）
   exclude:
-    # - /xxxxxx/
+    - /notes/
+    - /moments/
+    - /gallery/
+    - /shuoshuo/
+    - /music/
+    - /about/
+    - /map/
 
 # Inject the css and script (aplayer/meting)
 aplayerInject:
@@ -1078,8 +1087,12 @@ inject:
     # - <link rel="stylesheet" href="/xxx.css">
     - <link rel="stylesheet" href="/css/waves.css"> # 导航栏
     - <link rel="stylesheet" href="/css/cursor.css"> # 自定义鼠标
+    - <link rel="stylesheet" href="/css/venus-post.css"> # Venus 文章排版预设（含导航居中激活）
     # - <link rel="stylesheet" href="/css/essay_page.css">  # 即刻纸条样式
     - <link rel="stylesheet" href="/css/footer_fish.css"> # 页脚养鱼的适配
+    - <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    - <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    - <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     - <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/mainColor/heoMainColor.css"> # 张洪
     - <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/js-heo@1.0.11/poem/poem.css">   # 每日诗词
   bottom:
@@ -1099,7 +1112,8 @@ CDN:
   # Note: Dev version can only use 'local' for internal scripts
   # Note: When setting third-party scripts to 'local', you need to install hexo-butterfly-extjs
   internal_provider: local
-  third_party_provider: jsdelivr
+  # cdnjs(Cloudflare) 国内可用性/速度优于 jsdelivr，mathjax 等随之提速
+  third_party_provider: cdnjs
 
   # Add version number to url, true or false
   version: false

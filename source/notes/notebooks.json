@@ -5,8 +5,20 @@
     "icon": "fas fa-brain",
     "subtitle": "深度学习基础概念笔记",
     "articles": [
-      {"title": "基础梯度下降方法介绍", "slug":"Gradient Descent", "date": "2025-06-02", "icon": "fas fa-microchip"},
-      {"title": "验证集", "slug": "Validation Set", "date": "2025-06-02", "icon": "fas fa-project-diagram"}
+      {
+        "title": "基础梯度下降方法介绍",
+        "slug": "Gradient Descent",
+        "date": "2025-06-02",
+        "icon": "fas fa-microchip",
+        "url": "/articles/Gradient%20Descent/"
+      },
+      {
+        "title": "验证集",
+        "slug": "Validation Set",
+        "date": "2025-06-02",
+        "icon": "fas fa-project-diagram",
+        "url": "/articles/Validation%20Set/"
+      }
     ]
   },
   {
@@ -29,7 +41,13 @@
     "icon": "fas fa-language",
     "subtitle": "自然语言处理技术及应用",
     "articles": [
-      {"title": "文本情感分析实战", "slug": "RealW_2", "date": "2025-06-04", "icon": "fas fa-smile"}
+      {
+        "title": "文本情感分析实战",
+        "slug": "RealW_2",
+        "date": "2025-06-04",
+        "icon": "fas fa-smile",
+        "url": "/articles/RealW_2/"
+      }
     ]
   },
   {
@@ -38,8 +56,20 @@
     "icon": "fas fa-eye",
     "subtitle": "目标检测算法探究",
     "articles": [
-      {"title": "YOLOv1原理解析", "slug": "YOLOv1", "date": "2025-06-06", "icon": "fas fa-project-diagram"},
-      {"title": "YOLOv2架构详解", "slug": "YOLOv2", "date": "2025-06-07", "icon": "fas fa-bullseye"}
+      {
+        "title": "YOLOv1原理解析",
+        "slug": "YOLOv1",
+        "date": "2025-06-06",
+        "icon": "fas fa-project-diagram",
+        "url": "/articles/YOLOv1/"
+      },
+      {
+        "title": "YOLOv2架构详解",
+        "slug": "YOLOv2",
+        "date": "2025-06-07",
+        "icon": "fas fa-bullseye",
+        "url": "/articles/YOLOv2/"
+      }
     ]
   }
 ]

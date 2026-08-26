@@ -1,0 +1,339 @@
+---
+top_img: "/image/media/moments.jpg"
+---
+
+<!-- ============ 行迹 · 水彩国风可缩放地图（Venus × paper-reading-blog 自绘SVG规范） ============ -->
+<div class="mp-scroll">
+  <div class="mp-band" aria-hidden="true"></div>
+  <div class="mp-corner mp-corner-tl" aria-hidden="true"></div>
+  <div class="mp-corner mp-corner-br" aria-hidden="true"></div>
+
+  <header class="mp-hero">
+    <span class="mp-badge">行迹 · TRAVELED INK</span>
+    <h1 class="mp-title">山河行迹图</h1>
+    <p class="mp-hand">走过的每一处，都亮着一盏灯</p>
+    <p class="mp-hint">滚轮缩放 · 拖拽平移 · 点击点亮之地读诗</p>
+  </header>
+
+  <!-- 地图视口 -->
+  <div class="mp-viewport" id="mp-viewport">
+    <div class="mp-canvas" id="mp-canvas">
+      <svg id="mp-svg" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" aria-label="水彩国风行迹地图">
+        <defs>
+          <filter id="mp-wash" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="18"/>
+          </filter>
+          <filter id="mp-ink" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1.1"/>
+          </filter>
+        </defs>
+
+        <!-- 水彩晕染底：青绿 · 花青 · 赭石 -->
+        <g filter="url(#mp-wash)" opacity=".34">
+          <ellipse cx="250" cy="180" rx="190" ry="120" fill="#C4784A"/>  <!-- 西漠赭石 -->
+          <ellipse cx="560" cy="150" rx="170" ry="100" fill="#8FA68E"/>  <!-- 漠北草色 -->
+          <ellipse cx="640" cy="400" rx="200" ry="130" fill="#7FA88F"/>  <!-- 中原青绿 -->
+          <ellipse cx="800" cy="470" rx="150" ry="110" fill="#4A7DBF"/>  <!-- 江南花青 -->
+          <ellipse cx="430" cy="560" rx="160" ry="100" fill="#6B8E7B"/>  <!-- 岭南苍绿 -->
+          <ellipse cx="950" cy="350" rx="90"  ry="220" fill="#7FA8C4"/>  <!-- 东海水色 -->
+        </g>
+
+        <!-- 山脉（水墨皴笔） -->
+        <g filter="url(#mp-ink)" opacity=".5" stroke="#2D2D2D" stroke-width="2.4" fill="none" stroke-linecap="round">
+          <path d="M180 240 l26 -44 22 40 20 -30 24 42"/>
+          <path d="M255 205 l20 -34 18 30 18 -24 20 36"/>
+          <path d="M330 300 l22 -38 20 34 18 -26 22 38"/>
+          <path d="M300 520 l24 -40 20 36 20 -28 22 40"/>
+          <path d="M560 560 l22 -36 20 32 18 -24 20 34"/>
+          <path d="M120 420 l22 -36 20 32 18 -24 20 34"/>
+        </g>
+
+        <!-- 江河（花青双钩） -->
+        <g filter="url(#mp-ink)" fill="none" stroke="#4A7DBF" opacity=".55">
+          <path d="M60 250 C 220 230, 330 300, 470 280 S 720 240, 900 300" stroke-width="7" opacity=".5"/>
+          <path d="M380 640 C 460 560, 520 520, 610 470 S 780 430, 960 430" stroke-width="9" opacity=".55"/>
+        </g>
+
+        <!-- 区域题字（竖排） -->
+        <g font-family="'Noto Serif SC',serif" fill="#4A4A4A" opacity=".62" font-size="19" letter-spacing="4">
+          <text x="215" y="120" writing-mode="tb">西 域</text>
+          <text x="560" y="80"  writing-mode="tb">漠 北</text>
+          <text x="640" y="300" writing-mode="tb">中 原</text>
+          <text x="805" y="360" writing-mode="tb">江 南</text>
+          <text x="435" y="500" writing-mode="tb">西南</text>
+          <text x="705" y="545" writing-mode="tb">岭 南</text>
+          <text x="940" y="180" writing-mode="tb">东海</text>
+        </g>
+
+        <!-- 地点层（JS 注入） -->
+        <g id="mp-spots"></g>
+      </svg>
+    </div>
+
+    <!-- 缩放控件 -->
+    <div class="mp-ctrl">
+      <button id="mp-zin"  title="放大">＋</button>
+      <button id="mp-zout" title="缩小">－</button>
+      <button id="mp-zreset" title="复位">◎</button>
+    </div>
+    <div class="mp-legend">
+      <span class="mp-dot lit"></span> 已点亮 · 有诗
+      <span class="mp-dot dim"></span> 未至
+    </div>
+  </div>
+
+  <footer class="mp-foot">
+    <div class="mp-brandline" aria-hidden="true"></div>
+    <p>此卷山河，随行迹徐徐展开</p>
+  </footer>
+</div>
+
+<!-- 诗笺弹层 -->
+<div class="mp-mask" id="mp-mask">
+  <div class="mp-poem-card" role="dialog" aria-modal="true">
+    <button class="mp-poem-close" id="mp-poem-close" aria-label="关闭">✕</button>
+    <div class="mp-poem-strip" id="mp-poem-strip">行迹</div>
+    <div class="mp-poem-body">
+      <h3 id="mp-poem-place">—</h3>
+      <p class="mp-poem-date" id="mp-poem-date">—</p>
+      <div class="mp-poem-lines" id="mp-poem-lines">—</div>
+      <p class="mp-poem-note" id="mp-poem-note"></p>
+    </div>
+    <span class="mp-poem-seal" aria-hidden="true">迹</span>
+  </div>
+</div>
+
+<style>
+/* ===== 行迹 · 水彩国风（自足不透明画布） ===== */
+.mp-scroll {
+  position:relative; max-width:1080px; margin:0 auto;
+  background:
+    radial-gradient(800px 300px at 10% 0%, rgba(90,143,123,.07), transparent 60%),
+    linear-gradient(#FBF9F3, #F5F0E5);
+  border:1px solid #E8DFD0; border-radius:20px;
+  box-shadow:0 18px 50px rgba(0,0,0,.3);
+  padding:2.4rem 2rem 2.2rem; overflow:hidden;
+  font-family:'Noto Sans SC',-apple-system,sans-serif; color:#2A2520;
+}
+.mp-band {
+  position:absolute; top:0; left:0; right:0; height:9px; opacity:.85; border-radius:20px 20px 0 0;
+  background:linear-gradient(90deg,#4A3F2F 0 30%, #7A6B52 30% 55%, #C4784A 55% 80%, #4A7DBF 80% 100%);
+  background-size:72px 100%;
+}
+.mp-corner { position:absolute; width:52px; height:52px; pointer-events:none; z-index:3; }
+.mp-corner::before { content:''; position:absolute; inset:0; border:2px solid #4A3F2F; opacity:.38; }
+.mp-corner::after  { content:''; position:absolute; inset:5px; border:1px solid #C4784A; opacity:.5; }
+.mp-corner-tl { top:20px; left:20px; } .mp-corner-tl::before,.mp-corner-tl::after { border-right:0; border-bottom:0; }
+.mp-corner-br { bottom:20px; right:20px; } .mp-corner-br::before,.mp-corner-br::after { border-left:0; border-top:0; }
+
+.mp-hero { position:relative; z-index:1; text-align:center; padding:.4rem 1rem 1.6rem; }
+.mp-badge {
+  display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.68rem;
+  letter-spacing:.4em; color:#C4784A; border:1px solid #C4784A; border-radius:999px;
+  padding:.28rem 1rem .24rem 1.25rem; margin-bottom:.85rem; opacity:.9;
+}
+.mp-title {
+  font-family:'Noto Serif SC',serif; font-weight:900; letter-spacing:.2em;
+  font-size:clamp(1.9rem,4.4vw,2.8rem); margin:0 0 .55rem; color:#2A2520;
+}
+.mp-hand { font-family:'Ma Shan Zheng',cursive; font-size:1.18rem; color:#4A3F2F; margin:0 0 .4rem; }
+.mp-hint { font-size:.8rem; color:#9A8E80; margin:0; letter-spacing:.06em; }
+
+/* 视口与画布 */
+.mp-viewport {
+  position:relative; z-index:1; border:1px solid #E8DFD0; border-radius:14px;
+  background:linear-gradient(#FDFAF2,#F7F1E3);
+  overflow:hidden; height:520px; cursor:grab; touch-action:none;
+  box-shadow:inset 0 0 40px rgba(74,63,47,.06);
+}
+.mp-viewport:active { cursor:grabbing; }
+.mp-canvas { position:absolute; inset:0; transform-origin:0 0; will-change:transform; }
+#mp-svg { width:100%; height:100%; display:block; }
+
+/* 地点标记 */
+.mp-spot { cursor:pointer; }
+.mp-spot .halo { fill:#C44D3F; opacity:.18; }
+.mp-spot.lit .core { fill:#C44D3F; stroke:#FFF; stroke-width:2; }
+.mp-spot.lit .pulse { animation:mp-pulse 2.4s ease-out infinite; transform-origin:center; transform-box:fill-box; }
+@keyframes mp-pulse { 0%{opacity:.55; transform:scale(.6)} 70%{opacity:0; transform:scale(2.1)} 100%{opacity:0} }
+.mp-spot .label {
+  font-family:'Noto Serif SC',serif; font-size:15px; fill:#4A3F2F;
+  paint-order:stroke; stroke:#FDFAF2; stroke-width:4px; letter-spacing:2px;
+}
+.mp-spot.ghost .core { fill:#B8AA96; opacity:.55; }
+.mp-spot.ghost .label { fill:#A89A86; }
+
+/* 控件与图例 */
+.mp-ctrl { position:absolute; right:14px; bottom:14px; display:flex; flex-direction:column; gap:6px; z-index:2; }
+.mp-ctrl button {
+  width:36px; height:36px; border-radius:10px; border:1px solid #E8DFD0;
+  background:#FDFAF2EE; color:#4A3F2F; font-size:1.05rem; cursor:pointer;
+  font-family:'Noto Serif SC',serif; box-shadow:0 2px 8px rgba(74,63,47,.14);
+  transition:all .2s;
+}
+.mp-ctrl button:hover { border-color:#C4784A; color:#C4784A; transform:translateY(-2px); }
+.mp-legend {
+  position:absolute; left:14px; bottom:14px; z-index:2;
+  background:#FDFAF2E8; border:1px solid #E8DFD0; border-radius:10px;
+  font-size:.76rem; color:#6A5F50; padding:.4rem .7rem; display:flex; align-items:center; gap:.45rem;
+}
+.mp-dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+.mp-dot.lit { background:#C44D3F; box-shadow:0 0 0 2px #FDFAF2, 0 0 0 3px #C44D3F55; }
+.mp-dot.dim { background:#B8AA96; margin-left:.6rem; }
+
+/* 诗笺 */
+.mp-mask {
+  position:fixed; inset:0; background:rgba(42,37,32,.45); backdrop-filter:blur(3px);
+  display:none; place-items:center; z-index:999; padding:1rem;
+}
+.mp-mask.show { display:grid; }
+.mp-poem-card {
+  position:relative; width:min(430px, 94vw); max-height:86vh; overflow:auto;
+  background:linear-gradient(#FFFDF6,#F9F3E6);
+  border:1px solid #D9C7A1; border-radius:6px 18px 18px 18px;
+  padding:1.7rem 1.8rem 1.5rem 3.1rem;
+  box-shadow:0 24px 70px rgba(0,0,0,.4);
+  animation:mp-in .3s cubic-bezier(.16,1,.3,1);
+}
+@keyframes mp-in { from{opacity:0; transform:translateY(14px) scale(.97)} to{opacity:1} }
+.mp-poem-strip {
+  position:absolute; left:0; top:0; bottom:0; width:2.1rem;
+  background:linear-gradient(#4A3F2F,#6B5B45); color:#F9F3E6;
+  writing-mode:vertical-rl; display:flex; align-items:center; justify-content:center;
+  font-family:'Noto Serif SC',serif; letter-spacing:.4em; font-size:.95rem;
+  border-radius:6px 0 0 18px;
+}
+.mp-poem-close {
+  position:absolute; right:.7rem; top:.6rem; width:28px; height:28px; border-radius:50%;
+  border:1px solid #D9C7A1; background:transparent; color:#9A8E80; cursor:pointer;
+}
+.mp-poem-close:hover { color:#C44D3F; border-color:#C44D3F; }
+.mp-poem-body h3 {
+  font-family:'Noto Serif SC',serif; font-size:1.3rem; letter-spacing:.1em; margin:0 0 .2rem; color:#2A2520;
+}
+.mp-poem-date {
+  font-family:'JetBrains Mono',monospace; font-size:.74rem; color:#9A8E80;
+  letter-spacing:.14em; margin:0 0 1rem;
+}
+.mp-poem-lines {
+  font-family:'Noto Serif SC',serif; font-size:1.06rem; line-height:2.15; color:#4A3F2F;
+  border-top:1px dashed #D9C7A1; border-bottom:1px dashed #D9C7A1; padding:.9rem .2rem;
+  white-space:pre-line;
+}
+.mp-poem-note { font-size:.82rem; color:#9A8E80; margin:.8rem 0 0; }
+.mp-poem-seal {
+  position:absolute; right:1rem; bottom:.9rem; width:30px; height:30px;
+  display:grid; place-items:center; background:#C44D3F; color:#F9F3E6;
+  font-family:'Noto Serif SC',serif; font-size:.9rem; border-radius:5px; transform:rotate(-5deg);
+}
+
+.mp-brandline { width:64px; height:3px; margin:0 auto .8rem; border-radius:99px; background:linear-gradient(90deg,#4A3F2F,#C4784A); }
+.mp-foot { position:relative; z-index:1; text-align:center; margin-top:1.6rem; }
+.mp-foot p { font-family:'Ma Shan Zheng',cursive; font-size:1.02rem; color:#7A6B52; margin:0; }
+
+@media (max-width:640px){ .mp-scroll{padding:1.8rem .9rem 1.6rem;} .mp-viewport{height:400px;} }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
+</style>
+
+<script>
+(function () {
+  'use strict';
+  var viewport = document.getElementById('mp-viewport');
+  var canvas = document.getElementById('mp-canvas');
+  if (!viewport || !canvas) return;
+
+  /* ---------- 数据 ---------- */
+  fetch('/data/places.json')
+    .then(function (r) { return r.json(); })
+    .then(function (places) { renderSpots(places || []); })
+    .catch(function (e) { console.error('places.json 加载失败', e); });
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function renderSpots(places) {
+    var layer = document.getElementById('mp-spots');
+    if (!layer) return;
+    layer.innerHTML = places.map(function (p, i) {
+      var lit = p.visited !== false;
+      return '<g class="mp-spot ' + (lit ? 'lit' : 'ghost') + '" data-i="' + i + '" tabindex="0" role="button" aria-label="' + esc(p.name) + '">' +
+        (lit ? '<circle class="pulse" cx="' + p.x + '" cy="' + p.y + '" r="13" fill="none" stroke="#C44D3F" stroke-width="1.5"/>' : '') +
+        '<circle class="halo" cx="' + p.x + '" cy="' + p.y + '" r="10"/>' +
+        '<circle class="core" cx="' + p.x + '" cy="' + p.y + '" r="5.5"/>' +
+        '<text class="label" x="' + (p.x + 13) + '" y="' + (p.y + 5) + '">' + esc(p.name) + '</text>' +
+        '</g>';
+    }).join('');
+    Array.prototype.forEach.call(layer.querySelectorAll('.mp-spot'), function (node) {
+      node.addEventListener('click', function () { openPoem(places[+this.getAttribute('data-i')]); });
+      node.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPoem(places[+this.getAttribute('data-i')]); }
+      });
+    });
+  }
+  /* ---------- 诗笺 ---------- */
+  function openPoem(p) {
+    if (!p) return;
+    document.getElementById('mp-poem-place').textContent = p.name || '—';
+    document.getElementById('mp-poem-strip').textContent = (p.poemTitle || '行迹').split('').join(' ');
+    document.getElementById('mp-poem-date').textContent = p.date ? '✿ ' + p.date : '';
+    document.getElementById('mp-poem-lines').textContent = p.poem || '（此处还没有落下诗句）';
+    document.getElementById('mp-poem-note').textContent = p.note || '';
+    document.getElementById('mp-mask').classList.add('show');
+  }
+  document.getElementById('mp-poem-close').addEventListener('click', function () {
+    document.getElementById('mp-mask').classList.remove('show');
+  });
+  document.getElementById('mp-mask').addEventListener('click', function (e) {
+    if (e.target === this) this.classList.remove('show');
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') document.getElementById('mp-mask').classList.remove('show');
+  });
+  /* ---------- 缩放与平移 ---------- */
+  var scale = 1, tx = 0, ty = 0, MIN = 1, MAX = 4;
+  function apply() {
+    canvas.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+  }
+  function zoomAt(cx, cy, factor) {
+    var ns = Math.min(MAX, Math.max(MIN, scale * factor));
+    if (ns === scale) return;
+    var rect = viewport.getBoundingClientRect();
+    var px = cx - rect.left, py = cy - rect.top;
+    tx = px - (px - tx) * (ns / scale);
+    ty = py - (py - ty) * (ns / scale);
+    scale = ns; clampPan(); apply();
+  }
+  function clampPan() {
+    var rect = viewport.getBoundingClientRect();
+    var minX = rect.width - rect.width * scale, minY = rect.height - rect.height * scale;
+    tx = Math.min(0, Math.max(minX, tx));
+    ty = Math.min(0, Math.max(minY, ty));
+  }
+  viewport.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.15 : 1 / 1.15);
+  }, { passive: false });
+  var dragging = false, sx = 0, sy = 0, stx = 0, sty = 0;
+  viewport.addEventListener('pointerdown', function (e) {
+    dragging = true; sx = e.clientX; sy = e.clientY; stx = tx; sty = ty;
+    viewport.setPointerCapture(e.pointerId);
+  });
+  viewport.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    tx = stx + (e.clientX - sx); ty = sty + (e.clientY - sy); clampPan(); apply();
+  });
+  ['pointerup', 'pointercancel'].forEach(function (ev) {
+    viewport.addEventListener(ev, function () { dragging = false; });
+  });
+  document.getElementById('mp-zin').addEventListener('click', function () {
+    var r = viewport.getBoundingClientRect(); zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1.3);
+  });
+  document.getElementById('mp-zout').addEventListener('click', function () {
+    var r = viewport.getBoundingClientRect(); zoomAt(r.left + r.width / 2, r.top + r.height / 2, 1 / 1.3);
+  });
+  document.getElementById('mp-zreset').addEventListener('click', function () {
+    scale = 1; tx = 0; ty = 0; apply();
+  });
+})();
+</script>
+<!-- SENTINEL-R7 -->
