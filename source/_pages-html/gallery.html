@@ -7,6 +7,7 @@
   <!-- 浮世绘：青海波饰带 -->
   <div class="pt-seigaiha-band" aria-hidden="true"></div>
 
+  <div class="pt-container">
   <header class="pt-hero">
     <!-- 大理石铭牌 -->
     <div class="pt-marble" aria-hidden="true"></div>
@@ -59,17 +60,22 @@
   </div>
 
   <footer class="pt-foot"><span>✿</span><p>光落进颜料里，就成了画</p></footer>
+  </div><!-- /.pt-container -->
 </div>
 
 <style>
 .pt-scroll{
   --paper:#FBF9F3; --paper2:#F5F0E5; --line:#E8DFD0;
   --ink:#2A2520; --ink3:#9A8E80; --indigo:#1B4B6F; --gold:#C9A86C;
-  position:relative; max-width:1100px; margin:0 auto; padding:0 .5rem 3rem;
+  position:relative; min-height:100vh; padding:20px;
   font-family:'Noto Sans SC',-apple-system,sans-serif; color:var(--ink);
 }
+/* 布局契约：居中内容容器（hero/grid/divider/footer 全部纳入） */
+.pt-container{position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:20px}
 /* 浮世绘饰带：青海波 */
 .pt-seigaiha-band{
+  position:absolute; top:0; left:0; right:0; z-index:0; pointer-events:none;
+  width:calc(100% - 40px); max-width:1240px; margin:0 auto;
   height:56px; border-radius:14px 14px 0 0; opacity:.9;
   background-color:var(--indigo);
   background-image:radial-gradient(circle at 50% 100%, transparent 9px, rgba(244,208,63,.85) 10px, transparent 11px),
@@ -79,7 +85,7 @@
 }
 /* 大理石铭牌：金脉纹理 */
 .pt-marble{
-  position:absolute; right:4%; top:34px; width:190px; height:130px; border-radius:14px;
+  position:absolute; right:4%; top:50px; width:190px; height:130px; border-radius:14px;
   border:1px solid var(--line); box-shadow:0 12px 34px rgba(42,37,32,.14);
   background:
     linear-gradient(115deg, transparent 46%, rgba(201,168,108,.5) 47%, transparent 49%),
@@ -94,7 +100,7 @@
 .pt-title{font-family:'Noto Serif SC',Georgia,serif;font-weight:900;font-size:clamp(2.1rem,5vw,3.2rem);letter-spacing:.14em;margin:.15rem 0 .5rem;color:var(--ink)}
 .pt-hand{font-family:'Ma Shan Zheng',cursive;font-size:1.18rem;color:var(--ink3);margin:0}
 .pt-seal{
-  position:absolute; left:4%; top:52px; width:58px;height:58px;display:grid;place-items:center;
+  position:absolute; left:4%; top:66px; width:58px;height:58px;display:grid;place-items:center;
   background:#B03A5B;color:#fff;font-family:'Noto Serif SC',serif;font-size:1.5rem;font-weight:900;
   border-radius:9px;transform:rotate(-5deg);box-shadow:0 6px 18px rgba(176,58,91,.35);
 }
@@ -134,14 +140,18 @@
 .pt-go{font-size:.78rem;letter-spacing:.16em;color:var(--acc);border-bottom:1px solid var(--acc);padding-bottom:2px;opacity:0;transition:opacity .3s}
 .pt-card:hover .pt-go{opacity:1}
 
-.pt-wave-divider{position:relative;z-index:1;margin-top:2.4rem;line-height:0}
+.pt-wave-divider{position:relative;z-index:1;margin-top:28px;line-height:0}
 .pt-wave-divider svg{width:100%;height:26px}
 
-.pt-foot{position:relative;z-index:1;text-align:center;margin-top:1.4rem}
+.pt-foot{position:relative;z-index:1;text-align:center;margin-top:1.5rem}
 .pt-foot span{color:var(--gold);font-size:1.05rem}
 .pt-foot p{font-family:'Ma Shan Zheng',cursive;color:var(--ink3);font-size:1.02rem;margin:.3rem 0 0}
 
-@media (max-width:900px){ .pt-marble{display:none} }
-@media (max-width:640px){ .pt-grid{grid-template-columns:1fr} .pt-hero{padding:2rem .5rem 1.6rem} }
+@media (max-width:900px){
+  .pt-marble{display:none}
+  .pt-grid{grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:1.25rem}
+  .pt-hero{padding:2.4rem .5rem 1.9rem}
+}
+@media (max-width:640px){ .pt-grid{grid-template-columns:1fr} }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>

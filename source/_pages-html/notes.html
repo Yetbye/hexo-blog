@@ -1,41 +1,47 @@
 <!-- ============ 笔记 · 水墨丹青（自足纸底画布；数据源 notebooks.json，契约不变） ============ -->
 <div class="ik-scroll">
-  <div class="ik-mountain" aria-hidden="true"></div>
-<div class="ik-mountain" aria-hidden="true"></div>
-  <svg class="ik-cloud ik-cloud-a" viewBox="0 0 120 40" aria-hidden="true"><path d="M10 30 q10 -18 26 -12 q6 -14 24 -10 q16 3 18 14 q14 -2 16 8 z" fill="none" stroke="#4A4A4A" stroke-width="1.4" opacity=".35"/></svg>
-  <svg class="ik-cloud ik-cloud-b" viewBox="0 0 120 40" aria-hidden="true"><path d="M10 30 q10 -18 26 -12 q6 -14 24 -10 q16 3 18 14 q14 -2 16 8 z" fill="none" stroke="#7A6B52" stroke-width="1.2" opacity=".28"/></svg>
-  <div class="ik-corner ik-corner-tl" aria-hidden="true"></div>
-  <div class="ik-corner ik-corner-br" aria-hidden="true"></div>
+  <div class="ik-container">
+    <div class="ik-mountain" aria-hidden="true"></div>
+    <div class="ik-mountain" aria-hidden="true"></div>
+    <svg class="ik-cloud ik-cloud-a" viewBox="0 0 120 40" aria-hidden="true"><path d="M10 30 q10 -18 26 -12 q6 -14 24 -10 q16 3 18 14 q14 -2 16 8 z" fill="none" stroke="#4A4A4A" stroke-width="1.4" opacity=".35"/></svg>
+    <svg class="ik-cloud ik-cloud-b" viewBox="0 0 120 40" aria-hidden="true"><path d="M10 30 q10 -18 26 -12 q6 -14 24 -10 q16 3 18 14 q14 -2 16 8 z" fill="none" stroke="#7A6B52" stroke-width="1.2" opacity=".28"/></svg>
+    <div class="ik-corner ik-corner-tl" aria-hidden="true"></div>
+    <div class="ik-corner ik-corner-br" aria-hidden="true"></div>
 
-  <!-- 竖排题签 -->
-  <aside class="ik-slip" aria-hidden="true">
-    <span class="ik-slip-seal">墨</span>
-    <span class="ik-slip-text">笔记簿</span>
-  </aside>
+    <!-- 竖排题签 -->
+    <aside class="ik-slip" aria-hidden="true">
+      <span class="ik-slip-seal">墨</span>
+      <span class="ik-slip-text">笔记簿</span>
+    </aside>
 
-  <header class="ik-hero">
-    <span class="ik-eyebrow">NOTEBOOKS</span>
-    <h1 class="ik-title">笔记簿</h1>
-    <p class="ik-hand">一页一页，慢慢写完</p>
-    <div class="ik-inkline" aria-hidden="true"></div>
-  </header>
+    <header class="ik-hero">
+      <span class="ik-eyebrow">NOTEBOOKS</span>
+      <h1 class="ik-title">笔记簿</h1>
+      <p class="ik-hand">一页一页，慢慢写完</p>
+      <div class="ik-inkline" aria-hidden="true"></div>
+    </header>
 
-  <section id="notebooks-grid" class="ik-grid" aria-live="polite"></section>
-  <nav id="pagination" class="ik-pagination" aria-label="笔记本分页"></nav>
+    <section id="notebooks-grid" class="ik-grid" aria-live="polite"></section>
+    <nav id="pagination" class="ik-pagination" aria-label="笔记本分页"></nav>
 
-  <footer class="ik-foot"><span>墨</span><p>笔记皆为基础概念的手抄与整理</p></footer>
+    <footer class="ik-foot"><span>墨</span><p>笔记皆为基础概念的手抄与整理</p></footer>
+  </div>
 </div>
 
 <style>
-/* ===== Venus 配方 B：水墨丹青 —— 自足不透明画布 ===== */
+/* ===== 页面骨架外壳（SHARED_LAYOUT_SPEC v1：min-height:100vh; padding:20px; 装饰层 absolute 不占流） ===== */
 .ik-scroll {
-  position:relative; max-width:1020px; margin:0 auto;
+  position:relative; min-height:100vh; padding:20px;
+}
+/* 契约内容列（max-width:1200px; margin:0 auto; padding:20px），承接原纸底画布视觉——配色/边框/阴影数值一字未改 */
+.ik-container {
+  position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:20px;
   background:
     radial-gradient(900px 300px at 12% 0, rgba(61,90,74,.05), transparent 60%),
     linear-gradient(#F8F6F0, #F0EDE4);
   border:1px solid #E2DDD0; border-radius:18px;
   box-shadow:0 18px 50px rgba(0,0,0,.3);
-  padding:2.6rem 2.4rem 2.4rem; overflow:hidden;
+  overflow:hidden;
   font-family:'Noto Sans SC',-apple-system,sans-serif; color:#1A1A1A;
 }
 /* 远山水墨剪影（SI-03，页底） */
@@ -164,6 +170,8 @@
 .ik-cloud-b{width:90px;top:150px;right:8%;animation:ik-drift 11s ease-in-out infinite alternate-reverse}
 @keyframes ik-drift{from{transform:translateX(0)}to{transform:translateX(26px)}}
 @media(prefers-reduced-motion:reduce){.ik-cloud{animation:none!important}}
+/* 契约断点：网格降列、隐藏大装饰（云）；山影/题签等小件保留，640px 规则原样保留 */
+@media (max-width:900px){ .ik-grid{grid-template-columns:1fr} .ik-cloud{display:none} }
 </style>
 
 <script>

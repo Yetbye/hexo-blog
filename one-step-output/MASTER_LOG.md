@@ -401,3 +401,36 @@ gsd-verifier 视角复查官已派出（令牌/残留/卡片语法/功能红线�
 
 ### 状态
 站点 = 第八轮末形态；信纸风完整保留在 snapshots/ 可一键切回。
+
+---
+
+## 第十一轮：布局统一（小纸条骨架）+ 行迹游戏化精致化 + 性能根治
+
+### 用户两条硬约束
+1. 行迹可用但丑+卡 → 要游戏风格精致视觉，且与站点艺术气质一致
+2. 笔记/行迹/调色盘/关于 四页必须与小纸条页**布局和格式一致；美术元素绝对不动**
+
+### A1-A4
+- 从小纸条页提取骨架令牌，固化为 `docs/SHARED_LAYOUT_SPEC.md`：
+  外层 min-height:100vh+padding:20px → 装饰层(absolute) → 内容列 max-width:1200px 居中 → header 居中 → stats(可选) → 主内容 → 页脚；断点 900px
+- 每页美术保护清单写入规格书；about 迁入 _pages-html 安全通道
+
+### A5 子智能体并行施工（SDD，4 agents 文件互斥）
+| Agent | 页面 | 布局 | 自检 |
+|-------|------|------|------|
+| frontend-developer #1 | notes | ik-scroll 外壳+ik-container 1200 列，装饰随容器锚定 | new Function PASS；保护项 grep 全中 |
+| frontend-developer #2 | map | mp-page 外壳+1200 容器；HUD 缩放胶囊组/四角饰件/罗盘/pin 分层光效/诗笺缓动 | new Function PASS；14 个功能 id 全在 |
+| frontend-developer #3 | gallery | pt-scroll 外壳+pt-container；青海波带转绝对贴顶；铭牌/印章坐标补偿 | grep 计数全达标 |
+| frontend-developer #4 | about→_pages-html | va-container 宽容器+va-col 860 窄阅读列；文案逐条校验一字未改 | 日志条目数一致 |
+
+### 地图性能根治
+stdDeviation=18 大模糊滤镜（重绘元凶）→ 六枚 radialGradient 预烘焙晕染；拖拽 pointermove 经 rAF 合帧；viewport contain:strict；pulse 动画 visibilitychange 暂停；transform 仅 translate/scale；SVG 零 drop-shadow
+
+### A6 验收（jsdom 功能审计 5/5 ✓）
+笔记卡 4 ✓｜调色盘入口卡 4 ✓｜blue 画墙 3 ✓｜关于日志组 2 ✓｜行迹 pin 6 ✓ 零真实异常
+性能标记：contain:strict=1、rAF=1、大模糊滤镜=0
+布局契约抽检：四页 100vh 外壳/1200px 容器/900px 断点全部命中
+路由：9 页全 200（about 已由生成器直出，旧 md 备份 trash/about_index_pre_r11.md）
+
+### 美术零改动声明
+四页的配色变量、装饰组件、专属样式、受保护文案经 grep 逐项核对全部原样保留——本轮只动了「盒子怎么摆」，没动「画是什么」。
