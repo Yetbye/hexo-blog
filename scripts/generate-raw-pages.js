@@ -18,14 +18,14 @@ const fs = require('fs');
 const path = require('path');
 
 const META = {
-  map: { title: '山河行迹' },
-  about: { title: '花主自述' },
-  notes: { title: '笔记簿' },
-  gallery: { title: '调色盘' },
-  'gallery-blue': { title: 'Blue' },
-  'gallery-green': { title: 'Green' },
-  'gallery-pink': { title: 'Pink' },
-  'gallery-impressionism': { title: 'Impressionism' },
+  map: { title: '山河行迹', top_img: '/image/media/moments.jpg' },
+  about: { title: '花主自述', top_img: '/image/media/about.jpg' },
+  notes: { title: '笔记簿', top_img: '/image/media/notes.jpg' },
+  gallery: { title: '调色盘', top_img: '/image/media/gallery.jpeg' },
+  'gallery-blue': { title: 'Blue', top_img: '/image/gallery/blue/cover.jpg' },
+  'gallery-green': { title: 'Green', top_img: '/image/gallery/green/cover.jpg' },
+  'gallery-pink': { title: 'Pink', top_img: '/image/gallery/pink/cover.jpg' },
+  'gallery-Impressionism': { title: 'Impressionism', top_img: '/image/gallery/Impressionism/cover.jpg' },
 };
 
 hexo.extend.generator.register('raw-html-pages', function () {
@@ -46,8 +46,9 @@ hexo.extend.generator.register('raw-html-pages', function () {
       data: {
         title: meta.title || base,
         content,
+        top_img: meta.top_img || '',
         comments: false,
-        aside: false,
+
       },
     };
   });
