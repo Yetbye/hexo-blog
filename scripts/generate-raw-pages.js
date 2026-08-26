@@ -44,6 +44,7 @@ hexo.extend.generator.register('raw-html-pages', function () {
       path: `${routePath}/index.html`,
       layout: ['page', 'post'],
       data: {
+        layout: 'page',
         title: meta.title || base,
         content,
         top_img: meta.top_img || '',
