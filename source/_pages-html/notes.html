@@ -1,6 +1,9 @@
 <!-- ============ 笔记 · 水墨丹青（自足纸底画布；数据源 notebooks.json，契约不变） ============ -->
 <div class="ik-scroll">
   <div class="ik-mountain" aria-hidden="true"></div>
+<div class="ik-mountain" aria-hidden="true"></div>
+  <svg class="ik-cloud ik-cloud-a" viewBox="0 0 120 40" aria-hidden="true"><path d="M10 30 q10 -18 26 -12 q6 -14 24 -10 q16 3 18 14 q14 -2 16 8 z" fill="none" stroke="#4A4A4A" stroke-width="1.4" opacity=".35"/></svg>
+  <svg class="ik-cloud ik-cloud-b" viewBox="0 0 120 40" aria-hidden="true"><path d="M10 30 q10 -18 26 -12 q6 -14 24 -10 q16 3 18 14 q14 -2 16 8 z" fill="none" stroke="#7A6B52" stroke-width="1.2" opacity=".28"/></svg>
   <div class="ik-corner ik-corner-tl" aria-hidden="true"></div>
   <div class="ik-corner ik-corner-br" aria-hidden="true"></div>
 
@@ -156,6 +159,11 @@
 
 @media (max-width:640px){ .ik-scroll{padding:2rem 1.1rem 1.8rem;} .ik-grid{grid-template-columns:1fr;} .ik-slip{display:none;} }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important; animation:none!important} }
+.ik-cloud{position:absolute;pointer-events:none;z-index:1}
+.ik-cloud-a{width:130px;top:64px;left:6%;animation:ik-drift 9s ease-in-out infinite alternate}
+.ik-cloud-b{width:90px;top:150px;right:8%;animation:ik-drift 11s ease-in-out infinite alternate-reverse}
+@keyframes ik-drift{from{transform:translateX(0)}to{transform:translateX(26px)}}
+@media(prefers-reduced-motion:reduce){.ik-cloud{animation:none!important}}
 </style>
 
 <script>
