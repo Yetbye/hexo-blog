@@ -248,6 +248,7 @@ textarea.inp { resize:vertical; line-height:1.75; }
   <button class="nav-item" data-view="moments"><span class="ico">📷</span>日常动态</button>
   <button class="nav-item" data-view="pages"><span class="ico">🏠</span>页面</button>
   <button class="nav-item" data-view="data"><span class="ico">🗂️</span>数据文件</button>
+  <button class="nav-item" data-view="mapedit"><span class="ico">🗺️</span>行迹点位</button>
   <button class="nav-item" data-view="docs"><span class="ico">📚</span>论文库</button>
   <div class="nav-sep">运 维</div>
   <button class="nav-item" data-view="deploy"><span class="ico">🚀</span>部署中心</button>
@@ -459,6 +460,33 @@ textarea.inp { resize:vertical; line-height:1.75; }
   <div id="nb-list"></div>
 </section>
 
+<!-- ============ 行迹点位 ============ -->
+<section class="view" id="view-mapedit">
+  <div class="page-head"><h1>行迹点位</h1><span class="sub">点击左侧小地图选位置 → 填诗笺 → 保存到 places.json</span></div>
+  <div class="ed-layout">
+    <div class="card" style="padding:8px">
+      <canvas id="me-canvas" width="500" height="350" style="width:100%;cursor:crosshair;background:#F5F0E5;border-radius:10px"></canvas>
+      <p style="font-size:.78rem;color:var(--muted);margin:.5rem 0 0">🔴 已点亮 · ⚪ 未至 · ✛ 新选位置（坐标自动换算）</p>
+    </div>
+    <div class="ed-pane">
+      <div class="grid-2">
+        <div class="field"><label>地名</label><input class="inp" id="me-name"></div>
+        <div class="field"><label>日期（如 2025-04）</label><input class="inp" id="me-date"></div>
+      </div>
+      <div class="field"><label>诗题</label><input class="inp" id="me-poemtitle"></div>
+      <div class="field"><label>诗句（换行分隔）</label><textarea class="inp" id="me-poem" rows="4"></textarea></div>
+      <div class="field"><label>注（可选）</label><input class="inp" id="me-note"></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <label style="display:flex;gap:6px;align-items:center;font-size:.85rem"><input type="checkbox" id="me-visited" checked> 已点亮</label>
+        <span class="spacer" style="flex:1"></span>
+        <button class="btn btn-p" onclick="savePlace()">💾 新建地点</button>
+      </div>
+      <hr style="border:none;border-top:1px dashed var(--card);margin:14px 0">
+      <div id="me-list"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 论文库 ============ -->
 <section class="view" id="view-docs">
   <div class="page-head"><h1>论文库</h1><span class="sub">source/docs/ 下的独立 HTML 博客（原样发布于 /docs/）</span><span class="spacer"></span><button class="btn btn-s btn-g" onclick="loadDocs()">刷新</button></div>
@@ -549,7 +577,7 @@ $$('.nav-item').forEach(b => b.addEventListener('click',()=>goto(b.dataset.view)
 function goto(v){
   $$('.nav-item').forEach(x=>x.classList.toggle('active',x.dataset.view===v));
   $$('.view').forEach(x=>x.classList.toggle('active',x.id==='view-'+v));
-  ({dashboard:loadDashboard,posts:loadPosts,notebooks:loadNotebooks,shuoshuo:loadShuoshuo,moments:loadMoments,pages:loadPages,data:loadDatafiles,docs:loadDocs,deploy:refreshDeploy,activity:loadActivity}[v]||(()=>{}))();
+  ({dashboard:loadDashboard,posts:loadPosts,notebooks:loadNotebooks,mapedit:loadMapEdit,shuoshuo:loadShuoshuo,moments:loadMoments,pages:loadPages,data:loadDatafiles,docs:loadDocs,deploy:refreshDeploy,activity:loadActivity}[v]||(()=>{}))();
 }
 
 // ---------- dashboard ----------
@@ -940,7 +968,64 @@ async function saveNotebooks(){
   catch(e){ toast('保存失败：'+e.message,'err'); loadNotebooks(); }
 }
 
-// ---------- 论文库 ----------
+// ---------- 行迹点位 ----------
+let ME_X=null,ME_Y=null;
+async function loadMapEdit(){
+  try{
+    const list=await api('/api/collection/places');
+    drawMini(list);
+    $('#me-list').innerHTML='<table class="tbl">'+list.map((p,i)=>
+      '<tr><td>'+(p.visited!==false?'🔴':'⚪')+' <b>'+esc(p.name)+'</b><br><small style="color:var(--muted)">'+esc(p.date||'')+' x:'+p.x+' y:'+p.y+'</small></td>'+
+      '<td style="width:60px;text-align:right">'+(p.poem?'<a href="javascript:void(0)" onclick="viewPoem('+i+')">诗</a>':'')+' <button class="btn-del" onclick="delPlace('+i+')">✕</button></td></tr>').join('')+'</table>';
+    window.__places=list;
+  }catch(e){ toast('加载失败:'+e.message,'err'); }
+}
+function drawMini(list){
+  const cv=document.getElementById('me-canvas'),ctx=cv.getContext('2d');
+  ctx.fillStyle='#F5F0E5';ctx.fillRect(0,0,cv.width,cv.height);
+  const regs=[['西域',60,110,'#C4784A'],['漠北',230,70,'#8FA68E'],['中原',260,225,'#7FA88F'],['江南',390,235,'#4A7DBF'],['岭南',280,310,'#6B8E7B'],['东海',460,175,'#7FA8C4']];
+  regs.forEach(r=>{ctx.fillStyle=r[3]+'55';ctx.beginPath();ctx.ellipse(r[1],r[2],95,75,0,0,7);ctx.fill();
+    ctx.fillStyle='#4A4A4A';ctx.font='12px serif';ctx.fillText(r[0],r[1]-14,r[2]+4);});
+  (list||[]).forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x/1000*cv.width,p.y/700*cv.height,5,0,7);
+    ctx.fillStyle=p.visited!==false?'#C0392B':'#fff';ctx.fill();
+    ctx.strokeStyle='#333';ctx.stroke();
+  });
+  if(ME_X!=null){ctx.strokeStyle='#8B4570';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(ME_X/1000*cv.width-8,ME_Y/700*cv.height);ctx.lineTo(ME_X/1000*cv.width+8,ME_Y/700*cv.height);
+    ctx.moveTo(ME_X/1000*cv.width,ME_Y/700*cv.height-8);ctx.lineTo(ME_X/1000*cv.width,ME_Y/700*cv.height+8);ctx.stroke();}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const mc=document.getElementById('me-canvas');
+  if(mc) mc.addEventListener('click',e=>{
+    const r=mc.getBoundingClientRect();
+    ME_X=Math.round((e.clientX-r.left)/r.width*1000);
+    ME_Y=Math.round((e.clientY-r.top)/r.height*700);
+    drawMini(window.__places||[]);
+    toast('已选位置 x='+ME_X+' y='+ME_Y,'info');
+  });
+});
+async function savePlace(){
+  const name=document.getElementById('me-name').value.trim();
+  if(name==null||!name||ME_X==null)return toast('需要地名与地图位置','err');
+  const list=window.__places||[];
+  list.push({name:name,x:ME_X,y:ME_Y,visited:document.getElementById('me-visited').checked,
+    date:document.getElementById('me-date').value.trim(),
+    poemTitle:document.getElementById('me-poemtitle').value.trim(),
+    poem:document.getElementById('me-poem').value.trim(),
+    note:document.getElementById('me-note').value.trim()});
+  try{ await persistCollection('places',list); toast('地点已创建'); loadMapEdit(); loadDashboard(); }
+  catch(e){ toast('保存失败:'+e.message,'err'); loadMapEdit(); }
+}
+async function delPlace(i){
+  if(!confirm('删除「'+(window.__places[i].name)+'」？'))return;
+  if(!TOKEN){setToken();if(!TOKEN)return;}
+  const list=window.__places.slice(); list.splice(i,1);
+  try{ await persistCollection('places',list); toast('已删除'); loadMapEdit(); }
+  catch(e){ toast('失败:'+e.message,'err'); loadMapEdit(); }
+}
+function viewPoem(i){ const p=window.__places[i]; alert((p.poemTitle?("《"+p.poemTitle+"》\n"):"")+(p.poem||"")); }
+
 async function loadDocs(){
   const el=$('#docs-list');
   try{

@@ -13,6 +13,7 @@
       <canvas id="gk-canvas" width="1024" height="704"></canvas>
       <!-- 节点铭牌（JS 注入，DOM 保证文字锐利） -->
       <div id="gk-labels" class="gk-labels"></div>
+      <div id="gk-regions" class="gk-regions" aria-hidden="true"></div>
       <!-- HUD -->
       <div class="gk-hud">
         <span class="gk-hud-key">WASD</span><span class="gk-hud-key">↑←↓→</span><span>移动</span>
@@ -32,7 +33,7 @@
       </aside>
     </div>
 
-    <footer class="gk-foot"><span>✿</span><p>每一步都算数 —— 用方向键去把迷雾走开</p></footer>
+    <div class="gk-foot"><span>✿</span><p>每一步都算数 —— 用方向键去把迷雾走开</p></div>
   </div>
 </div>
 
@@ -115,6 +116,11 @@
   .gk-quest{width:calc(100% - 24px)}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+.gk-regions{position:absolute;inset:0;pointer-events:none;line-height:1}
+.gk-region{position:absolute;transform:translate(-50%,-50%);writing-mode:vertical-rl;
+  font-family:'Noto Serif SC',serif;font-size:15px;font-weight:900;letter-spacing:.5em;
+  color:rgba(42,37,32,.5);text-shadow:0 0 3px rgba(255,249,230,.6)}
+@media(max-width:900px){.gk-region{font-size:12px}}
 </style>
 
 <script>
@@ -135,23 +141,48 @@ var terrain=document.createElement('canvas');terrain.width=COLS*TILE;terrain.hei
 var SOLID={};
 function bake(){
   var g=terrain.getContext('2d'),R=rng(20250826),x,y;
-  for(y=0;y<ROWS;y++)for(x=0;x<COLS;x++){
-    var v=R();
-    var c = v<.55?'#5F8F62':v<.75?'#567F59':v<.9?'#69A068':'#4E7A52';
-    g.fillStyle=c;g.fillRect(x*TILE,y*TILE,TILE,TILE);
-    if(v>.93){g.fillStyle='#4E7A52';g.fillRect(x*TILE+3,y*TILE+3,3,3);g.fillRect(x*TILE+9,y*TILE+9,3,3);}
+  /* 六域种子（瓦片坐标）与各自三色像素调色板 */
+  var REG=[
+    {n:'西 域',sx:8,sy:10,p:['#C4784A','#B5693C','#D0905E']},
+    {n:'漠 北',sx:30,sy:7, p:['#8FA68E','#7E967E','#A0B49E']},
+    {n:'中原',sx:34,sy:25,p:['#7FA88F','#6E9980','#93B8A0']},
+    {n:'江 南',sx:50,sy:27,p:['#4A7DBF','#3F6DA8','#5E92CC']},
+    {n:'岭 南',sx:36,sy:39,p:['#6B8E7B','#5D8070','#7BA08C']},
+    {n:'东 海',sx:59,sy:20,p:['#7FA8C4','#6E98B4','#93BAD2']},
+  ];
+  window.__REG=REG;
+  function rid(tx,ty){ /* 最近种子 + 抖动 → 天然锯齿硬边界 */
+    var best=0,bd=1e9;
+    for(var i=0;i<REG.length;i++){
+      var d=Math.abs(tx-REG[i].sx)+Math.abs(ty-REG[i].sy)+R()*3.2;
+      if(d<bd){bd=d;best=i;}
+    }
+    return best;
   }
-  /* 湖：左下角椭圆水域 */
+  var map=[];
+  for(y=0;y<ROWS;y++){map[y]=[];for(x=0;x<COLS;x++)map[y][x]=rid(x,y);}
+  for(y=0;y<ROWS;y++)for(x=0;x<COLS;x++){
+    var pal=REG[map[y][x]].p,v=R();
+    var c=v<.6?pal[0]:v<.85?pal[1]:pal[2];
+    g.fillStyle=c;g.fillRect(x*TILE,y*TILE,TILE,TILE);
+    if(v>.94){g.fillStyle=pal[1];g.fillRect(x*TILE+4,y*TILE+4,3,3);}
+  }
+  /* 硬边界：相邻异域画深色锯齿缝 */
+  for(y=0;y<ROWS;y++)for(x=0;x<COLS;x++){
+    if(x+1<COLS&&map[y][x]!==map[y][x+1]){g.fillStyle='rgba(42,37,32,.55)';g.fillRect((x+1)*TILE-1,y*TILE,2,TILE);}
+    if(y+1<ROWS&&map[y][x]!==map[y+1][x]){g.fillStyle='rgba(42,37,32,.55)';g.fillRect(x*TILE,(y+1)*TILE-1,TILE,2);}
+  }
+  /* 湖 */
   for(y=0;y<ROWS;y++)for(x=0;x<COLS;x++){
     var dx=(x-10)/14,dy=(y-34)/10;
-    if(dx*dx+dy*dy<1){g.fillStyle=(x+y)%3?'#3E6FA3':'#35618F';g.fillRect(x*TILE,y*TILE,TILE,TILE);SOLID[x+','+y]=1;}
+    if(dx*dx+dy*dy<1){g.fillStyle=(x+y)%3?'#35618F':'#2E5680';g.fillRect(x*TILE,y*TILE,TILE,TILE);SOLID[x+','+y]=1;}
   }
   function tree(px,py,sakura){
     g.fillStyle='#5B4632';g.fillRect(px+6,py+18,4,7);
     if(sakura){g.fillStyle='#F5B8C8';g.fillRect(px,py,16,12);g.fillStyle='#EE9DB4';g.fillRect(px+3,py+2,10,8);g.fillRect(px+6,py-2,6,6);}
     else{g.fillStyle='#3E6B41';g.fillRect(px+1,py+2,14,13);g.fillStyle='#4E7A52';g.fillRect(px+4,py,9,7);}
   }
-  for(var i=0;i<46;i++){
+  for(var i=0;i<40;i++){
     var tx=Math.floor(R()*COLS),ty=Math.floor(R()*ROWS);
     if(SOLID[tx+','+ty])continue;
     var nearNode=PLACES.some(function(p){return Math.abs(Math.floor(p.x/1000*COLS)-tx)<3&&Math.abs(Math.floor(p.y/700*ROWS)-ty)<3});
@@ -353,6 +384,12 @@ fetch('/data/places.json')
     PLACES.forEach(function(p){if(p.visited!==false){var nt=nodeTiles(p);revealAround(nt.tx,nt.ty,4);}});
     revealAround(player.tx,player.ty,3);
     refreshCounters();renderLabels();
+    var rg=document.getElementById('gk-regions');
+    (window.__REG||[]).forEach(function(r){
+      var d=document.createElement('div');d.className='gk-region';
+      d.style.left=((r.sx+0.5)/COLS*100)+'%';d.style.top=((r.sy+2)/ROWS*100)+'%';
+      d.textContent=r.n.replace(/s/g,'');rg.appendChild(d);
+    });
     requestAnimationFrame(draw);
   })
   .catch(function(e){
