@@ -71,13 +71,53 @@
 
     <nav class="gm-tabs" id="gm-tabs">
       <button class="gm-tab active" data-region="main">华夏</button>
+      <span class="gm-tab-connector" aria-hidden="true"></span>
       <button class="gm-tab" data-region="west">西域</button>
+      <span class="gm-tab-connector" aria-hidden="true"></span>
       <button class="gm-tab" data-region="central">中原</button>
+      <span class="gm-tab-connector" aria-hidden="true"></span>
       <button class="gm-tab" data-region="east">江南</button>
+      <span class="gm-tab-connector" aria-hidden="true"></span>
       <button class="gm-tab" data-region="south">岭南</button>
     </nav>
 
     <div class="gm-map-frame" id="gm-frame">
+      <svg class="gm-frame-corner gm-frame-corner-tl" viewBox="0 0 60 60" aria-hidden="true">
+        <g filter="url(#ink-pen)">
+          <path d="M 2 30 Q 14 18 28 14 Q 18 24 12 36 Q 24 30 36 22" fill="none" stroke="#7A2F3F" stroke-width="1" opacity=".85"/>
+          <circle cx="14" cy="22" r="2.5" fill="#E86B8A" stroke="#3D2914" stroke-width=".4"/>
+          <circle cx="22" cy="30" r="2.5" fill="#F5B8C8" stroke="#3D2914" stroke-width=".4"/>
+          <circle cx="30" cy="18" r="2.5" fill="#E86B8A" stroke="#3D2914" stroke-width=".4"/>
+          <path d="M 2 2 L 2 14 M 2 2 L 14 2" stroke="#3D2914" stroke-width=".6" fill="none" opacity=".5"/>
+        </g>
+      </svg>
+      <svg class="gm-frame-corner gm-frame-corner-tr" viewBox="0 0 60 60" aria-hidden="true">
+        <g filter="url(#ink-pen)">
+          <path d="M 58 30 Q 46 18 32 14 Q 42 24 48 36 Q 36 30 24 22" fill="none" stroke="#7A2F3F" stroke-width="1" opacity=".85"/>
+          <circle cx="46" cy="22" r="2.5" fill="#E86B8A" stroke="#3D2914" stroke-width=".4"/>
+          <circle cx="38" cy="30" r="2.5" fill="#F5B8C8" stroke="#3D2914" stroke-width=".4"/>
+          <circle cx="30" cy="18" r="2.5" fill="#E86B8A" stroke="#3D2914" stroke-width=".4"/>
+          <path d="M 58 2 L 58 14 M 58 2 L 46 2" stroke="#3D2914" stroke-width=".6" fill="none" opacity=".5"/>
+        </g>
+      </svg>
+      <svg class="gm-frame-corner gm-frame-corner-bl" viewBox="0 0 60 60" aria-hidden="true">
+        <g filter="url(#ink-pen)">
+          <path d="M 2 30 Q 14 42 28 46 Q 18 36 12 24 Q 24 30 36 38" fill="none" stroke="#7A2F3F" stroke-width="1" opacity=".85"/>
+          <circle cx="14" cy="38" r="2.5" fill="#E86B8A" stroke="#3D2914" stroke-width=".4"/>
+          <circle cx="22" cy="30" r="2.5" fill="#F5B8C8" stroke="#3D2914" stroke-width=".4"/>
+          <circle cx="30" cy="42" r="2.5" fill="#E86B8A" stroke="#3D2914" stroke-width=".4"/>
+          <path d="M 2 58 L 2 46 M 2 58 L 14 58" stroke="#3D2914" stroke-width=".6" fill="none" opacity=".5"/>
+        </g>
+      </svg>
+      <svg class="gm-frame-corner gm-frame-corner-br" viewBox="0 0 60 60" aria-hidden="true">
+        <g filter="url(#ink-pen)">
+          <path d="M 58 30 Q 46 42 32 46 Q 42 36 48 24 Q 36 30 24 38" fill="none" stroke="#7A2F3F" stroke-width="1" opacity=".85"/>
+          <circle cx="46" cy="38" r="2.5" fill="#E86B8A" stroke="#3D2914" stroke-width=".4"/>
+          <circle cx="38" cy="30" r="2.5" fill="#F5B8C8" stroke="#3D2914" stroke-width=".4"/>
+          <circle cx="30" cy="42" r="2.5" fill="#E86B8A" stroke="#3D2914" stroke-width=".4"/>
+          <path d="M 58 58 L 58 46 M 58 58 L 46 58" stroke="#3D2914" stroke-width=".6" fill="none" opacity=".5"/>
+        </g>
+      </svg>
       <svg id="gm-map" class="gm-map" viewBox="0 0 1053 935" preserveAspectRatio="xMidYMid meet">
         <defs>
           <filter id="ink-pen" x="-1%" y="-1%" width="102%" height="102%">
@@ -115,14 +155,10 @@
       </div>
     </div>
 
-    <!-- 脚注：两行（修正版：倒数第二行=毛笔红划诗 倒一=狂草） -->
+    <!-- 脚注：两行（修正版：倒数第二行=红毛笔划掉 倒一=狂草） -->
     <footer class="gm-foot">
-      <p class="gm-foot-line1">
-        <s class="gm-strike">惶惶十余载，书剑两无成</s>
-        <span class="gm-strike-divider">·</span>
-        <s class="gm-strike">十年磨一剑，霜刃未曾试</s>
-      </p>
-      <p class="gm-foot-line2">今日把示君，谁有不平事！</p>
+      <p class="gm-foot-cross">惶惶十余载，书剑两无成</p>
+      <p class="gm-foot-final">今日把示君，谁有不平事！</p>
     </footer>
   </div>
 </div>
@@ -160,19 +196,25 @@
 .gm-sword-left  { left:18%; transform:rotate(-6deg); }
 .gm-sword-right { right:18%; transform:rotate(6deg) scaleX(-1); }
 
-.gm-eyebrow { font-family:'JetBrains Mono',monospace; font-size:.85rem; letter-spacing:.5em; color:var(--plum); display:block; margin-bottom:.8rem; }
-.gm-title { font-family:'Noto Serif SC',serif; font-weight:900; font-size:clamp(2.6rem,6vw,3.8rem); letter-spacing:.2em; margin:.4rem 0; color:var(--ink); text-shadow:2px 2px 0 rgba(122,47,63,.12); }
-.gm-hand { font-family:'Ma Shan Zheng',cursive; font-size:1.55rem; color:var(--plum); margin:.7rem 0 1.4rem; letter-spacing:.12em; }
+.gm-eyebrow { font-family:'JetBrains Mono',monospace; font-size:.95rem; letter-spacing:.5em; color:var(--plum); display:block; margin-bottom:.8rem; }
+.gm-title { font-family:'Noto Serif SC',serif; font-weight:900; font-size:clamp(2.8rem,6vw,4rem); letter-spacing:.25em; margin:.4rem 0; color:var(--ink); text-shadow:2px 2px 0 rgba(122,47,63,.12); }
+.gm-hand { font-family:'Ma Shan Zheng',cursive; font-size:1.6rem; color:var(--plum); margin:.7rem 0 1.4rem; letter-spacing:.12em; }
 .gm-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem; }
-.gm-chip { display:inline-block; padding:.5rem 1.2rem; background:rgba(255,245,230,.55); border:1px solid var(--gold); font-size:.92rem; }
+.gm-chip { display:inline-block; padding:.5rem 1.2rem; background:rgba(255,245,230,.55); border:1px solid var(--gold); font-size:1rem; }
 .gm-chip b { color:var(--sakura); font-weight:700; }
 
-.gm-tabs { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; margin:0 0 1.2rem; padding-bottom:.4rem; }
-.gm-tab { padding:.65rem 1.6rem; background:rgba(255,245,230,.6); border:1px solid var(--gold); font-family:'Noto Serif SC',serif; font-size:1.05rem; color:var(--ink2); cursor:pointer; transition:all .25s; border-radius:2px; }
+.gm-tabs { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; align-items:center; margin:0 0 1.2rem; padding-bottom:.4rem; position:relative; }
+.gm-tab { padding:.65rem 1.6rem; background:rgba(255,245,230,.6); border:1px solid var(--gold); font-family:'Noto Serif SC',serif; font-size:1.05rem; color:var(--ink2); cursor:pointer; transition:all .25s; border-radius:2px; position:relative; z-index:2; }
+.gm-tab-connector { display:inline-block; width:36px; height:14px; background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 14'><path d='M 0 7 Q 9 2 18 7 T 36 7' fill='none' stroke='%237A2F3F' stroke-width='0.9' stroke-linecap='round'/><circle cx='0' cy='7' r='1.2' fill='%237A2F3F'/><circle cx='36' cy='7' r='1.2' fill='%237A2F3F'/><path d='M 12 4 Q 14 1 16 4' fill='none' stroke='%23C44D3F' stroke-width='0.6'/><path d='M 22 10 Q 24 13 26 10' fill='none' stroke='%23C44D3F' stroke-width='0.6'/></svg>") no-repeat center / contain; opacity:.75; margin:0 -.1rem; }
 .gm-tab:hover { background:rgba(196,67,95,.15); color:var(--plum); }
 .gm-tab.active { background:var(--plum); color:#FFF6D6; border-color:var(--plum); box-shadow:0 4px 12px rgba(122,47,63,.35); font-weight:700; }
 
 .gm-map-frame { position:relative; background:var(--paper); border:2px solid var(--ink); box-shadow:inset 0 0 0 4px var(--paper), inset 0 0 0 5px var(--gold), 0 8px 32px rgba(61,41,20,.4); overflow:hidden; border-radius:2px; }
+.gm-frame-corner { position:absolute; width:54px; height:54px; pointer-events:none; z-index:5; opacity:.95; }
+.gm-frame-corner-tl { top:6px; left:6px; }
+.gm-frame-corner-tr { top:6px; right:6px; }
+.gm-frame-corner-bl { bottom:6px; left:6px; }
+.gm-frame-corner-br { bottom:6px; right:6px; }
 .gm-map { width:100%; height:auto; display:block; }
 .city-marker { cursor:pointer; transition:transform .25s; }
 .city-marker:hover { transform:scale(1.15); }
@@ -197,23 +239,28 @@
 .gm-poem-btn:hover { background:var(--ink); color:#FFFBE8; }
 .gm-poem-btn:disabled { opacity:.3; cursor:not-allowed; }
 
-/* 脚注：两行（修正版） */
-.gm-foot { margin-top:2.4rem; text-align:center; padding-bottom:1rem; }
-.gm-foot-line1 { font-family:'Noto Serif SC',serif; font-size:1.35rem; color:var(--ink2); margin:0 0 .6rem; letter-spacing:.08em; line-height:1.6; }
-.gm-foot-line1 .gm-strike {
+/* 脚注：两行（严格两行：倒二=红删划 倒一=狂草加粗） */
+.gm-foot { margin-top:2.6rem; text-align:center; padding-bottom:1rem; position:relative; }
+.gm-foot-cross {
+  font-family:'Noto Serif SC',serif; font-size:1.45rem; font-weight:600;
+  color:#6A5050; margin:0 0 .8rem; letter-spacing:.12em; line-height:1.6;
   text-decoration:line-through;
   text-decoration-color:#C44D3F;
-  text-decoration-thickness:2.5px;
-  font-weight:600;
+  text-decoration-thickness:3px;
   text-decoration-skip-ink:none;
   text-decoration-skip:none;
 }
-.gm-strike-divider { color:#C4A36F; margin:0 .8em; opacity:.6; }
-.gm-foot-line2 {
-  font-family:'Ma Shan Zheng',cursive; font-size:2.1rem; font-weight:700;
-  color:var(--plum); margin:.8rem 0 0; letter-spacing:.22em;
-  /* 狂草效果：增加字间距不均的感觉 */
-  text-shadow:2px 2px 0 rgba(122,47,63,.12);
+.gm-foot-final {
+  font-family:'Ma Shan Zheng',cursive; font-size:clamp(2.2rem,4vw,2.8rem); font-weight:700;
+  color:#2A2520; margin:1rem 0 0; letter-spacing:.2em; text-align:center;
+  /* 狂草黑白分割：印版晕染 = 多重 text-shadow 制造墨韵不齐 */
+  text-shadow:
+    2px 0 0 #FFF,
+    -2px 0 0 #000,
+    0 2px 0 #000,
+    0 -1px 0 rgba(255,255,255,.8),
+    3px 3px 0 rgba(122,47,63,.18);
+  filter:contrast(1.4);
 }
 
 @media (max-width: 768px) {
@@ -224,8 +271,8 @@
   .gm-note-panel { position:fixed; top:8%; left:5%; right:5%; width:auto; max-height:80vh; }
   .gm-tabs { gap:.3rem; }
   .gm-tab { padding:.4rem 1rem; font-size:.9rem; }
-  .gm-foot-line2 { font-size:1.5rem; }
-  .gm-foot-line1 { font-size:1.05rem; }
+  .gm-foot-final { font-size:1.5rem; }
+  .gm-foot-cross { font-size:1.05rem; }
 }
 </style>
 
@@ -339,7 +386,7 @@ function drawDecorItem(decor, theme) {
     const t = document.createElementNS(SVG_NS, 'text');
     t.setAttribute('x', x); t.setAttribute('y', y);
     t.setAttribute('font-family', "'Ma Shan Zheng',cursive");
-    t.setAttribute('font-size', sz || 13);
+    t.setAttribute('font-size', sz || 14);
     t.setAttribute('fill', theme.stroke);
     t.setAttribute('text-anchor', 'middle');
     t.setAttribute('style', 'paint-order:stroke;stroke:#F2E7C8;stroke-width:2.5;pointer-events:none');
