@@ -1,6 +1,60 @@
 <!-- ============ 行迹 · 满堂花醉三千客，一剑霜寒十四州 ============ -->
 <!-- 设计：5 区域子图（华夏/西域/中原/江南/岭南）+ 剑饰 + 满堂花醉之诗笺画卷 -->
 <div class="gm-page">
+  <!-- 页面四角装饰（云纹/兰花/竹叶/桃花枝） -->
+  <svg class="gm-page-corner gm-page-tl" viewBox="0 0 120 120" aria-hidden="true">
+    <path d="M 0 0 Q 30 8 50 30 Q 64 50 56 78 Q 40 64 26 48 Q 12 30 0 0 Z" fill="#7A2F3F" fill-opacity="0.08" stroke="#7A2F3F" stroke-width="0.7" stroke-opacity="0.5"/>
+    <path d="M 10 6 Q 30 16 46 36 Q 56 54 50 70" fill="none" stroke="#7A2F3F" stroke-width="0.7" stroke-opacity="0.45"/>
+    <path d="M 0 24 Q 14 30 24 44" fill="none" stroke="#7A2F3F" stroke-width="0.6" stroke-opacity="0.4"/>
+    <circle cx="38" cy="42" r="2" fill="#7A2F3F" fill-opacity="0.5"/>
+    <circle cx="50" cy="56" r="1.6" fill="#7A2F3F" fill-opacity="0.5"/>
+  </svg>
+  <svg class="gm-page-corner gm-page-tr" viewBox="0 0 120 120" aria-hidden="true">
+    <!-- 兰花 -->
+    <g stroke="#5A7B4E" stroke-width="0.8" fill="none" stroke-opacity="0.6">
+      <path d="M 110 10 Q 96 26 88 50 Q 84 70 92 90"/>
+      <path d="M 108 8 Q 100 18 96 30"/>
+      <path d="M 112 12 Q 104 24 100 38"/>
+      <path d="M 106 14 Q 98 28 96 44"/>
+    </g>
+    <ellipse cx="92" cy="32" rx="6" ry="3" fill="#5A7B4E" fill-opacity="0.18" transform="rotate(-30 92 32)"/>
+    <ellipse cx="86" cy="44" rx="6" ry="3" fill="#5A7B4E" fill-opacity="0.18" transform="rotate(-50 86 44)"/>
+    <ellipse cx="96" cy="48" rx="6" ry="3" fill="#5A7B4E" fill-opacity="0.18" transform="rotate(-20 96 48)"/>
+    <path d="M 120 0 Q 90 8 70 30 Q 56 50 64 78 Q 80 64 94 48 Q 108 30 120 0 Z" fill="#5A7B4E" fill-opacity="0.06" stroke="#5A7B4E" stroke-width="0.6" stroke-opacity="0.4"/>
+  </svg>
+  <svg class="gm-page-corner gm-page-bl" viewBox="0 0 120 120" aria-hidden="true">
+    <!-- 竹叶 -->
+    <g stroke="#5A7B4E" stroke-width="0.9" fill="#5A7B4E" fill-opacity="0.2" stroke-opacity="0.6">
+      <path d="M 8 110 Q 20 96 30 78 Q 38 64 34 50 Q 22 60 16 78 Q 10 94 8 110 Z"/>
+      <path d="M 22 100 Q 38 86 50 70 Q 60 56 56 44 Q 42 52 32 68 Q 24 84 22 100 Z"/>
+      <path d="M 40 92 Q 56 78 68 62 Q 76 48 72 38 Q 58 46 50 60 Q 44 78 40 92 Z"/>
+    </g>
+    <line x1="0" y1="120" x2="80" y2="40" stroke="#5A7B4E" stroke-width="0.6" stroke-opacity="0.4"/>
+    <path d="M 0 120 Q 30 108 50 90 Q 64 70 60 50 Q 40 60 24 80 Q 12 100 0 120 Z" fill="#5A7B4E" fill-opacity="0.05" stroke="#5A7B4E" stroke-width="0.5" stroke-opacity="0.35"/>
+  </svg>
+  <svg class="gm-page-corner gm-page-br" viewBox="0 0 120 120" aria-hidden="true">
+    <!-- 桃花枝 -->
+    <g stroke="#7A2F3F" stroke-width="0.9" fill="none" stroke-opacity="0.55">
+      <path d="M 120 120 Q 96 100 80 80 Q 64 58 50 50"/>
+      <path d="M 100 102 Q 86 90 78 78"/>
+      <path d="M 84 86 Q 74 76 70 66"/>
+    </g>
+    <g fill="#C44D3F" fill-opacity="0.55" stroke="#7A2F3F" stroke-width="0.5" stroke-opacity="0.6">
+      <circle cx="96" cy="100" r="3"/>
+      <circle cx="84" cy="86" r="2.5"/>
+      <circle cx="74" cy="74" r="2.8"/>
+      <circle cx="66" cy="62" r="2.4"/>
+      <circle cx="54" cy="52" r="2.6"/>
+    </g>
+    <g fill="#C4A36F" fill-opacity="0.7">
+      <circle cx="96" cy="100" r="0.8"/>
+      <circle cx="84" cy="86" r="0.7"/>
+      <circle cx="74" cy="74" r="0.8"/>
+      <circle cx="66" cy="62" r="0.7"/>
+      <circle cx="54" cy="52" r="0.8"/>
+    </g>
+    <path d="M 120 120 Q 90 110 70 90 Q 50 70 38 56 Q 30 50 20 44 Q 10 40 0 38" fill="none" stroke="#7A2F3F" stroke-width="0.6" stroke-opacity="0.4"/>
+  </svg>
   <div class="gm-container">
     <header class="gm-hero">
       <svg class="gm-sword gm-sword-left" viewBox="0 0 60 200" aria-hidden="true">
@@ -30,13 +84,58 @@
 
     <nav class="gm-tabs" id="gm-tabs">
       <button class="gm-tab active" data-region="main">华夏</button>
+      <span class="gm-tab-ornament" aria-hidden="true">
+        <svg viewBox="0 0 40 14"><path d="M 0 7 Q 10 1 20 7 Q 30 13 40 7" fill="none" stroke="#7A2F3F" stroke-width="0.8" stroke-opacity="0.55"/><circle cx="20" cy="7" r="1.4" fill="#7A2F3F" fill-opacity="0.7"/></svg>
+      </span>
       <button class="gm-tab" data-region="west">西域</button>
+      <span class="gm-tab-ornament" aria-hidden="true">
+        <svg viewBox="0 0 40 14"><path d="M 0 7 Q 10 1 20 7 Q 30 13 40 7" fill="none" stroke="#7A2F3F" stroke-width="0.8" stroke-opacity="0.55"/><circle cx="20" cy="7" r="1.4" fill="#7A2F3F" fill-opacity="0.7"/></svg>
+      </span>
       <button class="gm-tab" data-region="central">中原</button>
+      <span class="gm-tab-ornament" aria-hidden="true">
+        <svg viewBox="0 0 40 14"><path d="M 0 7 Q 10 1 20 7 Q 30 13 40 7" fill="none" stroke="#7A2F3F" stroke-width="0.8" stroke-opacity="0.55"/><circle cx="20" cy="7" r="1.4" fill="#7A2F3F" fill-opacity="0.7"/></svg>
+      </span>
       <button class="gm-tab" data-region="east">江南</button>
+      <span class="gm-tab-ornament" aria-hidden="true">
+        <svg viewBox="0 0 40 14"><path d="M 0 7 Q 10 1 20 7 Q 30 13 40 7" fill="none" stroke="#7A2F3F" stroke-width="0.8" stroke-opacity="0.55"/><circle cx="20" cy="7" r="1.4" fill="#7A2F3F" fill-opacity="0.7"/></svg>
+      </span>
       <button class="gm-tab" data-region="south">岭南</button>
     </nav>
 
     <div class="gm-map-frame" id="gm-frame">
+      <!-- 4 内角角饰：花瓣/桃枝 -->
+      <svg class="gm-corner gm-corner-tl" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M 0 0 Q 22 6 32 22 Q 38 36 28 50 Q 18 38 14 22 Q 10 10 0 0 Z" fill="#C44D3F" fill-opacity="0.18" stroke="#7A2F3F" stroke-width="0.8"/>
+        <path d="M 8 6 Q 20 14 26 28" fill="none" stroke="#7A2F3F" stroke-width="1"/>
+        <circle cx="22" cy="22" r="3" fill="#7A2F3F" fill-opacity="0.7"/>
+        <path d="M 0 18 Q 10 26 14 36" fill="none" stroke="#7A2F3F" stroke-width="0.8"/>
+        <path d="M 4 40 Q 8 32 12 28" fill="none" stroke="#7A2F3F" stroke-width="0.8"/>
+        <circle cx="6" cy="46" r="2" fill="#C44D3F" fill-opacity="0.6"/>
+      </svg>
+      <svg class="gm-corner gm-corner-tr" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M 80 0 Q 58 6 48 22 Q 42 36 52 50 Q 62 38 66 22 Q 70 10 80 0 Z" fill="#C44D3F" fill-opacity="0.18" stroke="#7A2F3F" stroke-width="0.8"/>
+        <path d="M 72 6 Q 60 14 54 28" fill="none" stroke="#7A2F3F" stroke-width="1"/>
+        <circle cx="58" cy="22" r="3" fill="#7A2F3F" fill-opacity="0.7"/>
+        <path d="M 80 18 Q 70 26 66 36" fill="none" stroke="#7A2F3F" stroke-width="0.8"/>
+        <path d="M 76 40 Q 72 32 68 28" fill="none" stroke="#7A2F3F" stroke-width="0.8"/>
+        <circle cx="74" cy="46" r="2" fill="#C44D3F" fill-opacity="0.6"/>
+      </svg>
+      <svg class="gm-corner gm-corner-bl" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M 0 80 Q 22 74 32 58 Q 38 44 28 30 Q 18 42 14 58 Q 10 70 0 80 Z" fill="#C44D3F" fill-opacity="0.18" stroke="#7A2F3F" stroke-width="0.8"/>
+        <path d="M 8 74 Q 20 66 26 52" fill="none" stroke="#7A2F3F" stroke-width="1"/>
+        <circle cx="22" cy="58" r="3" fill="#7A2F3F" fill-opacity="0.7"/>
+        <path d="M 0 62 Q 10 54 14 44" fill="none" stroke="#7A2F3F" stroke-width="0.8"/>
+        <path d="M 4 40 Q 8 48 12 52" fill="none" stroke="#7A2F3F" stroke-width="0.8"/>
+        <circle cx="6" cy="34" r="2" fill="#C44D3F" fill-opacity="0.6"/>
+      </svg>
+      <svg class="gm-corner gm-corner-br" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M 80 80 Q 58 74 48 58 Q 42 44 52 30 Q 62 42 66 58 Q 70 70 80 80 Z" fill="#C44D3F" fill-opacity="0.18" stroke="#7A2F3F" stroke-width="0.8"/>
+        <path d="M 72 74 Q 60 66 54 52" fill="none" stroke="#7A2F3F" stroke-width="1"/>
+        <circle cx="58" cy="58" r="3" fill="#7A2F3F" fill-opacity="0.7"/>
+        <path d="M 80 62 Q 70 54 66 44" fill="none" stroke="#7A2F3F" stroke-width="0.8"/>
+        <path d="M 76 40 Q 72 48 68 52" fill="none" stroke="#7A2F3F" stroke-width="0.8"/>
+        <circle cx="74" cy="34" r="2" fill="#C44D3F" fill-opacity="0.6"/>
+      </svg>
       <svg id="gm-map" class="gm-map" viewBox="0 0 1053 935" preserveAspectRatio="xMidYMid meet">
         <defs>
           <filter id="ink-pen" x="-1%" y="-1%" width="102%" height="102%">
@@ -78,11 +177,7 @@
     </div>
 
     <footer class="gm-foot">
-      <p class="gm-foot-line1">
-        <s>惶惶十余载，书剑两无成</s>
-        <span class="gm-foot-arrow">↔</span>
-        <s>十年磨一剑，霜刃未曾试</s>
-      </p>
+      <p class="gm-foot-line1"><span class="gm-foot-strike">惶惶十余载，书剑两无成</span></p>
       <p class="gm-foot-line2">今日把示君，谁有不平事！</p>
     </footer>
   </div>
@@ -97,32 +192,49 @@
 }
 
 .gm-page {
-  min-height:100vh; padding:32px 20px 12px;
+  position:relative;
+  min-height:100vh; padding:48px 20px 24px;
   font-family:'Noto Serif SC',serif; color:var(--ink);
   background:
     radial-gradient(ellipse 800px 600px at 20% 0%, rgba(212,168,122,.18), transparent 60%),
     radial-gradient(ellipse 700px 500px at 90% 100%, rgba(122,47,63,.10), transparent 60%),
     var(--paper);
+  overflow-x:hidden;
 }
-.gm-container { max-width:1200px; margin:0 auto; padding:0 6px; position:relative; }
+.gm-container { max-width:1200px; margin:0 auto; padding:0 6px; position:relative; z-index:2; }
 
-.gm-hero { text-align:center; padding:1.4rem 0 1.4rem; position:relative; border-bottom:1px solid rgba(122,79,42,.4); margin-bottom:1.4rem; min-height:120px; }
+/* page-level 四角装饰 */
+.gm-page-corner { position:absolute; width:120px; height:120px; z-index:1; pointer-events:none; opacity:.9; }
+.gm-page-tl { top:6px;    left:6px; }
+.gm-page-tr { top:6px;    right:6px; }
+.gm-page-bl { bottom:6px; left:6px; }
+.gm-page-br { bottom:6px; right:6px; }
+
+.gm-hero { text-align:center; padding:1.6rem 0 1.6rem; position:relative; border-bottom:1px solid rgba(122,79,42,.4); margin-bottom:1.6rem; min-height:140px; }
 .gm-sword { position:absolute; top:6px; width:36px; height:130px; filter:drop-shadow(0 4px 6px rgba(61,41,20,.25)); }
 .gm-sword-left  { left:14%; transform:rotate(-6deg); }
 .gm-sword-right { right:14%; transform:rotate(6deg) scaleX(-1); }
-.gm-eyebrow { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.4em; color:var(--plum); display:block; margin-bottom:.5rem; }
-.gm-title { font-family:'Noto Serif SC',serif; font-weight:900; font-size:clamp(2.2rem,5vw,3.2rem); letter-spacing:.18em; margin:.3rem 0; color:var(--ink); text-shadow:2px 2px 0 rgba(122,47,63,.12); }
-.gm-hand { font-family:'Ma Shan Zheng',cursive; font-size:1.25rem; color:var(--plum); margin:.6rem 0 1.2rem; letter-spacing:.1em; }
+.gm-eyebrow { font-family:'JetBrains Mono',monospace; font-size:.95rem; letter-spacing:.42em; color:var(--plum); display:block; margin-bottom:.6rem; }
+.gm-title { font-family:'Noto Serif SC',serif; font-weight:900; font-size:clamp(2.8rem,6vw,4rem); letter-spacing:.25em; margin:.4rem 0 .2rem; color:var(--ink); text-shadow:2px 2px 0 rgba(122,47,63,.12); }
+.gm-hand { font-family:'Ma Shan Zheng',cursive; font-size:1.6rem; color:var(--plum); margin:.6rem 0 1.2rem; letter-spacing:.12em; }
 .gm-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem; }
-.gm-chip { display:inline-block; padding:.4rem 1.1rem; background:rgba(255,245,230,.55); border:1px solid var(--gold); font-size:.85rem; }
+.gm-chip { display:inline-block; padding:.5rem 1.2rem; background:rgba(255,245,230,.55); border:1px solid var(--gold); font-size:1rem; }
 .gm-chip b { color:var(--sakura); font-weight:700; }
 
-.gm-tabs { display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; margin:0 0 1.2rem; padding-bottom:.4rem; }
-.gm-tab { padding:.55rem 1.4rem; background:rgba(255,245,230,.6); border:1px solid var(--gold); font-family:'Noto Serif SC',serif; font-size:.95rem; color:var(--ink2); cursor:pointer; transition:all .25s; border-radius:2px; }
+.gm-tabs { display:flex; gap:.4rem; flex-wrap:wrap; justify-content:center; align-items:center; margin:0 0 1.2rem; padding-bottom:.4rem; }
+.gm-tab { padding:.6rem 1.5rem; background:rgba(255,245,230,.6); border:1px solid var(--gold); font-family:'Noto Serif SC',serif; font-size:1.05rem; color:var(--ink2); cursor:pointer; transition:all .25s; border-radius:2px; }
 .gm-tab:hover { background:rgba(196,67,95,.15); color:var(--plum); }
 .gm-tab.active { background:var(--plum); color:#FFF6D6; border-color:var(--plum); box-shadow:0 4px 12px rgba(122,47,63,.35); font-weight:700; }
+.gm-tab-ornament { display:inline-flex; align-items:center; width:40px; height:14px; }
+.gm-tab-ornament svg { width:100%; height:100%; }
 
 .gm-map-frame { position:relative; background:var(--paper); border:2px solid var(--ink); box-shadow:inset 0 0 0 4px var(--paper), inset 0 0 0 5px var(--gold), 0 8px 32px rgba(61,41,20,.4); overflow:hidden; border-radius:2px; }
+/* 4 内角角饰（absolute, z-index 5, pointer-events none） */
+.gm-corner { position:absolute; width:80px; height:80px; z-index:5; pointer-events:none; }
+.gm-corner-tl { top:0;    left:0; }
+.gm-corner-tr { top:0;    right:0; }
+.gm-corner-bl { bottom:0; left:0; }
+.gm-corner-br { bottom:0; right:0; }
 .gm-map { width:100%; height:auto; display:block; }
 .city-marker { cursor:pointer; transition:transform .25s; }
 .city-marker:hover { transform:scale(1.15); }
@@ -131,7 +243,7 @@
 @keyframes gmNoteIn { from { opacity:0; transform:translateY(-12px) rotate(-1deg); } to { opacity:1; transform:rotate(-.4deg); } }
 .gm-note-panel::before { content:''; position:absolute; top:-9px; left:38%; width:60px; height:18px; background:rgba(196,67,95,.65); transform:rotate(-3deg); }
 .gm-note-header { display:flex; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px dashed var(--gold); background:rgba(255,245,230,.6); }
-.gm-note-city { font-family:'Noto Serif SC',serif; font-weight:900; font-size:1.3rem; color:var(--ink); letter-spacing:.1em; }
+.gm-note-city { font-family:'Noto Serif SC',serif; font-weight:900; font-size:1.45rem; color:var(--ink); letter-spacing:.12em; }
 .gm-note-count { font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--plum); margin-left:auto; }
 .gm-note-close { background:#FFFBE8; border:1px solid var(--ink); color:var(--ink); font-size:1.1rem; cursor:pointer; width:24px; height:24px; line-height:1; padding:0; }
 .gm-note-close:hover { background:var(--sakura); color:#fff; }
@@ -147,18 +259,39 @@
 .gm-poem-btn:hover { background:var(--ink); color:#FFFBE8; }
 .gm-poem-btn:disabled { opacity:.3; cursor:not-allowed; }
 
-.gm-foot { margin-top:1.6rem; text-align:center; }
-.gm-foot-line1 { font-size:.85rem; color:var(--ink2); margin:0 0 .4rem; }
-.gm-foot-line1 s { text-decoration-color:var(--sakura); text-decoration-thickness:1.5px; opacity:.85; }
-.gm-foot-arrow { color:var(--gold); font-weight:700; margin:0 .5em; }
-.gm-foot-line2 { font-family:'Ma Shan Zheng',cursive; font-size:1.25rem; font-weight:700; color:var(--plum); margin:0; letter-spacing:.18em; }
+.gm-foot { margin-top:2rem; text-align:center; padding-bottom:.4rem; }
+/* 倒数第二行：墨色深红，红色 line-through，不消失 */
+.gm-foot-line1 { font-family:'Noto Serif SC',serif; font-size:1.6rem; color:#6A3030; margin:0 0 .5rem; letter-spacing:.18em; font-weight:600; }
+.gm-foot-strike { display:inline-block; text-decoration:line-through; text-decoration-color:#C44D3F; text-decoration-thickness:3px; opacity:.55; }
+/* 最后一行：Ma Shan Zheng 草书 + 略大加粗 + 居中 + 狂草黑白水墨质感 */
+.gm-foot-line2 {
+  font-family:'Ma Shan Zheng',cursive;
+  font-size:clamp(2.2rem,4vw,2.8rem);
+  font-weight:700;
+  color:#1A1410;
+  margin:0;
+  letter-spacing:.22em;
+  text-align:center;
+  text-shadow:
+    0 0 0.5px rgba(26,20,16,.95),
+    1px 1px 0 rgba(26,20,16,.55),
+    -0.6px -0.4px 0 rgba(26,20,16,.45),
+    2px 2px 3px rgba(26,20,16,.18),
+    3px 3px 6px rgba(26,20,16,.10),
+    -1px 0 2px rgba(60,60,60,.18),
+    1px -1px 2px rgba(60,60,60,.15);
+  -webkit-text-stroke:0.3px rgba(26,20,16,.4);
+}
 
 @media (max-width: 768px) {
-  .gm-page { padding:18px 10px; }
+  .gm-page { padding:24px 10px 16px; }
   .gm-sword { width:24px; height:80px; }
   .gm-note-panel { position:fixed; top:8%; left:5%; right:5%; width:auto; max-height:80vh; }
-  .gm-tabs { gap:.3rem; }
-  .gm-tab { padding:.4rem 1rem; font-size:.85rem; }
+  .gm-tabs { gap:.25rem; }
+  .gm-tab { padding:.45rem 1rem; font-size:.95rem; }
+  .gm-tab-ornament { width:24px; }
+  .gm-page-corner { width:80px; height:80px; opacity:.7; }
+  .gm-foot-line1 { font-size:1.2rem; }
 }
 </style>
 
@@ -487,14 +620,17 @@ function renderCityMarkers(theme) {
 let CURRENT_POEM_IDX = 0;
 let CURRENT_CITY = null;
 let NOTE_OPENING = false;
+let LAST_OPEN_TS = 0;
 
 function openNote(city) {
-  if (!city || NOTE_OPENING) return;
+  if (!city) return;
+  // 200ms 防抖：连续点击同一城市不会重新触发
+  const now = Date.now();
+  if (now - LAST_OPEN_TS < 200) return;
+  // 任何点击都先 close 现有面板，杜绝"异常跳动"
+  closeNote();
+  LAST_OPEN_TS = now;
   NOTE_OPENING = true;
-  if (CURRENT_CITY && CURRENT_CITY.name === city.name && document.getElementById('gm-note').style.display === 'block') {
-    NOTE_OPENING = false;
-    return;
-  }
   CURRENT_CITY = city;
   CURRENT_POEM_IDX = 0;
   renderNote();
