@@ -659,14 +659,14 @@
 }
 .gm-foot-second { color:#3D2914; font-weight:600; }
 
-/* 黑白条纹鱼：固定频率左右摆动游弋（约 1.6s 一周期） */
-.gm-fish-anim {
+/* 预留扩展位（原 .gm-fish-system 黑白条按频率运动样式占位，当前不引用） */
+.gm-fish-system {
   transform-box: fill-box;
   transform-origin: center;
-  animation: gmFishSwim 1.6s ease-in-out infinite;
+  animation: gmFishSystemFreq 1.6s ease-in-out infinite;
   pointer-events: none;
 }
-@keyframes gmFishSwim {
+@keyframes gmFishSystemFreq {
   0%   { transform: translateX(-6px) rotate(-3deg); }
   25%  { transform: translateX(0px)   rotate( 2deg); }
   50%  { transform: translateX(6px)   rotate( 5deg); }
@@ -799,8 +799,7 @@ const REGION_DECOR = {
     { type:'kite',  x:380, y:380, label:'敦煌飞天' },
     { type:'tea',   x:600, y:520, label:'茶道' },
     { type:'moon',  x:900, y:200, label:'月圆' },
-    { type:'fly',   x:880, y:580, label:'飞马' },
-    { type:'fish',  x:860, y:760, label:'东海游鱼' }
+    { type:'fly',   x:880, y:580, label:'飞马' }
   ],
   west: [
     { type:'camel', x:300, y:340, label:'丝绸之驿' },
@@ -826,8 +825,7 @@ const REGION_DECOR = {
     { type:'sail',  x:650, y:580, label:'珠江帆影' },
     { type:'flower',x:380, y:480, label:'岭南花' },
     { type:'tea',   x:300, y:200, label:'功夫茶' },
-    { type:'moon',  x:750, y:400, label:'明月' },
-    { type:'fish',  x:500, y:600, label:'南海游鱼' }
+    { type:'moon',  x:750, y:400, label:'明月' }
   ]
 };
 
@@ -982,42 +980,6 @@ function drawDecorItem(decor, theme) {
       g.appendChild(path('M -14 2 Q -18 0 -16 6'));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
       g.appendChild(text(decor.label, 0, 26)); break;
-    case 'fish':
-      // 黑白条纹鱼：鱼身由 6 道黑白横条 + 三角尾 + 圆眼 构成；CSS @keyframes 让它原地左右摆动游弋
-      const fishBody = document.createElementNS(SVG_NS, 'g');
-      fishBody.setAttribute('class', 'gm-fish-anim');
-      // 鱼身外轮廓（白色基底 + 黑描边）
-      const bodyShape = document.createElementNS(SVG_NS, 'ellipse');
-      bodyShape.setAttribute('cx', 0); bodyShape.setAttribute('cy', 0);
-      bodyShape.setAttribute('rx', 16); bodyShape.setAttribute('ry', 6);
-      bodyShape.setAttribute('fill', '#FFFFFF');
-      bodyShape.setAttribute('stroke', '#1A1410');
-      bodyShape.setAttribute('stroke-width', '0.9');
-      fishBody.appendChild(bodyShape);
-      // 6 道黑色横条（按 3px 间距，rx=16 内）
-      for (let i = 0; i < 6; i++) {
-        const stripeX = -13 + i * 5;
-        const stripe = document.createElementNS(SVG_NS, 'rect');
-        stripe.setAttribute('x', stripeX); stripe.setAttribute('y', -5.5);
-        stripe.setAttribute('width', 3); stripe.setAttribute('height', 11);
-        stripe.setAttribute('fill', '#1A1410');
-        fishBody.appendChild(stripe);
-      }
-      // 尾鳍（右侧三角）
-      const tail = document.createElementNS(SVG_NS, 'path');
-      tail.setAttribute('d', 'M 16 0 L 24 -5 L 22 0 L 24 5 Z');
-      tail.setAttribute('fill', '#FFFFFF');
-      tail.setAttribute('stroke', '#1A1410');
-      tail.setAttribute('stroke-width', '0.9');
-      fishBody.appendChild(tail);
-      // 眼
-      const fishEye = document.createElementNS(SVG_NS, 'circle');
-      fishEye.setAttribute('cx', -9); fishEye.setAttribute('cy', -1.5);
-      fishEye.setAttribute('r', 1.4); fishEye.setAttribute('fill', '#1A1410');
-      fishBody.appendChild(fishEye);
-      g.appendChild(fishBody);
-      g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(text(decor.label, 0, 18)); break;
   }
   return g;
 }
