@@ -177,7 +177,11 @@
     </div>
 
     <footer class="gm-foot">
-      <p class="gm-foot-line1"><span class="gm-foot-strike">惶惶十余载，书剑两无成</span></p>
+      <p class="gm-foot-line1">
+        <span class="gm-foot-strike">惶惶十余载，书剑两无成</span>
+        <span class="gm-foot-arrow" aria-hidden="true">→</span>
+        <span class="gm-foot-second">十年磨一剑，霜刃未曾试</span>
+      </p>
       <p class="gm-foot-line2">今日把示君，谁有不平事！</p>
     </footer>
   </div>
@@ -261,8 +265,38 @@
 
 .gm-foot { margin-top:2rem; text-align:center; padding-bottom:.4rem; }
 /* 倒数第二行：墨色深红，红色 line-through，不消失 */
-.gm-foot-line1 { font-family:'Noto Serif SC',serif; font-size:1.6rem; color:#6A3030; margin:0 0 .5rem; letter-spacing:.18em; font-weight:600; }
+.gm-foot-line1 { font-family:'Noto Serif SC',serif; font-size:1.6rem; color:#6A3030; margin:0 0 .5rem; letter-spacing:.18em; font-weight:600; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.6rem; }
 .gm-foot-strike { display:inline-block; text-decoration:line-through; text-decoration-color:#C44D3F; text-decoration-thickness:3px; opacity:.55; }
+.gm-foot-arrow {
+  display:inline-block;
+  font-family:'Ma Shan Zheng',cursive;
+  font-size:2.4rem;
+  color:#C44D3F;
+  line-height:1;
+  transform:rotate(5deg) translateY(-2px);
+  text-shadow:1px 1px 0 rgba(196,77,63,.25);
+  animation:gmFootArrowPulse 1.8s ease-in-out infinite;
+}
+@keyframes gmFootArrowPulse {
+  0%, 100% { transform:rotate(5deg) translateY(-2px); opacity:.85; }
+  50%      { transform:rotate(8deg) translateY(-4px); opacity:1; }
+}
+.gm-foot-second { color:#3D2914; font-weight:600; }
+
+/* 黑白条纹鱼：固定频率左右摆动游弋（约 1.6s 一周期） */
+.gm-fish-anim {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: gmFishSwim 1.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes gmFishSwim {
+  0%   { transform: translateX(-6px) rotate(-3deg); }
+  25%  { transform: translateX(0px)   rotate( 2deg); }
+  50%  { transform: translateX(6px)   rotate( 5deg); }
+  75%  { transform: translateX(0px)   rotate( 2deg); }
+  100% { transform: translateX(-6px) rotate(-3deg); }
+}
 /* 最后一行：Ma Shan Zheng 草书 + 略大加粗 + 居中 + 狂草黑白水墨质感 */
 .gm-foot-line2 {
   font-family:'Ma Shan Zheng',cursive;
@@ -350,7 +384,8 @@ const REGION_DECOR = {
     { type:'kite',  x:380, y:380, label:'敦煌飞天' },
     { type:'tea',   x:600, y:520, label:'茶道' },
     { type:'moon',  x:900, y:200, label:'月圆' },
-    { type:'fly',   x:880, y:580, label:'飞马' }
+    { type:'fly',   x:880, y:580, label:'飞马' },
+    { type:'fish',  x:860, y:760, label:'东海游鱼' }
   ],
   west: [
     { type:'camel', x:300, y:340, label:'丝绸之驿' },
@@ -376,7 +411,8 @@ const REGION_DECOR = {
     { type:'sail',  x:650, y:580, label:'珠江帆影' },
     { type:'flower',x:380, y:480, label:'岭南花' },
     { type:'tea',   x:300, y:200, label:'功夫茶' },
-    { type:'moon',  x:750, y:400, label:'明月' }
+    { type:'moon',  x:750, y:400, label:'明月' },
+    { type:'fish',  x:500, y:600, label:'南海游鱼' }
   ]
 };
 
@@ -531,6 +567,42 @@ function drawDecorItem(decor, theme) {
       g.appendChild(path('M -14 2 Q -18 0 -16 6'));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
       g.appendChild(text(decor.label, 0, 26)); break;
+    case 'fish':
+      // 黑白条纹鱼：鱼身由 6 道黑白横条 + 三角尾 + 圆眼 构成；CSS @keyframes 让它原地左右摆动游弋
+      const fishBody = document.createElementNS(SVG_NS, 'g');
+      fishBody.setAttribute('class', 'gm-fish-anim');
+      // 鱼身外轮廓（白色基底 + 黑描边）
+      const bodyShape = document.createElementNS(SVG_NS, 'ellipse');
+      bodyShape.setAttribute('cx', 0); bodyShape.setAttribute('cy', 0);
+      bodyShape.setAttribute('rx', 16); bodyShape.setAttribute('ry', 6);
+      bodyShape.setAttribute('fill', '#FFFFFF');
+      bodyShape.setAttribute('stroke', '#1A1410');
+      bodyShape.setAttribute('stroke-width', '0.9');
+      fishBody.appendChild(bodyShape);
+      // 6 道黑色横条（按 3px 间距，rx=16 内）
+      for (let i = 0; i < 6; i++) {
+        const stripeX = -13 + i * 5;
+        const stripe = document.createElementNS(SVG_NS, 'rect');
+        stripe.setAttribute('x', stripeX); stripe.setAttribute('y', -5.5);
+        stripe.setAttribute('width', 3); stripe.setAttribute('height', 11);
+        stripe.setAttribute('fill', '#1A1410');
+        fishBody.appendChild(stripe);
+      }
+      // 尾鳍（右侧三角）
+      const tail = document.createElementNS(SVG_NS, 'path');
+      tail.setAttribute('d', 'M 16 0 L 24 -5 L 22 0 L 24 5 Z');
+      tail.setAttribute('fill', '#FFFFFF');
+      tail.setAttribute('stroke', '#1A1410');
+      tail.setAttribute('stroke-width', '0.9');
+      fishBody.appendChild(tail);
+      // 眼
+      const fishEye = document.createElementNS(SVG_NS, 'circle');
+      fishEye.setAttribute('cx', -9); fishEye.setAttribute('cy', -1.5);
+      fishEye.setAttribute('r', 1.4); fishEye.setAttribute('fill', '#1A1410');
+      fishBody.appendChild(fishEye);
+      g.appendChild(fishBody);
+      g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
+      g.appendChild(text(decor.label, 0, 18)); break;
   }
   return g;
 }
@@ -619,19 +691,20 @@ function renderCityMarkers(theme) {
     if (p.x < r.lonMin - 1 || p.x > r.lonMax + 1 || p.y < r.latMin - 1 || p.y > r.latMax + 1) return;
     const [x, y] = projectP(p, r);
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('class', 'city-marker');
     g.setAttribute('transform', `translate(${x}, ${y})`);
-    g.setAttribute('data-city', p.name);
+    const inner = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    inner.setAttribute('class', 'city-marker');
+    inner.setAttribute('data-city', p.name);
     const c1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     c1.setAttribute('r', '11');
     c1.setAttribute('fill', '#7A2F3F');
     c1.setAttribute('stroke', '#3D2914');
     c1.setAttribute('stroke-width', '1.5');
     c1.setAttribute('filter', 'url(#stamp)');
-    g.appendChild(c1);
+    inner.appendChild(c1);
     const c2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     c2.setAttribute('r', '3.5'); c2.setAttribute('fill', '#F2E7C8');
-    g.appendChild(c2);
+    inner.appendChild(c2);
     const t1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     t1.setAttribute('x', 16); t1.setAttribute('y', -2);
     t1.setAttribute('font-family', "'Ma Shan Zheng',cursive");
@@ -640,8 +713,9 @@ function renderCityMarkers(theme) {
     t1.setAttribute('font-weight', '700');
     t1.setAttribute('style', 'paint-order:stroke;stroke:#F2E7C8;stroke-width:3.5;pointer-events:none');
     t1.textContent = p.name;
-    g.appendChild(t1);
-    g.addEventListener('click', (e) => { e.stopPropagation(); openNote(p); });
+    inner.appendChild(t1);
+    inner.addEventListener('click', (e) => { e.stopPropagation(); openNote(p); });
+    g.appendChild(inner);
     layer.appendChild(g);
   });
 }
