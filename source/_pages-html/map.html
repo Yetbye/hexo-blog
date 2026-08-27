@@ -1,152 +1,219 @@
-<!-- ============ 行迹 · 中世纪手绘中国地图（真实 GeoJSON + 钢笔线描） ============ -->
+<!-- ============ 行迹 · 中世纪手绘中国地图（35 省真实边界） ============ -->
 <div class="gm-page">
   <div class="gm-container">
     <header class="gm-hero">
-      <span class="gm-eyebrow">TRAVEL · MAPPA · MUNDI</span>
+      <span class="gm-eyebrow">MAPPA SINICA · 华夏舆图</span>
       <h1 class="gm-title">行 迹</h1>
       <p class="gm-hand">走过的路，写在地图上；写下的诗，刻进山河里</p>
       <span class="gm-chip">✿ 已走过 <b id="gm-count">0</b> 座城</span>
     </header>
 
     <div class="gm-map-frame">
-      <svg id="gm-map" class="gm-map" viewBox="0 0 1000 760" preserveAspectRatio="xMidYMid meet">
+      <svg id="gm-map" class="gm-map" viewBox="0 0 1053 935" preserveAspectRatio="xMidYMid meet">
         <defs>
-          <!-- 手绘线条：湍流扰动边缘 -->
-          <filter id="ink-pen" x="-2%" y="-2%" width="104%" height="104%">
-            <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" seed="7" result="wobble"/>
-            <feDisplacementMap in="SourceGraphic" in2="wobble" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+          <filter id="ink-pen" x="-1%" y="-1%" width="102%" height="102%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="9" result="wobble"/>
+            <feDisplacementMap in="SourceGraphic" in2="wobble" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
           </filter>
-          <filter id="ink-pen-thin">
-            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="3" result="w"/>
-            <feDisplacementMap in="SourceGraphic" in2="w" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-          <!-- 老旧羊皮纸 -->
           <filter id="parchment">
             <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/>
-            <feColorMatrix in="n" values="0 0 0 0 0.78  0 0 0 0 0.69  0 0 0 0 0.51  0 0 0 0.18 0" result="tint"/>
+            <feColorMatrix in="n" values="0 0 0 0 0.78  0 0 0 0 0.69  0 0 0 0 0.51  0 0 0 0.2 0" result="tint"/>
             <feComposite in="tint" in2="SourceGraphic" operator="in" result="masked"/>
             <feBlend in="SourceGraphic" in2="masked" mode="multiply"/>
           </filter>
-          <!-- 海浪短线 -->
-          <pattern id="wave-pattern" x="0" y="0" width="14" height="8" patternUnits="userSpaceOnUse">
-            <path d="M 0 4 Q 3.5 0 7 4 T 14 4" stroke="#4A6E8F" stroke-width="0.6" fill="none" opacity="0.5"/>
-          </pattern>
-          <!-- 城市印章 -->
           <filter id="stamp">
-            <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" result="n"/>
-            <feDisplacementMap in="SourceGraphic" in2="n" scale="1.2"/>
+            <feTurbulence type="fractalNoise" baseFrequency="0.4" numOctaves="2" result="n"/>
+            <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4"/>
           </filter>
-          <!-- 轨迹虚线箭头 -->
           <marker id="arrow" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="userSpaceOnUse">
             <path d="M 0 1 L 11 4 L 0 7 L 3 4 Z" fill="#7A2F3F"/>
           </marker>
         </defs>
 
-        <!-- 羊皮纸底（含粗布纤维） -->
-        <rect width="1000" height="760" fill="#F2E7C8"/>
-        <rect width="1000" height="760" fill="#E8D9A6" filter="url(#parchment)"/>
-        <!-- 纤维斑点 -->
-        <g opacity="0.12" fill="#8B6F3F">
+        <rect width="1053" height="935" fill="#F2E7C8"/>
+        <rect width="1053" height="935" fill="#E8D9A6" filter="url(#parchment)"/>
+        <g opacity="0.13" fill="#8B6F3F">
           <circle cx="120" cy="80" r="0.7"/><circle cx="250" cy="160" r="0.6"/><circle cx="380" cy="240" r="0.5"/>
           <circle cx="500" cy="120" r="0.7"/><circle cx="640" cy="280" r="0.6"/><circle cx="780" cy="200" r="0.5"/>
           <circle cx="180" cy="420" r="0.6"/><circle cx="320" cy="500" r="0.7"/><circle cx="460" cy="380" r="0.5"/>
           <circle cx="600" cy="460" r="0.6"/><circle cx="740" cy="540" r="0.7"/><circle cx="880" cy="380" r="0.5"/>
           <circle cx="280" cy="640" r="0.6"/><circle cx="450" cy="680" r="0.5"/><circle cx="620" cy="700" r="0.6"/>
-          <circle cx="800" cy="660" r="0.7"/><circle cx="920" cy="580" r="0.5"/>
+          <circle cx="800" cy="660" r="0.7"/><circle cx="920" cy="580" r="0.5"/><circle cx="180" cy="780" r="0.6"/>
+          <circle cx="350" cy="850" r="0.7"/><circle cx="500" cy="820" r="0.5"/><circle cx="650" cy="860" r="0.6"/>
         </g>
 
-        <!-- ===== 中国轮廓（钢笔手绘，墨水深褐） ===== -->
-        <g id="china-layer" fill="#E8D9A6" stroke="#3D2914" stroke-width="1.2" fill-opacity="0.55" filter="url(#ink-pen)"></g>
+        <g id="china-layer" fill="#E8D9A6" fill-opacity="0.7" stroke="#3D2914" stroke-width="1.1" stroke-linejoin="round" filter="url(#ink-pen)"></g>
 
-        <!-- 海洋（水波纹 + 灰蓝） -->
-        <g id="sea-layer"></g>
-
-        <!-- 海洋装饰：东海章鱼 -->
-        <g id="kraken" transform="translate(870, 380)" filter="url(#ink-pen-thin)" opacity="0.55">
-          <ellipse cx="0" cy="0" rx="32" ry="26" fill="none" stroke="#3D4F6B" stroke-width="1.4"/>
-          <path d="M -22 22 Q -32 46 -22 64 M -10 26 Q -14 50 -4 68 M 4 26 Q 4 52 10 68 M 18 24 Q 24 48 32 60" fill="none" stroke="#3D4F6B" stroke-width="1.3" stroke-linecap="round"/>
-          <path d="M -22 22 Q -32 46 -22 64 M -10 26 Q -14 50 -4 68" fill="none" stroke="#3D4F6B" stroke-width="1.3" stroke-linecap="round" transform="scale(-1 1)"/>
-          <circle cx="-10" cy="-8" r="3" fill="#3D4F6B"/>
-          <circle cx="10" cy="-8" r="3" fill="#3D4F6B"/>
-          <text x="0" y="80" font-family="'Ma Shan Zheng',cursive" font-size="11" fill="#3D4F6B" text-anchor="middle">东海之章</text>
-        </g>
-
-        <!-- 海洋装饰：南海帆船 -->
-        <g id="sailboat" transform="translate(750, 640) rotate(15)" filter="url(#ink-pen-thin)" opacity="0.5">
-          <path d="M 0 0 L 18 0 L 8 -25 Z" fill="#C4A36F" stroke="#3D2914" stroke-width="0.8"/>
-          <line x1="9" y1="-25" x2="9" y2="2" stroke="#3D2914" stroke-width="0.8"/>
-          <path d="M 9 -22 Q 20 -12 9 -2" fill="#E86B8A" stroke="#3D2914" stroke-width="0.6" opacity="0.7"/>
-          <path d="M -15 6 Q 0 14 30 6" fill="none" stroke="#3D2914" stroke-width="0.8"/>
-          <text x="0" y="22" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">南海商帆</text>
-        </g>
-
-        <!-- 陆上装饰：西北骆驼 -->
-        <g id="camel" transform="translate(280, 230)" filter="url(#ink-pen-thin)" opacity="0.5">
-          <ellipse cx="0" cy="0" rx="20" ry="10" fill="none" stroke="#7A4E2A" stroke-width="1.2"/>
-          <path d="M -20 -6 Q -28 -16 -22 -22" fill="none" stroke="#7A4E2A" stroke-width="1.2"/>
-          <line x1="-8" y1="10" x2="-10" y2="22" stroke="#7A4E2A" stroke-width="1"/>
-          <line x1="8" y1="10" x2="10" y2="22" stroke="#7A4E2A" stroke-width="1"/>
-          <text x="0" y="38" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#7A4E2A" text-anchor="middle">丝绸之驿</text>
-        </g>
-
-        <!-- 陆上装饰：青藏牦牛 -->
-        <g id="yak" transform="translate(200, 380)" filter="url(#ink-pen-thin)" opacity="0.5">
-          <ellipse cx="0" cy="0" rx="22" ry="12" fill="#3D2914"/>
-          <path d="M -18 -8 Q -30 -22 -20 -30" fill="none" stroke="#3D2914" stroke-width="1.4"/>
-          <path d="M 18 -8 Q 30 -22 20 -30" fill="none" stroke="#3D2914" stroke-width="1.4"/>
-          <text x="0" y="28" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">高原牧歌</text>
-        </g>
-
-        <!-- 陆上装饰：江南垂柳 -->
-        <g id="willow" transform="translate(770, 360)" filter="url(#ink-pen-thin)" opacity="0.4">
-          <path d="M 0 -25 Q -3 -10 -2 5 M 0 -25 Q 4 -10 3 5 M 0 -25 Q 0 -10 0 5" fill="none" stroke="#5A7B4E" stroke-width="1.2"/>
-          <circle cx="0" cy="-26" r="6" fill="none" stroke="#5A7B4E" stroke-width="1.2"/>
-        </g>
-
-        <!-- 轨迹连线（按时间顺序） -->
-        <g id="trajectory" filter="url(#ink-pen-thin)"></g>
-
-        <!-- 城市标记层 -->
+        <g id="trajectory" filter="url(#ink-pen)"></g>
         <g id="city-markers"></g>
 
-        <!-- 比例尺（中世纪风） -->
-        <g transform="translate(60, 720)" opacity="0.7">
-          <line x1="0" y1="0" x2="140" y2="0" stroke="#3D2914" stroke-width="1.5"/>
-          <line x1="0" y1="-6" x2="0" y2="6" stroke="#3D2914" stroke-width="1.5"/>
-          <line x1="70" y1="-4" x2="70" y2="4" stroke="#3D2914" stroke-width="1"/>
-          <line x1="140" y1="-6" x2="140" y2="6" stroke="#3D2914" stroke-width="1.5"/>
-          <text x="70" y="20" font-family="'Noto Serif SC',serif" font-size="10" fill="#3D2914" text-anchor="middle">500 KM</text>
-          <text x="0" y="-10" font-family="'Noto Sans SC',sans-serif" font-size="8" fill="#3D2914" text-anchor="middle">0</text>
-          <text x="140" y="-10" font-family="'Noto Sans SC',sans-serif" font-size="8" fill="#3D2914" text-anchor="middle">500</text>
+        <g id="kraken" transform="translate(960, 430)" filter="url(#ink-pen)" opacity="0.6">
+          <ellipse cx="0" cy="0" rx="32" ry="26" fill="#4A6E8F" fill-opacity="0.15" stroke="#3D4F6B" stroke-width="1.4"/>
+          <path d="M -22 22 Q -32 46 -22 64 M -10 26 Q -14 50 -4 68 M 4 26 Q 4 52 10 68 M 18 24 Q 24 48 32 60" fill="none" stroke="#3D4F6B" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="-10" cy="-8" r="3" fill="#3D4F6B"/><circle cx="10" cy="-8" r="3" fill="#3D4F6B"/>
+          <path d="M -6 -4 L 6 -4" stroke="#3D4F6B" stroke-width="1.2"/>
+          <text x="0" y="80" font-family="'Ma Shan Zheng',cursive" font-size="12" fill="#3D4F6B" text-anchor="middle" opacity="0.7">东海之章</text>
         </g>
 
-        <!-- 罗盘玫瑰 -->
-        <g transform="translate(920, 700)" filter="url(#ink-pen-thin)" opacity="0.75">
+        <g id="camel" transform="translate(180, 220)" filter="url(#ink-pen)" opacity="0.55">
+          <ellipse cx="0" cy="0" rx="22" ry="11" fill="none" stroke="#7A4E2A" stroke-width="1.3"/>
+          <path d="M -22 -7 Q -32 -18 -24 -25" fill="none" stroke="#7A4E2A" stroke-width="1.3"/>
+          <line x1="-10" y1="11" x2="-12" y2="22" stroke="#7A4E2A" stroke-width="1"/>
+          <line x1="6" y1="11" x2="8" y2="22" stroke="#7A4E2A" stroke-width="1"/>
+          <text x="0" y="42" font-family="'Ma Shan Zheng',cursive" font-size="11" fill="#7A4E2A" text-anchor="middle">丝绸之驿</text>
+        </g>
+
+        <g id="yak" transform="translate(140, 480)" filter="url(#ink-pen)" opacity="0.5">
+          <ellipse cx="0" cy="0" rx="24" ry="14" fill="#3D2914" fill-opacity="0.6"/>
+          <path d="M -20 -8 Q -32 -24 -22 -32" fill="none" stroke="#3D2914" stroke-width="1.4"/>
+          <path d="M 20 -8 Q 32 -24 22 -32" fill="none" stroke="#3D2914" stroke-width="1.4"/>
+          <line x1="-12" y1="14" x2="-14" y2="26" stroke="#3D2914" stroke-width="1"/>
+          <line x1="12" y1="14" x2="14" y2="26" stroke="#3D2914" stroke-width="1"/>
+          <text x="0" y="48" font-family="'Ma Shan Zheng',cursive" font-size="11" fill="#3D2914" text-anchor="middle">高原牧歌</text>
+        </g>
+
+        <g id="willow" transform="translate(830, 490)" filter="url(#ink-pen)" opacity="0.45">
+          <line x1="0" y1="0" x2="0" y2="-25" stroke="#5A7B4E" stroke-width="1.4"/>
+          <circle cx="0" cy="-26" r="7" fill="none" stroke="#5A7B4E" stroke-width="1.2"/>
+          <path d="M 0 -22 Q -4 -10 -3 5 M 0 -22 Q 4 -10 3 5 M 0 -22 Q 0 -10 0 5" fill="none" stroke="#5A7B4E" stroke-width="1.2"/>
+          <text x="0" y="22" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#5A7B4E" text-anchor="middle">江南烟柳</text>
+        </g>
+
+        <g id="sailboat" transform="translate(660, 855) rotate(15)" filter="url(#ink-pen)" opacity="0.55">
+          <path d="M 0 0 L 22 0 L 10 -30 Z" fill="#C4A36F" stroke="#3D2914" stroke-width="0.8"/>
+          <line x1="11" y1="-30" x2="11" y2="2" stroke="#3D2914" stroke-width="0.8"/>
+          <path d="M 11 -26 Q 24 -14 11 -2" fill="#E86B8A" stroke="#3D2914" stroke-width="0.6" opacity="0.7"/>
+          <path d="M -18 6 Q 0 16 36 6" fill="none" stroke="#3D2914" stroke-width="0.8"/>
+          <text x="0" y="26" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">南海商帆</text>
+        </g>
+
+        <!-- 装饰：京-故宫 -->
+        <g id="forbidden" transform="translate(660, 200)" filter="url(#ink-pen)" opacity="0.55">
+          <rect x="-9" y="-5" width="18" height="10" fill="none" stroke="#7A2F3F" stroke-width="1.2"/>
+          <polygon points="-12,-5 0,-12 12,-5" fill="#7A2F3F" fill-opacity="0.5" stroke="#7A2F3F" stroke-width="1.2"/>
+          <line x1="-6" y1="-5" x2="-6" y2="5" stroke="#7A2F3F" stroke-width="0.8"/>
+          <line x1="0" y1="-5" x2="0" y2="5" stroke="#7A2F3F" stroke-width="0.8"/>
+          <line x1="6" y1="-5" x2="6" y2="5" stroke="#7A2F3F" stroke-width="0.8"/>
+          <text x="0" y="20" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#7A2F3F" text-anchor="middle">京华</text>
+        </g>
+
+        <!-- 装饰：西安-大雁塔 -->
+        <g id="bigwild" transform="translate(520, 365)" filter="url(#ink-pen)" opacity="0.5">
+          <polygon points="0,-18 -6,-12 6,-12" fill="#A0826B" stroke="#3D2914" stroke-width="0.8"/>
+          <rect x="-2" y="-12" width="4" height="14" fill="#A0826B" stroke="#3D2914" stroke-width="0.6"/>
+          <line x1="-3" y1="-6" x2="3" y2="-6" stroke="#3D2914" stroke-width="0.6"/>
+          <line x1="-3" y1="0" x2="3" y2="0" stroke="#3D2914" stroke-width="0.6"/>
+          <line x1="-3" y1="6" x2="3" y2="6" stroke="#3D2914" stroke-width="0.6"/>
+          <text x="0" y="22" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">长安塔影</text>
+        </g>
+
+        <!-- 装饰：湘-爱晚亭 -->
+        <g id="aiwan" transform="translate(720, 540)" filter="url(#ink-pen)" opacity="0.5">
+          <polygon points="0,0 -10,-5 -10,-15 -5,-22 5,-22 10,-15 10,-5" fill="#5A7B4E" fill-opacity="0.6" stroke="#3D2914" stroke-width="0.8"/>
+          <line x1="0" y1="0" x2="0" y2="8" stroke="#3D2914" stroke-width="0.8"/>
+          <text x="0" y="22" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">爱晚</text>
+        </g>
+
+        <!-- 装饰：川-都江堰鱼嘴 -->
+        <g id="yuzui" transform="translate(450, 480)" filter="url(#ink-pen)" opacity="0.5">
+          <path d="M -10 5 Q -8 -8 0 -10 Q 8 -8 10 5 Q 8 -3 0 -5 Q -8 -3 -10 5 Z" fill="#5A7B6B" fill-opacity="0.7" stroke="#3D2914" stroke-width="0.8"/>
+          <path d="M -6 0 Q -3 -4 0 -3 M 3 -2 Q 6 1 3 2" stroke="#3D2914" stroke-width="0.6" fill="none"/>
+          <text x="0" y="20" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">鱼嘴</text>
+        </g>
+
+        <!-- 装饰：藏-布达拉宫 -->
+        <g id="potala" transform="translate(220, 600)" filter="url(#ink-pen)" opacity="0.55">
+          <polygon points="0,-22 -8,-18 8,-18" fill="#8FA68E" fill-opacity="0.6" stroke="#3D2914" stroke-width="0.8"/>
+          <rect x="-10" y="-18" width="20" height="12" fill="#8FA68E" fill-opacity="0.5" stroke="#3D2914" stroke-width="0.8"/>
+          <rect x="-14" y="-6" width="28" height="14" fill="#8FA68E" fill-opacity="0.5" stroke="#3D2914" stroke-width="0.8"/>
+          <rect x="-6" y="2" width="12" height="4" fill="#7A2F3F" fill-opacity="0.5" stroke="#3D2914" stroke-width="0.6"/>
+          <text x="0" y="24" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">布达拉</text>
+        </g>
+
+        <!-- 装饰：台-阿里山樱花 -->
+        <g id="sakura-tw" transform="translate(900, 660)" filter="url(#ink-pen)" opacity="0.55">
+          <line x1="0" y1="0" x2="0" y2="-15" stroke="#3D2914" stroke-width="0.8"/>
+          <circle cx="-5" cy="-12" r="4" fill="#F5B8C8" stroke="#3D2914" stroke-width="0.5"/>
+          <circle cx="5" cy="-10" r="4" fill="#F5B8C8" stroke="#3D2914" stroke-width="0.5"/>
+          <circle cx="0" cy="-18" r="4" fill="#F5B8C8" stroke="#3D2914" stroke-width="0.5"/>
+          <circle cx="0" cy="-13" r="1.5" fill="#E86B8A"/>
+          <text x="0" y="14" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">阿里山</text>
+        </g>
+
+        <!-- 装饰：东北-人参 -->
+        <g id="renshen" transform="translate(840, 100)" filter="url(#ink-pen)" opacity="0.55">
+          <line x1="0" y1="0" x2="0" y2="-15" stroke="#7A4E2A" stroke-width="1"/>
+          <path d="M -6 -10 Q -3 -18 0 -15 Q 3 -18 6 -10 Q 4 -8 0 -10 Q -4 -8 -6 -10 Z" fill="#8B4570" fill-opacity="0.5" stroke="#3D2914" stroke-width="0.5"/>
+          <line x1="-2" y1="-15" x2="-2" y2="-22" stroke="#5A7B4E" stroke-width="0.6"/>
+          <line x1="2" y1="-15" x2="2" y2="-22" stroke="#5A7B4E" stroke-width="0.6"/>
+          <text x="0" y="12" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">参茸</text>
+        </g>
+
+        <!-- 装饰：甘-敦煌飞天 -->
+        <g id="feitian" transform="translate(330, 360)" filter="url(#ink-pen)" opacity="0.55">
+          <circle cx="0" cy="-5" r="5" fill="#E86B8A" fill-opacity="0.5" stroke="#3D2914" stroke-width="0.6"/>
+          <path d="M 0 0 Q -8 5 -12 12" fill="none" stroke="#3D2914" stroke-width="1.2"/>
+          <path d="M 0 0 Q 8 5 12 12" fill="none" stroke="#3D2914" stroke-width="1.2"/>
+          <path d="M -10 12 Q -5 10 0 14" fill="none" stroke="#3D2914" stroke-width="1.2"/>
+          <path d="M 10 12 Q 5 10 0 14" fill="none" stroke="#3D2914" stroke-width="1.2"/>
+          <text x="0" y="24" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">飞天</text>
+        </g>
+
+        <!-- 装饰：闽-客家土楼 -->
+        <g id="tulou" transform="translate(820, 640)" filter="url(#ink-pen)" opacity="0.5">
+          <circle cx="0" cy="0" r="10" fill="#A0826B" fill-opacity="0.5" stroke="#3D2914" stroke-width="0.8"/>
+          <circle cx="0" cy="0" r="5" fill="#FFF6D6" stroke="#3D2914" stroke-width="0.6"/>
+          <rect x="-3" y="-12" width="6" height="3" fill="#3D2914"/>
+          <text x="0" y="22" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">土楼</text>
+        </g>
+
+        <!-- 装饰：黔-黄果树瀑布 -->
+        <g id="waterfall" transform="translate(640, 620)" filter="url(#ink-pen)" opacity="0.5">
+          <line x1="-6" y1="-12" x2="-6" y2="0" stroke="#4A6E8F" stroke-width="0.8"/>
+          <line x1="-3" y1="-10" x2="-3" y2="0" stroke="#4A6E8F" stroke-width="0.8"/>
+          <line x1="0" y1="-14" x2="0" y2="0" stroke="#4A6E8F" stroke-width="0.8"/>
+          <line x1="3" y1="-10" x2="3" y2="0" stroke="#4A6E8F" stroke-width="0.8"/>
+          <line x1="6" y1="-12" x2="6" y2="0" stroke="#4A6E8F" stroke-width="0.8"/>
+          <path d="M -8 0 Q 0 5 8 0" fill="none" stroke="#4A6E8F" stroke-width="1.2"/>
+          <text x="0" y="18" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#4A6E8F" text-anchor="middle">瀑</text>
+        </g>
+
+        <!-- 装饰：青-青海湖 -->
+        <g id="qinghai" transform="translate(290, 340)" filter="url(#ink-pen)" opacity="0.5">
+          <ellipse cx="0" cy="0" rx="11" ry="6" fill="#7FA8C4" fill-opacity="0.6" stroke="#3D2914" stroke-width="0.8"/>
+          <ellipse cx="0" cy="0" rx="6" ry="3" fill="#FFF6D6" fill-opacity="0.7"/>
+          <text x="0" y="18" font-family="'Ma Shan Zheng',cursive" font-size="10" fill="#3D2914" text-anchor="middle">青海</text>
+        </g>
+
+        <g transform="translate(60, 905)" opacity="0.7">
+          <line x1="0" y1="0" x2="140" y2="0" stroke="#3D2914" stroke-width="1.5"/>
+          <line x1="0" y1="-5" x2="0" y2="5" stroke="#3D2914" stroke-width="1.5"/>
+          <line x1="70" y1="-3" x2="70" y2="3" stroke="#3D2914" stroke-width="1"/>
+          <line x1="140" y1="-5" x2="140" y2="5" stroke="#3D2914" stroke-width="1.5"/>
+          <text x="70" y="18" font-family="'Noto Serif SC',serif" font-size="10" fill="#3D2914" text-anchor="middle">500 KM</text>
+        </g>
+
+        <g transform="translate(990, 870)" filter="url(#ink-pen)" opacity="0.75">
           <circle r="32" fill="none" stroke="#3D2914" stroke-width="1.2"/>
           <circle r="22" fill="none" stroke="#3D2914" stroke-width="0.6" stroke-dasharray="2,2"/>
           <path d="M 0 -30 L 4 0 L 0 30 L -4 0 Z" fill="#3D2914" opacity="0.7"/>
           <path d="M -30 0 L 0 4 L 30 0 L 0 -4 Z" fill="#3D2914" opacity="0.5"/>
           <text x="0" y="-38" font-family="'Noto Serif SC',serif" font-size="13" fill="#3D2914" text-anchor="middle" font-weight="700">N</text>
-          <text x="0" y="48" font-family="'Noto Serif SC',serif" font-size="10" fill="#3D2914" text-anchor="middle">S</text>
-          <text x="-40" y="4" font-family="'Noto Serif SC',serif" font-size="10" fill="#3D2914" text-anchor="end">W</text>
-          <text x="40" y="4" font-family="'Noto Serif SC',serif" font-size="10" fill="#3D2914">E</text>
         </g>
 
-        <!-- 边框装饰（中世纪手稿风） -->
-        <rect x="20" y="20" width="960" height="720" fill="none" stroke="#3D2914" stroke-width="1.5" opacity="0.6"/>
-        <rect x="28" y="28" width="944" height="704" fill="none" stroke="#3D2914" stroke-width="0.6" opacity="0.5"/>
+        <rect x="20" y="20" width="1013" height="895" fill="none" stroke="#3D2914" stroke-width="1.5" opacity="0.6"/>
+        <rect x="28" y="28" width="997" height="879" fill="none" stroke="#3D2914" stroke-width="0.6" opacity="0.5"/>
         <g fill="#3D2914" opacity="0.5">
-          <path d="M 20 20 L 35 20 M 20 20 L 20 35"/><path d="M 980 20 L 965 20 M 980 20 L 980 35"/>
-          <path d="M 20 740 L 35 740 M 20 740 L 20 725"/><path d="M 980 740 L 965 740 M 980 740 L 980 725"/>
+          <path d="M 20 20 L 35 20 M 20 20 L 20 35"/><path d="M 1033 20 L 1018 20 M 1033 20 L 1033 35"/>
+          <path d="M 20 915 L 35 915 M 20 915 L 20 900"/><path d="M 1033 915 L 1018 915 M 1033 915 L 1033 900"/>
         </g>
       </svg>
 
-      <!-- 诗笺面板 -->
       <div class="gm-note-panel" id="gm-note" style="display:none">
         <div class="gm-note-header">
           <span class="gm-note-city" id="gm-note-city"></span>
           <span class="gm-note-date" id="gm-note-date"></span>
-          <button class="gm-note-close" id="gm-note-close" aria-label="关闭">×</button>
+          <button class="gm-note-close" id="gm-note-close">×</button>
         </div>
         <div class="gm-note-content">
           <h3 class="gm-note-title" id="gm-note-title"></h3>
@@ -156,7 +223,7 @@
       </div>
     </div>
 
-    <div class="gm-hint"><span>🗺 点击城市查看诗笺 · 每条轨迹都是一段旅程</span></div>
+    <div class="gm-hint"><span>🗺 点击城市查看诗笺 · 钢笔之下，藏山河</span></div>
   </div>
 </div>
 
@@ -177,318 +244,150 @@
   background: var(--paper);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='none'/%3E%3Ccircle cx='50' cy='50' r='0.8' fill='%2300000030'/%3E%3Ccircle cx='20' cy='70' r='0.6' fill='%2300000020'/%3E%3Ccircle cx='80' cy='30' r='0.7' fill='%2300000025'/%3E%3C/svg%3E");
 }
-
-.gm-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.gm-hero {
-  text-align: center;
-  padding: 1.5rem 0 2rem;
-  border-bottom: 1px solid #8B6F3F;
-  margin-bottom: 2rem;
-}
-
-.gm-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.4em;
-  color: var(--plum);
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.gm-title {
-  font-family: 'Noto Serif SC', serif;
-  font-weight: 900;
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
-  letter-spacing: 0.18em;
-  margin: 0.3rem 0;
-  color: var(--ink);
-}
-
-.gm-hand {
-  font-family: 'Ma Shan Zheng', cursive;
-  font-size: 1.2rem;
-  color: var(--plum);
-  margin: 0.6rem 0 1rem;
-  letter-spacing: 0.1em;
-}
-
-.gm-chip {
-  display: inline-block;
-  padding: 0.4rem 1.4rem;
-  border-radius: 0;
-  background: rgba(255, 245, 230, 0.5);
-  border: 1px solid #8B6F3F;
-  font-size: 0.9rem;
-  font-family: 'Noto Sans SC', sans-serif;
-}
-
-.gm-chip b {
-  color: var(--sakura);
-  font-size: 1.1rem;
-}
-
-.gm-map-frame {
-  position: relative;
-  background: #F2E7C8;
-  border: 2px solid #3D2914;
-  padding: 0;
-  box-shadow:
-    inset 0 0 0 4px #F2E7C8,
-    inset 0 0 0 5px #8B6F3F,
-    0 8px 32px rgba(61, 41, 20, 0.4);
-  overflow: hidden;
-}
-
-.gm-map {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.city-marker {
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.city-marker:hover {
-  transform: scale(1.15);
-}
-
-.gm-note-panel {
-  position: absolute;
-  top: 50px;
-  right: 50px;
-  width: 320px;
-  background: #FFFBE8;
-  border: 2px solid #3D2914;
-  box-shadow:
-    inset 0 0 0 3px #FFFBE8,
-    inset 0 0 0 4px #8B6F3F,
-    6px 6px 0 #3D2914;
-  z-index: 10;
-  transform: rotate(0.5deg);
-  font-family: 'Noto Serif SC', serif;
-}
-
-.gm-note-panel::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 18px;
-  background: rgba(196, 67, 95, 0.6);
-  transform: translateX(-50%) rotate(-2deg);
-}
-
-.gm-note-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 18px;
-  border-bottom: 1px dashed #8B6F3F;
-  background: #FFF6D6;
-}
-
-.gm-note-city {
-  font-family: 'Noto Serif SC', serif;
-  font-weight: 900;
-  font-size: 1.25rem;
-  color: var(--ink);
-  letter-spacing: 0.1em;
-}
-
-.gm-note-date {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  color: var(--plum);
-  margin-left: auto;
-}
-
-.gm-note-close {
-  background: none;
-  border: 1px solid #3D2914;
-  color: var(--ink);
-  font-size: 1rem;
-  cursor: pointer;
-  width: 22px;
-  height: 22px;
-  line-height: 1;
-  padding: 0;
-  background: #FFFBE8;
-}
-
+.gm-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.gm-hero { text-align: center; padding: 1.5rem 0 2rem; border-bottom: 1px solid #8B6F3F; margin-bottom: 2rem; }
+.gm-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.4em; color: var(--plum); display: block; margin-bottom: 0.5rem; }
+.gm-title { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: clamp(2.2rem, 5vw, 3.2rem); letter-spacing: 0.18em; margin: 0.3rem 0; color: var(--ink); }
+.gm-hand { font-family: 'Ma Shan Zheng', cursive; font-size: 1.2rem; color: var(--plum); margin: 0.6rem 0 1rem; letter-spacing: 0.1em; }
+.gm-chip { display: inline-block; padding: 0.4rem 1.4rem; background: rgba(255, 245, 230, 0.5); border: 1px solid #8B6F3F; font-size: 0.9rem; font-family: 'Noto Sans SC', sans-serif; }
+.gm-chip b { color: var(--sakura); font-size: 1.1rem; }
+.gm-map-frame { position: relative; background: #F2E7C8; border: 2px solid #3D2914; box-shadow: inset 0 0 0 4px #F2E7C8, inset 0 0 0 5px #8B6F3F, 0 8px 32px rgba(61,41,20,.4); overflow: hidden; }
+.gm-map { width: 100%; height: auto; display: block; }
+.city-marker { cursor: pointer; transition: transform 0.2s; }
+.city-marker:hover { transform: scale(1.15); }
+.gm-note-panel { position: absolute; top: 50px; right: 50px; width: 320px; background: #FFFBE8; border: 2px solid #3D2914; box-shadow: inset 0 0 0 3px #FFFBE8, inset 0 0 0 4px #8B6F3F, 6px 6px 0 #3D2914; z-index: 10; transform: rotate(0.5deg); font-family: 'Noto Serif SC', serif; }
+.gm-note-panel::before { content: ''; position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-2deg); width: 60px; height: 18px; background: rgba(196, 67, 95, 0.6); }
+.gm-note-header { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px dashed #8B6F3F; background: #FFF6D6; }
+.gm-note-city { font-family: 'Noto Serif SC', serif; font-weight: 900; font-size: 1.25rem; color: var(--ink); letter-spacing: 0.1em; }
+.gm-note-date { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--plum); margin-left: auto; }
+.gm-note-close { background: #FFFBE8; border: 1px solid #3D2914; color: var(--ink); font-size: 1rem; cursor: pointer; width: 22px; height: 22px; line-height: 1; padding: 0; }
 .gm-note-close:hover { background: var(--sakura); color: #fff; }
-
 .gm-note-content { padding: 16px 18px; }
-
-.gm-note-title {
-  font-family: 'Ma Shan Zheng', cursive;
-  font-size: 1.35rem;
-  color: var(--plum);
-  margin: 0 0 12px;
-  letter-spacing: 0.08em;
-}
-
-.gm-note-poem {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 1rem;
-  line-height: 1.9;
-  color: var(--ink);
-  margin: 0 0 12px;
-  white-space: pre-line;
-  padding: 12px;
-  background: rgba(196, 163, 111, 0.15);
-  border-left: 3px solid var(--gold);
-}
-
-.gm-note-note {
-  font-size: 0.85rem;
-  color: var(--plum);
-  font-style: italic;
-  margin: 0;
-  padding-top: 10px;
-  border-top: 1px dashed #8B6F3F;
-}
-
-.gm-hint {
-  text-align: center;
-  padding: 1.4rem 0;
-  font-size: 0.85rem;
-  color: var(--plum);
-  font-family: 'Ma Shan Zheng', cursive;
-  letter-spacing: 0.15em;
-}
-
+.gm-note-title { font-family: 'Ma Shan Zheng', cursive; font-size: 1.35rem; color: var(--plum); margin: 0 0 12px; letter-spacing: 0.08em; }
+.gm-note-poem { font-family: 'Noto Serif SC', serif; font-size: 1rem; line-height: 1.9; color: var(--ink); margin: 0 0 12px; white-space: pre-line; padding: 12px; background: rgba(196, 163, 111, 0.15); border-left: 3px solid var(--gold); }
+.gm-note-note { font-size: 0.85rem; color: var(--plum); font-style: italic; margin: 0; padding-top: 10px; border-top: 1px dashed #8B6F3F; }
+.gm-hint { text-align: center; padding: 1.4rem 0; font-size: 0.85rem; color: var(--plum); font-family: 'Ma Shan Zheng', cursive; letter-spacing: 0.15em; }
 @media (max-width: 768px) {
   .gm-page { padding: 10px; }
   .gm-note-panel { position: fixed; top: 10%; left: 5%; right: 5%; width: auto; }
 }
 </style>
 
-<script src="../tools/d3-geo.js"></script>
+<script src="/data/china-paths.js"></script>
 <script>
 (function () {
 'use strict';
-const W = 1000, H = 760;
 
-// 经纬度 → viewBox 投影
-// 中国范围: 73-135°E, 18-54°N
-const LO = 73, HI = 135, LA_LO = 18, LA_HI = 54;
-const SX = 60, SY = 60, SW = 880, SH = 640;
-const proj = d3.geoMercator()
-  .center([104, 35])
-  .scale(700)
-  .translate([W/2, H/2 - 40])
-  .precision(0.1);
-function project(lon, lat) { return proj([lon, lat]); }
+// 颜色按地理区系映射
+const colorMap = {
+  '新疆维吾尔自治区':'#C4784A','内蒙古自治区':'#A0826B','西藏自治区':'#8FA68E',
+  '青海省':'#7E967E','甘肃省':'#8B7355','宁夏回族自治区':'#9A8B7B',
+  '陕西省':'#A0826B','四川省':'#7FA88F','重庆市':'#8FA68E',
+  '云南省':'#7FA88F','贵州省':'#6B8E7B','广西壮族自治区':'#5A7B6B',
+  '广东省':'#7FA88F','海南省':'#5A8F7B','湖南省':'#6B8E7B',
+  '湖北省':'#7FA88F','河南省':'#9A8B7B','江西省':'#8B7B6B',
+  '安徽省':'#9A8B7B','江苏省':'#8FA68E','上海市':'#9A8B7B',
+  '浙江省':'#8FA68E','福建省':'#7E967E','台湾省':'#7FA8C4',
+  '山东省':'#9A8B7B','河北省':'#8B7B6B','北京市':'#9A8B7B',
+  '天津市':'#9A8B7B','辽宁省':'#8B7B6B','吉林省':'#8FA68E',
+  '黑龙江省':'#8FA68E','山西省':'#9A8B7B',
+  '香港特别行政区':'#5A7B6B','澳门特别行政区':'#5A7B6B',
+};
+const labelMap = {
+  '新疆维吾尔自治区':'新疆','内蒙古自治区':'内蒙','西藏自治区':'西藏',
+  '宁夏回族自治区':'宁夏','广西壮族自治区':'广西','香港特别行政区':'港',
+  '澳门特别行政区':'澳',
+};
 
-// ==================== 渲染中国轮廓 ====================
-fetch('/data/china-provinces.json').then(r => r.json()).then(geo => {
-  const layer = document.getElementById('china-layer');
-  const seaLayer = document.getElementById('sea-layer');
-  const sea = new Set();
-  // 简化的海域名（按省份中心经纬度判定）
-  const seaWords = ['海'];
-  geo.features.forEach(feat => {
-    if (feat.geometry.type !== 'MultiPolygon' && feat.geometry.type !== 'Polygon') return;
-    const name = feat.properties.name;
-    if (name.includes('省') || name.includes('市') || name.includes('区')) {
-      // 渲染陆地
-      const path = d3.geoPath(proj)(feat);
+// 渲染中国全部省份
+const layer = document.getElementById('china-layer');
+if (window.CHINA_PROVINCES) {
+  window.CHINA_PROVINCES.forEach(prov => {
+    const shortName = labelMap[prov.name] || prov.name.replace(/(省|市|自治区|壮族|回族|维吾尔|特别行政区)$/, '');
+    const color = colorMap[prov.name] || '#A0826B';
+    prov.paths.forEach(d => {
       const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      p.setAttribute('d', path);
-      p.setAttribute('fill', '#E8D9A6');
-      p.setAttribute('fill-opacity', '0.65');
+      p.setAttribute('d', d);
+      p.setAttribute('fill', color);
+      p.setAttribute('fill-opacity', '0.35');
       p.setAttribute('stroke', '#3D2914');
-      p.setAttribute('stroke-width', '1.1');
-      p.setAttribute('filter', 'url(#ink-pen)');
-      // 省份名（手写体小标签）
-      const c = feat.properties.centroid || feat.properties.center;
-      if (c) {
-        const [px, py] = proj(c);
-        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t.setAttribute('x', px);
-        t.setAttribute('y', py);
-        t.setAttribute('font-family', "'Ma Shan Zheng',cursive");
-        t.setAttribute('font-size', '10');
-        t.setAttribute('fill', '#3D2914');
-        t.setAttribute('opacity', '0.55');
-        t.setAttribute('text-anchor', 'middle');
-        t.setAttribute('style', 'pointer-events:none');
-        t.textContent = name.replace(/(省|市|自治区|壮族|回族|维吾尔)$/, '');
-        layer.appendChild(t);
-      }
+      p.setAttribute('stroke-width', '1.0');
+      p.setAttribute('stroke-linejoin', 'round');
       layer.appendChild(p);
-    } else {
-      sea.add(name);
-    }
-  });
-});
-
-// ==================== 轨迹 ====================
-const places = [
-  {name:'西安', x:108.94, y:34.34, visited:true, date:'2023.08', poemTitle:'长安砖上', poem:'城墙踏遍暮云平，\n钟鼓声沉月自明。\n千年往事砖缝里，\n一粒风沙一名城。'},
-  {name:'杭州', x:120.16, y:30.29, visited:true, date:'2024.10', poemTitle:'西湖夜', poem:'一堤烟柳浸空濛，\n灯火随波入镜中。\n借问游船何处去，\n满湖山色半湖风。'},
-  {name:'成都', x:104.07, y:30.67, visited:true, date:'2025.04', poemTitle:'锦城小住', poem:'茶烟起处市声长，\n竹影筛月过短墙。\n人间至味是清欢处，\n一盏盖碗慢慢凉。'}
-];
-
-document.getElementById('gm-count').textContent = places.length;
-
-fetch('/data/china-provinces.json').then(r => r.json()).then(geo => {
-  setTimeout(() => {
-    // 轨迹：按日期排序连接
-    const traj = document.getElementById('trajectory');
-    const sorted = [...places].sort((a, b) => a.date.localeCompare(b.date));
-    for (let i = 0; i < sorted.length - 1; i++) {
-      const a = proj([sorted[i].x, sorted[i].y]);
-      const b = proj([sorted[i+1].x, sorted[i+1].y]);
-      // 中世纪虚线+中段偏移
-      const mx = (a[0] + b[0]) / 2 + (i % 2 === 0 ? -30 : 30);
-      const my = (a[1] + b[1]) / 2 + 20;
-      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      p.setAttribute('d', `M ${a[0]} ${a[1]} Q ${mx} ${my} ${b[0]} ${b[1]}`);
-      p.setAttribute('fill', 'none');
-      p.setAttribute('stroke', '#7A2F3F');
-      p.setAttribute('stroke-width', '1.5');
-      p.setAttribute('stroke-dasharray', '5,3');
-      p.setAttribute('opacity', '0.7');
-      p.setAttribute('marker-end', 'url(#arrow)');
-      traj.appendChild(p);
-      // 轨迹日期标注
+    });
+    if (prov.cx != null) {
       const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-      t.setAttribute('x', mx);
-      t.setAttribute('y', my - 6);
-      t.setAttribute('font-family', "'JetBrains Mono',monospace");
-      t.setAttribute('font-size', '9');
-      t.setAttribute('fill', '#7A2F3F');
-      t.setAttribute('opacity', '0.8');
+      t.setAttribute('x', prov.cx);
+      t.setAttribute('y', prov.cy);
+      t.setAttribute('font-family', "'Ma Shan Zheng',cursive");
+      t.setAttribute('font-size', '15');
+      t.setAttribute('fill', '#3D2914');
+      t.setAttribute('opacity', '0.75');
       t.setAttribute('text-anchor', 'middle');
       t.setAttribute('style', 'pointer-events:none');
-      t.textContent = sorted[i+1].date;
-      traj.appendChild(t);
+      t.textContent = shortName;
+      layer.appendChild(t);
     }
-    renderCityMarkers();
-  }, 200);
-});
+  });
+}
 
-function renderCityMarkers() {
-  const layer = document.getElementById('city-markers');
-  layer.innerHTML = '';
+const places = [
+  { name:'西安', x:108.94, y:34.34, visited:true, date:'2023.08', poemTitle:'长安砖上', poem:'城墙踏遍暮云平，\n钟鼓声沉月自明。\n千年往事砖缝里，\n一粒风沙一名城。' },
+  { name:'杭州', x:120.16, y:30.29, visited:true, date:'2024.10', poemTitle:'西湖夜', poem:'一堤烟柳浸空濛，\n灯火随波入镜中。\n借问游船何处去，\n满湖山色半湖风。' },
+  { name:'成都', x:104.07, y:30.67, visited:true, date:'2025.04', poemTitle:'锦城小住', poem:'茶烟起处市声长，\n竹影筛月过短墙。\n人间至味是清欢处，\n一盏盖碗慢慢凉。' }
+];
+document.getElementById('gm-count').textContent = places.length;
+
+if (window.CHINA_PROVINCES) {
+  const VB_W = 1053, MIN_LO = 73, MAX_LO = 135;
+  function mercatorY(lat) {
+    const phi = lat * Math.PI / 180;
+    const phiMin = 16 * Math.PI / 180, phiMax = 54 * Math.PI / 180;
+    const yMerc = Math.log(Math.tan(Math.PI/4 + phi/2));
+    const yMin = Math.log(Math.tan(Math.PI/4 + phiMin/2));
+    const yMax = Math.log(Math.tan(Math.PI/4 + phiMax/2));
+    return (yMax - yMerc) / (yMax - yMin) * 700;
+  }
+  function project(lon, lat) {
+    return [(lon - MIN_LO) / (MAX_LO - MIN_LO) * VB_W, mercatorY(lat)];
+  }
+
+  const traj = document.getElementById('trajectory');
+  const sorted = [...places].sort((a, b) => a.date.localeCompare(b.date));
+  for (let i = 0; i < sorted.length - 1; i++) {
+    const a = project(sorted[i].x, sorted[i].y);
+    const b = project(sorted[i+1].x, sorted[i+1].y);
+    const mx = (a[0] + b[0]) / 2 + (i % 2 === 0 ? -30 : 30);
+    const my = (a[1] + b[1]) / 2 + 30;
+    const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    p.setAttribute('d', `M ${a[0]} ${a[1]} Q ${mx} ${my} ${b[0]} ${b[1]}`);
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', '#7A2F3F');
+    p.setAttribute('stroke-width', '1.5');
+    p.setAttribute('stroke-dasharray', '5,3');
+    p.setAttribute('opacity', '0.75');
+    p.setAttribute('marker-end', 'url(#arrow)');
+    traj.appendChild(p);
+    const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    t.setAttribute('x', mx); t.setAttribute('y', my - 6);
+    t.setAttribute('font-family', "'JetBrains Mono',monospace");
+    t.setAttribute('font-size', '9');
+    t.setAttribute('fill', '#7A2F3F');
+    t.setAttribute('opacity', '0.8');
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('style', 'pointer-events:none');
+    t.textContent = sorted[i+1].date;
+    traj.appendChild(t);
+  }
+
+  const markers = document.getElementById('city-markers');
   places.forEach(p => {
-    const [x, y] = proj([p.x, p.y]);
+    const [x, y] = project(p.x, p.y);
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     g.setAttribute('class', 'city-marker');
     g.setAttribute('transform', `translate(${x}, ${y})`);
     g.setAttribute('data-city', p.name);
 
-    // 印章圆
     const c1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     c1.setAttribute('r', '9');
     c1.setAttribute('fill', '#7A2F3F');
@@ -497,37 +396,32 @@ function renderCityMarkers() {
     c1.setAttribute('filter', 'url(#stamp)');
     g.appendChild(c1);
 
-    // 内点
     const c2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     c2.setAttribute('r', '3');
     c2.setAttribute('fill', '#F2E7C8');
     g.appendChild(c2);
 
-    // 名称（手写体）
     const t1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    t1.setAttribute('x', 14);
-    t1.setAttribute('y', -2);
+    t1.setAttribute('x', 14); t1.setAttribute('y', -2);
     t1.setAttribute('font-family', "'Ma Shan Zheng',cursive");
     t1.setAttribute('font-size', '15');
     t1.setAttribute('fill', '#3D2914');
     t1.setAttribute('font-weight', '700');
-    t1.setAttribute('style', 'paint-order:stroke;stroke:#F2E7C8;stroke-width:3');
+    t1.setAttribute('style', 'paint-order:stroke;stroke:#F2E7C8;stroke-width:3;pointer-events:none');
     t1.textContent = p.name;
     g.appendChild(t1);
 
-    // 日期
     const t2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-    t2.setAttribute('x', 14);
-    t2.setAttribute('y', 10);
+    t2.setAttribute('x', 14); t2.setAttribute('y', 10);
     t2.setAttribute('font-family', "'JetBrains Mono',monospace");
     t2.setAttribute('font-size', '9');
     t2.setAttribute('fill', '#7A2F3F');
-    t2.setAttribute('style', 'paint-order:stroke;stroke:#F2E7C8;stroke-width:2.5');
+    t2.setAttribute('style', 'paint-order:stroke;stroke:#F2E7C8;stroke-width:2.5;pointer-events:none');
     t2.textContent = p.date;
     g.appendChild(t2);
 
     g.addEventListener('click', () => showNote(p));
-    layer.appendChild(g);
+    markers.appendChild(g);
   });
 }
 
@@ -537,16 +431,11 @@ function showNote(p) {
   document.getElementById('gm-note-title').textContent = p.poemTitle || '行迹';
   document.getElementById('gm-note-poem').textContent = p.poem || '';
   document.getElementById('gm-note-note').textContent = p.note || '';
-  const panel = document.getElementById('gm-note');
-  panel.style.display = 'block';
-  panel.dataset.city = p.name;
+  document.getElementById('gm-note').style.display = 'block';
 }
-
 document.getElementById('gm-note-close').addEventListener('click', () => {
   document.getElementById('gm-note').style.display = 'none';
 });
-
-// 点击地图空白处关闭
 document.getElementById('gm-map').addEventListener('click', e => {
   if (!e.target.closest('.city-marker') && !e.target.closest('.gm-note-panel')) {
     document.getElementById('gm-note').style.display = 'none';
