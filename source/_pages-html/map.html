@@ -330,8 +330,7 @@ const REGION_DECOR = {
     { type:'camel', x:150, y:230, label:'骆驼' },
     { type:'kite',  x:380, y:380, label:'敦煌飞天' },
     { type:'tea',   x:600, y:520, label:'茶道' },
-    { type:'moon',  x:900, y:200, label:'月圆' },
-    { type:'horse', x:880, y:580, label:'飞马' }
+    { type:'moon',  x:900, y:200, label:'月圆' }
   ],
   west: [
     { type:'camel', x:300, y:340, label:'丝绸之驿' },
@@ -480,25 +479,6 @@ function drawDecorItem(decor, theme) {
       g.appendChild(circle(0, 0, 4, theme.gold));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
       g.appendChild(text(decor.label, 0, 22)); break;
-    case 'horse':
-      // 飞马剪影：椭圆马身 + 三角翅膀 + 四蹄 + 尾巴 + 鬃毛 + 马头
-      g.appendChild(path('M -8 -2 Q -22 -4 -22 4 Q -20 10 -10 10 L 12 10 Q 22 10 24 4 Q 24 -4 14 -4 Z', theme.accent));
-      g.appendChild(path('M 22 0 Q 32 -4 34 -10 Q 30 -6 24 -2')); // 鬃毛
-      g.appendChild(circle(28, -6, 4)); // 马头
-      g.appendChild(line(26, -2, 30, 2)); // 马嘴
-      g.appendChild(circle(29, -7, 0.8, theme.stroke)); // 马眼
-      // 翅膀
-      g.appendChild(path('M -4 -4 L -22 -22 L -8 -8 L -18 -18 L 0 -6 Z', theme.accent));
-      g.appendChild(path('M 2 -4 L 18 -24 L 6 -8 L 16 -20 L 6 -6 Z', theme.accent));
-      // 四条腿
-      g.appendChild(line(-16, 10, -18, 24));
-      g.appendChild(line(-8, 10, -10, 24));
-      g.appendChild(line(4, 10, 2, 24));
-      g.appendChild(line(12, 10, 10, 24));
-      // 尾巴
-      g.appendChild(path('M -22 4 Q -32 -2 -30 -12 Q -26 -6 -22 -2'));
-      g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(text(decor.label, 0, 38)); break;
   }
   return g;
 }
