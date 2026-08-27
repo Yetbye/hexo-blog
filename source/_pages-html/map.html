@@ -1,117 +1,59 @@
 <!-- ============ 行迹 · 满堂花醉三千客，一剑霜寒十四州 ============ -->
-<!-- 设计：5 区域子图（西北/西南/东北/东南/中原）+ 剑饰 + 满堂花醉之诗笺画卷 -->
-<!-- 调色：去政治化 + Venus 古色复原（赭朱 / 胭脂 / 旧金 / 月白 / 淡竹青 / 墨青 / 檀紫）-->
+<!-- 设计：极少红色 + 大量墨青/淡竹青/旧金/赭朱（仅在诗句朱批时微现）+ 古卷边+留白 -->
+<!-- 布局：顶部诗性内容海（满堂花醉）+ 底部大地图（东北已达标+四子图同步到东北标准） -->
 <div class="gm-page">
-  <!-- 整页背景：固定层（CZ 多层 radial）+ 顶/底装饰光带 -->
+
+  <!-- 整页固定背景：单一淡竹青+淡墨青径向渐变（多色低饱和高斯光晕） -->
   <div class="gm-page-bg" aria-hidden="true"></div>
+  <!-- 极淡光带（顶/底，宽度自适应） -->
   <div class="gm-page-glow gm-page-glow-top" aria-hidden="true"></div>
   <div class="gm-page-glow gm-page-glow-bot" aria-hidden="true"></div>
 
-  <!-- 页面四角装饰（云纹/兰花/竹叶/桃花枝） -->
-  <svg class="gm-page-corner gm-page-tl" viewBox="0 0 120 120" aria-hidden="true">
-    <path d="M 0 0 Q 30 8 50 30 Q 64 50 56 78 Q 40 64 26 48 Q 12 30 0 0 Z" fill="#A8443C" fill-opacity="0.08" stroke="#A8443C" stroke-width="0.7" stroke-opacity="0.5"/>
-    <path d="M 10 6 Q 30 16 46 36 Q 56 54 50 70" fill="none" stroke="#A8443C" stroke-width="0.7" stroke-opacity="0.45"/>
-    <path d="M 0 24 Q 14 30 24 44" fill="none" stroke="#A8443C" stroke-width="0.6" stroke-opacity="0.4"/>
-    <circle cx="38" cy="42" r="2" fill="#A8443C" fill-opacity="0.5"/>
-    <circle cx="50" cy="56" r="1.6" fill="#A8443C" fill-opacity="0.5"/>
-  </svg>
-  <svg class="gm-page-corner gm-page-tr" viewBox="0 0 120 120" aria-hidden="true">
-    <!-- 兰花 -->
-    <g stroke="#6E8A6F" stroke-width="0.8" fill="none" stroke-opacity="0.6">
-      <path d="M 110 10 Q 96 26 88 50 Q 84 70 92 90"/>
-      <path d="M 108 8 Q 100 18 96 30"/>
-      <path d="M 112 12 Q 104 24 100 38"/>
-      <path d="M 106 14 Q 98 28 96 44"/>
-    </g>
-    <ellipse cx="92" cy="32" rx="6" ry="3" fill="#6E8A6F" fill-opacity="0.18" transform="rotate(-30 92 32)"/>
-    <ellipse cx="86" cy="44" rx="6" ry="3" fill="#6E8A6F" fill-opacity="0.18" transform="rotate(-50 86 44)"/>
-    <ellipse cx="96" cy="48" rx="6" ry="3" fill="#6E8A6F" fill-opacity="0.18" transform="rotate(-20 96 48)"/>
-    <path d="M 120 0 Q 90 8 70 30 Q 56 50 64 78 Q 80 64 94 48 Q 108 30 120 0 Z" fill="#6E8A6F" fill-opacity="0.06" stroke="#6E8A6F" stroke-width="0.6" stroke-opacity="0.4"/>
-  </svg>
-  <svg class="gm-page-corner gm-page-bl" viewBox="0 0 120 120" aria-hidden="true">
-    <!-- 竹叶 -->
-    <g stroke="#6E8A6F" stroke-width="0.9" fill="#6E8A6F" fill-opacity="0.2" stroke-opacity="0.6">
-      <path d="M 8 110 Q 20 96 30 78 Q 38 64 34 50 Q 22 60 16 78 Q 10 94 8 110 Z"/>
-      <path d="M 22 100 Q 38 86 50 70 Q 60 56 56 44 Q 42 52 32 68 Q 24 84 22 100 Z"/>
-      <path d="M 40 92 Q 56 78 68 62 Q 76 48 72 38 Q 58 46 50 60 Q 44 78 40 92 Z"/>
-    </g>
-    <line x1="0" y1="120" x2="80" y2="40" stroke="#6E8A6F" stroke-width="0.6" stroke-opacity="0.4"/>
-    <path d="M 0 120 Q 30 108 50 90 Q 64 70 60 50 Q 40 60 24 80 Q 12 100 0 120 Z" fill="#6E8A6F" fill-opacity="0.05" stroke="#6E8A6F" stroke-width="0.5" stroke-opacity="0.35"/>
-  </svg>
-  <svg class="gm-page-corner gm-page-br" viewBox="0 0 120 120" aria-hidden="true">
-    <!-- 桃花枝 -->
-    <g stroke="#A8443C" stroke-width="0.9" fill="none" stroke-opacity="0.55">
-      <path d="M 120 120 Q 96 100 80 80 Q 64 58 50 50"/>
-      <path d="M 100 102 Q 86 90 78 78"/>
-      <path d="M 84 86 Q 74 76 70 66"/>
-    </g>
-    <g fill="#B25C58" fill-opacity="0.55" stroke="#A8443C" stroke-width="0.5" stroke-opacity="0.6">
-      <circle cx="96" cy="100" r="3"/>
-      <circle cx="84" cy="86" r="2.5"/>
-      <circle cx="74" cy="74" r="2.8"/>
-      <circle cx="66" cy="62" r="2.4"/>
-      <circle cx="54" cy="52" r="2.6"/>
-    </g>
-    <g fill="#B8945E" fill-opacity="0.7">
-      <circle cx="96" cy="100" r="0.8"/>
-      <circle cx="84" cy="86" r="0.7"/>
-      <circle cx="74" cy="74" r="0.8"/>
-      <circle cx="66" cy="62" r="0.7"/>
-      <circle cx="54" cy="52" r="0.8"/>
-    </g>
-    <path d="M 120 120 Q 90 110 70 90 Q 50 70 38 56 Q 30 50 20 44 Q 10 40 0 38" fill="none" stroke="#A8443C" stroke-width="0.6" stroke-opacity="0.4"/>
-  </svg>
-
   <div class="gm-container">
-    <!-- ============ 板块 1：HERO（剑饰 + 标题 + chips）============ -->
+
+    <!-- ================== HERO ================== -->
     <header class="gm-hero">
-      <svg class="gm-sword gm-sword-left" viewBox="0 0 60 200" aria-hidden="true">
-        <defs><linearGradient id="blade-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A0826B"/><stop offset=".5" stop-color="#E0E4DC"/><stop offset="1" stop-color="#A8443C"/></linearGradient></defs>
-        <rect x="28" y="6" width="3" height="160" fill="url(#blade-g)" stroke="#2A2520" stroke-width="0.6"/>
-        <polygon points="26,6 33,6 29.5,0" fill="#A8443C" stroke="#2A2520" stroke-width="0.6"/>
-        <rect x="14" y="166" width="32" height="6" fill="#A0826B" stroke="#2A2520" stroke-width="0.6"/>
-        <rect x="27" y="172" width="6" height="20" fill="#7A4E2A" stroke="#2A2520" stroke-width="0.6"/>
-        <circle cx="30" cy="194" r="2.5" fill="#B8945E" stroke="#2A2520" stroke-width="0.5"/>
+      <!-- 双剑饰（极简化，剑身更细，弱化剑柄/护手） -->
+      <svg class="gm-sword gm-sword-left" viewBox="0 0 40 200" aria-hidden="true">
+        <line x1="20" y1="6" x2="20" y2="166" stroke="#3D2914" stroke-width="0.8" stroke-opacity="0.55"/>
+        <line x1="14" y1="166" x2="26" y2="166" stroke="#3D2914" stroke-width="0.6" stroke-opacity="0.5"/>
+        <line x1="20" y1="166" x2="20" y2="194" stroke="#3D2914" stroke-width="0.7" stroke-opacity="0.55"/>
       </svg>
-      <svg class="gm-sword gm-sword-right" viewBox="0 0 60 200" aria-hidden="true">
-        <rect x="28" y="6" width="3" height="160" fill="url(#blade-g)" stroke="#2A2520" stroke-width="0.6"/>
-        <polygon points="26,6 33,6 29.5,0" fill="#A8443C" stroke="#2A2520" stroke-width="0.6"/>
-        <rect x="14" y="166" width="32" height="6" fill="#A0826B" stroke="#2A2520" stroke-width="0.6"/>
-        <rect x="27" y="172" width="6" height="20" fill="#7A4E2A" stroke="#2A2520" stroke-width="0.6"/>
-        <circle cx="30" cy="194" r="2.5" fill="#B8945E" stroke="#2A2520" stroke-width="0.5"/>
+      <svg class="gm-sword gm-sword-right" viewBox="0 0 40 200" aria-hidden="true">
+        <line x1="20" y1="6" x2="20" y2="166" stroke="#3D2914" stroke-width="0.8" stroke-opacity="0.55"/>
+        <line x1="14" y1="166" x2="26" y2="166" stroke="#3D2914" stroke-width="0.6" stroke-opacity="0.5"/>
+        <line x1="20" y1="166" x2="20" y2="194" stroke="#3D2914" stroke-width="0.7" stroke-opacity="0.55"/>
       </svg>
-      <div class="gm-eyebrow">MAPPA SINICA · 华夏舆图</div>
+
+      <span class="gm-eyebrow">MAPPA SINICA · 满堂花醉三千客</span>
       <h1 class="gm-title">行 迹</h1>
       <p class="gm-hand">身如芥子游天地，心在沧溟寄一舟</p>
-      <p class="gm-hero-motto">满堂花醉三千客&nbsp;·&nbsp;一剑霜寒十四州</p>
       <div class="gm-chips">
         <span class="gm-chip">✿ 已走过 <b id="gm-count">0</b> 座城</span>
         <span class="gm-chip">✦ 共 <b id="gm-poem-count">0</b> 首诗</span>
-        <span class="gm-chip" id="gm-region-chip">🗺 西北</span>
+        <span class="gm-chip" id="gm-region-chip">🗺 东北</span>
       </div>
     </header>
 
-    <!-- ============ 板块 2：顶部饰带（hero 与 tabs 之间）============ -->
+    <!-- ================== 满堂花醉主体（诗性内容海） ================== -->
+    <!-- 装饰带：碎花+印章（极淡、低饱墨青） -->
     <div class="gm-ribbon gm-ribbon-top" aria-hidden="true">
-      <span class="gm-ribbon-line"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-1"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-2"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-3"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-4"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-5"></span>
-      <span class="gm-ribbon-stamp">行</span>
-      <span class="gm-ribbon-stamp gm-ribbon-stamp-2">迹</span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-6"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-7"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-8"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-9"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-10"></span>
-      <span class="gm-ribbon-line"></span>
+      <svg viewBox="0 0 1200 36" preserveAspectRatio="none">
+        <path d="M 0 18 Q 100 6 200 18 T 400 18 T 600 18 T 800 18 T 1000 18 T 1200 18" fill="none" stroke="#6E8A6F" stroke-width="0.5" stroke-opacity="0.35" stroke-dasharray="3,4"/>
+        <circle cx="120" cy="18" r="1.5" fill="#6E8A6F" fill-opacity="0.4"/>
+        <circle cx="320" cy="18" r="1" fill="#6E8A6F" fill-opacity="0.35"/>
+        <circle cx="520" cy="18" r="1.5" fill="#6E8A6F" fill-opacity="0.4"/>
+        <circle cx="720" cy="18" r="1" fill="#6E8A6F" fill-opacity="0.35"/>
+        <circle cx="920" cy="18" r="1.5" fill="#6E8A6F" fill-opacity="0.4"/>
+        <circle cx="1120" cy="18" r="1" fill="#6E8A6F" fill-opacity="0.35"/>
+        <text x="600" y="14" text-anchor="middle" fill="#5C3D4E" fill-opacity="0.45" font-size="9" font-family="'Ma Shan Zheng',cursive">一 剑 霜 寒 十 四 州</text>
+      </svg>
     </div>
 
-    <!-- ============ 板块 3：主区（三栏碰撞：左 sidebar / 中 tabs+map / 右 sidebar）============ -->
+    <!-- 主板块：左右便签 + 顶饰带 + 大地图（移下面） -->
     <div class="gm-board">
-      <!-- 左侧边栏：诗性短句 + 日期小字（钢笔 + 墨色 + 朱印） -->
+
+      <!-- 左便签：诗性短句+朱批+古卷边 -->
       <aside class="gm-side gm-side-left" aria-label="行迹札记">
         <div class="gm-side-paper">
           <span class="gm-side-tape gm-side-tape-tl"></span>
@@ -123,170 +65,120 @@
           <p class="gm-side-meta">壬寅 · 三月初七</p>
           <span class="gm-side-divider"></span>
           <p class="gm-side-verse">月落乌啼霜满天<br/>江枫渔火对愁眠</p>
-          <p class="gm-side-meta">癸卯 · 寒食前</p>
+          <p class="gm-side-meta">癸卯 · 十月十五</p>
         </div>
       </aside>
 
-      <!-- 中央：tabs + map-frame（map-frame 内部结构完全不动） -->
-      <main class="gm-center">
-        <nav class="gm-tabs" id="gm-tabs">
-          <button class="gm-tab active" data-region="nw">西北</button>
-          <span class="gm-tab-ornament" aria-hidden="true">
-            <svg viewBox="0 0 40 14"><path d="M 0 7 Q 10 1 20 7 Q 30 13 40 7" fill="none" stroke="#A8443C" stroke-width="0.8" stroke-opacity="0.55"/><circle cx="20" cy="7" r="1.4" fill="#A8443C" fill-opacity="0.7"/></svg>
+      <!-- 中央：诗性文本主体（满堂花醉三千客·二十首诗+回放） -->
+      <section class="gm-flora" aria-label="满堂花醉三千客">
+        <header class="gm-flora-header">
+          <span class="gm-flora-seal" aria-hidden="true">堂</span>
+          <h2>满 堂 花 醉 三 千 客</h2>
+          <p class="gm-flora-sub">一剑霜寒十四州</p>
+        </header>
+        <ol class="gm-flora-list" id="gm-flora-list"></ol>
+      </section>
+
+      <!-- 右便签：统计贴纸+印章 -->
+      <aside class="gm-side gm-side-right" aria-label="行迹贴纸">
+        <div class="gm-side-paper">
+          <span class="gm-side-tape gm-side-tape-tr"></span>
+          <span class="gm-stamp-card">
+            <strong>行 迹</strong>
+            <span class="gm-stamp-sub">3 城 · 10 诗</span>
           </span>
-          <button class="gm-tab" data-region="sw">西南</button>
-          <span class="gm-tab-ornament" aria-hidden="true">
-            <svg viewBox="0 0 40 14"><path d="M 0 7 Q 10 1 20 7 Q 30 13 40 7" fill="none" stroke="#A8443C" stroke-width="0.8" stroke-opacity="0.55"/><circle cx="20" cy="7" r="1.4" fill="#A8443C" fill-opacity="0.7"/></svg>
-          </span>
-          <button class="gm-tab" data-region="ne">东北</button>
-          <span class="gm-tab-ornament" aria-hidden="true">
-            <svg viewBox="0 0 40 14"><path d="M 0 7 Q 10 1 20 7 Q 30 13 40 7" fill="none" stroke="#A8443C" stroke-width="0.8" stroke-opacity="0.55"/><circle cx="20" cy="7" r="1.4" fill="#A8443C" fill-opacity="0.7"/></svg>
-          </span>
-          <button class="gm-tab" data-region="se">东南</button>
-          <span class="gm-tab-ornament" aria-hidden="true">
-            <svg viewBox="0 0 40 14"><path d="M 0 7 Q 10 1 20 7 Q 30 13 40 7" fill="none" stroke="#A8443C" stroke-width="0.8" stroke-opacity="0.55"/><circle cx="20" cy="7" r="1.4" fill="#A8443C" fill-opacity="0.7"/></svg>
-          </span>
-          <button class="gm-tab" data-region="cc">中原</button>
-        </nav>
-
-        <!-- 5 区域子图主标题条（位于 tabs 下方、map 上方） -->
-        <div class="gm-region-banner" aria-hidden="true">
-          <span class="gm-region-banner-line"></span>
-          <span class="gm-region-banner-petal"></span>
-          <span class="gm-region-banner-title" id="gm-region-banner-title">西北 · 长河落日 · 驼铃霜雪</span>
-          <span class="gm-region-banner-petal"></span>
-          <span class="gm-region-banner-line"></span>
-        </div>
-
-        <!-- 地图框（结构完全不动） -->
-        <div class="gm-map-frame" id="gm-frame">
-          <!-- 4 内角角饰：花瓣/桃枝 -->
-          <svg class="gm-corner gm-corner-tl" viewBox="0 0 80 80" aria-hidden="true">
-            <path d="M 0 0 Q 22 6 32 22 Q 38 36 28 50 Q 18 38 14 22 Q 10 10 0 0 Z" fill="#A8443C" fill-opacity="0.18" stroke="#A8443C" stroke-width="0.8"/>
-            <path d="M 8 6 Q 20 14 26 28" fill="none" stroke="#A8443C" stroke-width="1"/>
-            <circle cx="22" cy="22" r="3" fill="#A8443C" fill-opacity="0.7"/>
-            <path d="M 0 18 Q 10 26 14 36" fill="none" stroke="#A8443C" stroke-width="0.8"/>
-            <path d="M 4 40 Q 8 32 12 28" fill="none" stroke="#A8443C" stroke-width="0.8"/>
-            <circle cx="6" cy="46" r="2" fill="#A8443C" fill-opacity="0.6"/>
-          </svg>
-          <svg class="gm-corner gm-corner-tr" viewBox="0 0 80 80" aria-hidden="true">
-            <path d="M 80 0 Q 58 6 48 22 Q 42 36 52 50 Q 62 38 66 22 Q 70 10 80 0 Z" fill="#A8443C" fill-opacity="0.18" stroke="#A8443C" stroke-width="0.8"/>
-            <path d="M 72 6 Q 60 14 54 28" fill="none" stroke="#A8443C" stroke-width="1"/>
-            <circle cx="58" cy="22" r="3" fill="#A8443C" fill-opacity="0.7"/>
-            <path d="M 80 18 Q 70 26 66 36" fill="none" stroke="#A8443C" stroke-width="0.8"/>
-            <path d="M 76 40 Q 72 32 68 28" fill="none" stroke="#A8443C" stroke-width="0.8"/>
-            <circle cx="74" cy="46" r="2" fill="#A8443C" fill-opacity="0.6"/>
-          </svg>
-          <svg class="gm-corner gm-corner-bl" viewBox="0 0 80 80" aria-hidden="true">
-            <path d="M 0 80 Q 22 74 32 58 Q 38 44 28 30 Q 18 42 14 58 Q 10 70 0 80 Z" fill="#A8443C" fill-opacity="0.18" stroke="#A8443C" stroke-width="0.8"/>
-            <path d="M 8 74 Q 20 66 26 52" fill="none" stroke="#A8443C" stroke-width="1"/>
-            <circle cx="22" cy="58" r="3" fill="#A8443C" fill-opacity="0.7"/>
-            <path d="M 0 62 Q 10 54 14 44" fill="none" stroke="#A8443C" stroke-width="0.8"/>
-            <path d="M 4 40 Q 8 48 12 52" fill="none" stroke="#A8443C" stroke-width="0.8"/>
-            <circle cx="6" cy="34" r="2" fill="#A8443C" fill-opacity="0.6"/>
-          </svg>
-          <svg class="gm-corner gm-corner-br" viewBox="0 0 80 80" aria-hidden="true">
-            <path d="M 80 80 Q 58 74 48 58 Q 42 44 52 30 Q 62 42 66 58 Q 70 70 80 80 Z" fill="#A8443C" fill-opacity="0.18" stroke="#A8443C" stroke-width="0.8"/>
-            <path d="M 72 74 Q 60 66 54 52" fill="none" stroke="#A8443C" stroke-width="1"/>
-            <circle cx="58" cy="58" r="3" fill="#A8443C" fill-opacity="0.7"/>
-            <path d="M 80 62 Q 70 54 66 44" fill="none" stroke="#A8443C" stroke-width="0.8"/>
-            <path d="M 76 40 Q 72 48 68 52" fill="none" stroke="#A8443C" stroke-width="0.8"/>
-            <circle cx="74" cy="34" r="2" fill="#A8443C" fill-opacity="0.6"/>
-          </svg>
-          <svg id="gm-map" class="gm-map" viewBox="0 0 1053 935" preserveAspectRatio="xMidYMid meet">
-            <defs>
-              <filter id="ink-pen" x="-1%" y="-1%" width="102%" height="102%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="9" result="wobble"/>
-                <feDisplacementMap in="SourceGraphic" in2="wobble" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
-              </filter>
-              <filter id="parchment">
-                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/>
-                <feColorMatrix in="n" values="0 0 0 0 0.78  0 0 0 0 0.69  0 0 0 0 0.51  0 0 0 0.2 0" result="tint"/>
-                <feComposite in="tint" in2="SourceGraphic" operator="in" result="masked"/>
-                <feBlend in="SourceGraphic" in2="masked" mode="multiply"/>
-              </filter>
-              <filter id="paper-noise" x="0" y="0" width="100%" height="100%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="pn"/>
-                <feColorMatrix in="pn" values="0 0 0 0 0.78  0 0 0 0 0.69  0 0 0 0 0.55  0 0 0 0.12 0" result="pnt"/>
-                <feComposite in="pnt" in2="SourceGraphic" operator="in" result="pnm"/>
-                <feBlend in="SourceGraphic" in2="pnm" mode="multiply"/>
-              </filter>
-              <filter id="stamp"><feTurbulence type="fractalNoise" baseFrequency="0.4" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.4"/></filter>
-              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-              </filter>
-              <marker id="arrow" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="userSpaceOnUse">
-                <path d="M 0 1 L 11 4 L 0 7 L 3 4 Z" fill="#A8443C"/>
-              </marker>
-            </defs>
-
-            <rect id="gm-paper" width="1053" height="935" fill="#E0E4DC"/>
-            <rect id="gm-paper-texture" width="1053" height="935" fill="#D6DCD0" filter="url(#parchment)"/>
-            <g id="gm-bg-flowers" opacity="0.35"></g>
-            <g id="gm-province-layer" fill="#D6DCD0" fill-opacity="0.7" stroke="#2A2520" stroke-width="1.1" stroke-linejoin="round" filter="url(#ink-pen)"></g>
-            <g id="gm-decor-layer"></g>
-            <g id="trajectory" filter="url(#ink-pen)"></g>
-            <g id="city-markers"></g>
-          </svg>
-
-          <div class="gm-note-panel" id="gm-note" style="display:none">
-            <div class="gm-note-header">
-              <span class="gm-note-city" id="gm-note-city"></span>
-              <span class="gm-note-count" id="gm-note-count"></span>
-              <button class="gm-note-close" id="gm-note-close">×</button>
-            </div>
-            <div class="gm-note-content" id="gm-note-content"></div>
-          </div>
-        </div>
-      </main>
-
-      <!-- 右侧边栏：行程统计 + 三城小图（贴纸风格） -->
-      <aside class="gm-side gm-side-right" aria-label="行程统计">
-        <div class="gm-stat-card">
-          <span class="gm-stat-tag">行 · 迹</span>
-          <div class="gm-stat-row">
-            <span class="gm-stat-num" id="gm-stat-cities">—</span>
-            <span class="gm-stat-label">城</span>
-          </div>
-          <div class="gm-stat-row gm-stat-row-thin">
-            <span class="gm-stat-sub" id="gm-stat-poems">—</span>
-            <span class="gm-stat-sub-label">首诗</span>
-          </div>
-          <span class="gm-stat-divider"></span>
-          <ul class="gm-stat-list">
-            <li><span class="gm-stat-dot" style="background:#A8443C"></span>西北 <em>·</em> <b id="gm-stat-nw">0</b></li>
-            <li><span class="gm-stat-dot" style="background:#5C3D4E"></span>西南 <em>·</em> <b id="gm-stat-sw">0</b></li>
-            <li><span class="gm-stat-dot" style="background:#6E8A6F"></span>东北 <em>·</em> <b id="gm-stat-ne">0</b></li>
-            <li><span class="gm-stat-dot" style="background:#B25C58"></span>东南 <em>·</em> <b id="gm-stat-se">0</b></li>
-            <li><span class="gm-stat-dot" style="background:#B8945E"></span>中原 <em>·</em> <b id="gm-stat-cc">0</b></li>
-          </ul>
-        </div>
-        <div class="gm-stamp-card">
-          <span class="gm-stamp-card-tape"></span>
-          <span class="gm-stamp-card-label">三城小影</span>
-          <div class="gm-stamp-grid">
-            <span class="gm-stamp-chip" style="--c1:#A8443C;--c2:#B8945E"><b>京</b><i>长安</i></span>
-            <span class="gm-stamp-chip" style="--c1:#6E8A6F;--c2:#B8945E"><b>杭</b><i>临安</i></span>
-            <span class="gm-stamp-chip" style="--c1:#5C3D4E;--c2:#B8945E"><b>洛</b><i>洛阳</i></span>
+          <div class="gm-stat-list">
+            <div class="gm-stat-item"><span class="gm-stat-key">已探</span><b id="gm-stat-cities">0</b></div>
+            <div class="gm-stat-item"><span class="gm-stat-key">已写</span><b id="gm-stat-poems">0</b></div>
+            <div class="gm-stat-item"><span class="gm-stat-key">区域</span><b>5</b></div>
+            <div class="gm-stat-item"><span class="gm-stat-key">省数</span><b id="gm-stat-provs">0</b></div>
           </div>
         </div>
       </aside>
     </div>
 
-    <!-- ============ 板块 4：底部饰带（地图与脚注之间）============ -->
-    <div class="gm-ribbon gm-ribbon-bot" aria-hidden="true">
-      <span class="gm-ribbon-line"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-1"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-2"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-3"></span>
-      <span class="gm-ribbon-seal">行迹之印</span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-4"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-5"></span>
-      <span class="gm-ribbon-petal gm-ribbon-petal-6"></span>
-      <span class="gm-ribbon-line"></span>
+    <!-- 满堂花醉主体下方的横向延续：花串 -->
+    <div class="gm-flora-bottom" aria-hidden="true">
+      <svg viewBox="0 0 1200 24" preserveAspectRatio="none">
+        <path d="M 0 12 Q 100 4 200 12 T 400 12 T 600 12 T 800 12 T 1000 12 T 1200 12" fill="none" stroke="#5C3D4E" stroke-width="0.4" stroke-opacity="0.3" stroke-dasharray="2,5"/>
+        <circle cx="80" cy="12" r="1.2" fill="#5C3D4E" fill-opacity="0.35"/>
+        <circle cx="240" cy="12" r="1" fill="#5C3D4E" fill-opacity="0.3"/>
+        <circle cx="400" cy="12" r="1.2" fill="#5C3D4E" fill-opacity="0.35"/>
+        <circle cx="560" cy="12" r="1" fill="#5C3D4E" fill-opacity="0.3"/>
+        <circle cx="720" cy="12" r="1.2" fill="#5C3D4E" fill-opacity="0.35"/>
+        <circle cx="880" cy="12" r="1" fill="#5C3D4E" fill-opacity="0.3"/>
+        <circle cx="1040" cy="12" r="1.2" fill="#5C3D4E" fill-opacity="0.35"/>
+        <text x="600" y="11" text-anchor="middle" fill="#5C3D4E" fill-opacity="0.4" font-size="8" font-family="'Ma Shan Zheng',cursive">一 剑 霜 寒 十 四 州</text>
+      </svg>
     </div>
 
-    <!-- ============ 板块 5：脚注 ============ -->
+    <!-- ================== 大地图（移下面） ================== -->
+    <div class="gm-map-section">
+      <header class="gm-map-section-header">
+        <h3>大地图 · 五域山河</h3>
+        <p class="gm-map-section-sub">东北 · 白山黑水 · 人参鹿影</p>
+      </header>
+
+      <!-- 区域 tab（5 个：西北/西南/东北/东南/中原） -->
+      <nav class="gm-tabs" id="gm-tabs">
+        <button class="gm-tab" data-region="nw">西北</button>
+        <button class="gm-tab" data-region="sw">西南</button>
+        <button class="gm-tab active" data-region="ne">东北</button>
+        <button class="gm-tab" data-region="se">东南</button>
+        <button class="gm-tab" data-region="c">中原</button>
+      </nav>
+
+      <div class="gm-map-frame">
+        <svg id="gm-map" class="gm-map" viewBox="0 0 900 720" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <filter id="ink-pen" x="-1%" y="-1%" width="102%" height="102%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="9" result="w"/>
+              <feDisplacementMap in="SourceGraphic" in2="w" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="parchment">
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n"/>
+              <feColorMatrix in="n" values="0 0 0 0 0.78  0 0 0 0 0.69  0 0 0 0 0.51  0 0 0 0.2 0" result="tint"/>
+              <feComposite in="tint" in2="SourceGraphic" operator="in" result="masked"/>
+              <feBlend in="SourceGraphic" in2="masked" mode="multiply"/>
+            </filter>
+            <filter id="stamp"><feTurbulence type="fractalNoise" baseFrequency="0.4" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.4"/></filter>
+            <marker id="arrow" markerWidth="12" markerHeight="8" refX="10" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M 0 1 L 11 4 L 0 7 L 3 4 Z" fill="#5C3D4E"/>
+            </marker>
+          </defs>
+
+          <!-- 羊皮纸底（浅米黄） -->
+          <rect width="900" height="720" fill="#F0E4C8"/>
+          <rect width="900" height="720" fill="#E5D9B6" filter="url(#parchment)"/>
+
+          <!-- 极淡背景花纹（古卷草） -->
+          <g opacity="0.06" fill="none" stroke="#3D2914" stroke-width="0.5">
+            <path d="M 0 80 Q 50 60 100 80 T 200 80 T 300 80 T 400 80 T 500 80 T 600 80 T 700 80 T 800 80 T 900 80"/>
+            <path d="M 0 200 Q 50 180 100 200 T 200 200 T 300 200 T 400 200 T 500 200 T 600 200 T 700 200 T 800 200 T 900 200"/>
+            <path d="M 0 320 Q 50 300 100 320 T 200 320 T 300 320 T 400 320 T 500 320 T 600 320 T 700 320 T 800 320 T 900 320"/>
+            <path d="M 0 440 Q 50 420 100 440 T 200 440 T 300 440 T 400 440 T 500 440 T 600 440 T 700 440 T 800 440 T 900 440"/>
+            <path d="M 0 560 Q 50 540 100 560 T 200 560 T 300 560 T 400 560 T 500 560 T 600 560 T 700 560 T 800 560 T 900 560"/>
+          </g>
+
+          <g id="gm-province-layer" fill="#E5D9B6" fill-opacity="0.55" stroke="#5C3D4E" stroke-width="1.0" stroke-linejoin="round" filter="url(#ink-pen)"></g>
+          <g id="gm-decor-layer"></g>
+          <g id="trajectory" filter="url(#ink-pen)"></g>
+          <g id="city-markers"></g>
+        </svg>
+
+        <!-- 诗笺面板（多诗集时间线） -->
+        <div class="gm-note-panel" id="gm-note" style="display:none">
+          <div class="gm-note-header">
+            <span class="gm-note-city" id="gm-note-city"></span>
+            <span class="gm-note-count" id="gm-note-count"></span>
+            <button class="gm-note-close" id="gm-note-close">×</button>
+          </div>
+          <div class="gm-note-content" id="gm-note-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================== 脚注：两诗 + 草书 ================== -->
     <footer class="gm-foot">
       <p class="gm-foot-line1">
         <span class="gm-foot-strike">惶惶十余载，书剑两无成</span>
@@ -295,6 +187,7 @@
       </p>
       <p class="gm-foot-line2">今日把示君，谁有不平事！</p>
     </footer>
+
   </div>
 </div>
 
@@ -302,532 +195,385 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Ma+Shan+Zheng&family=JetBrains+Mono&display=swap');
 
 :root {
-  /* Venus 古色复原（去政治化 · 降饱和 -15%） */
-  --paper:#E0E4DC;       /* 月白主底 */
-  --paper-warm:#D6DCD0;   /* 月白底暗 */
-  --ink:#2A2520;          /* 墨青 */
-  --ink2:#5C4A3E;         /* 浅墨 */
-  --plum:#A8443C;         /* 赭朱（主） */
-  --rose:#B25C58;         /* 胭脂 */
-  --gold:#B8945E;         /* 旧金 */
-  --gold2:#C9A36A;        /* 账黄 */
-  --moss:#6E8A6F;         /* 淡竹青 */
-  --violet:#5C3D4E;       /* 檀紫 */
-  --line:#D6DCD0;
-  --warm:#E0E4DC;
-  --sakura:#B25C58;       /* 用胭脂代替正红 */
+  --paper:#F2E7C8;
+  --ink:#3D2914; --ink2:#6A5050;
+  --plum:#5C3D4E;     /* 淡檀紫，代替鲜艳梅紫 */
+  --moss:#6E8A6F;      /* 淡竹青，代替任何红系 */
+  --gold:#B8945E;      /* 旧金，代替招贴金 */
+  --vermilion:#A8443C; /* 朱砂，仅在诗句朱批/印章小面积出现 */
+  --line:#E0E4DC;       /* 月白 */
 }
 
-/* ============ 整页壳 ============ */
 .gm-page {
-  position:relative;
-  min-height:100vh; padding:48px 20px 24px;
+  min-height:100vh; padding:36px 20px 16px;
   font-family:'Noto Serif SC',serif; color:var(--ink);
   background:var(--paper);
-  overflow-x:hidden;
+  position:relative; overflow-x:hidden;
 }
-/* 整页固定背景：多层 radial + conic + paper noise 纹 */
+/* 整页背景：低饱和高斯光晕（极简） */
 .gm-page-bg {
   position:fixed; inset:0; z-index:0; pointer-events:none;
   background:
-    radial-gradient(ellipse 900px 700px at 18% 8%,  rgba(178,92,88,.10), transparent 62%),
-    radial-gradient(ellipse 800px 600px at 88% 92%, rgba(110,138,111,.08), transparent 62%),
-    radial-gradient(circle 520px at 50% 50%,  rgba(184,148,94,.08), transparent 70%),
-    conic-gradient(from 220deg at 75% 30%, rgba(168,68,60,.05), transparent 30%, rgba(178,92,88,.04) 60%, transparent 90%),
-    linear-gradient(180deg, #E5E9E0 0%, #E0E4DC 45%, #D6DCD0 100%);
-  mix-blend-mode:multiply;
-}
-/* paper noise — 散落细点（降饱和） */
-.gm-page-bg::before, .gm-page-bg::after {
-  content:''; position:absolute; inset:0; pointer-events:none;
-}
-.gm-page-bg::before {
-  background:
-    radial-gradient(circle 6px at 12% 22%,  rgba(168,68,60,.32) 0 60%, transparent 62%),
-    radial-gradient(circle 4px at 28% 78%,  rgba(92,61,78,.26) 0 60%, transparent 62%),
-    radial-gradient(circle 8px at 72% 18%,  rgba(178,92,88,.30) 0 60%, transparent 62%),
-    radial-gradient(circle 5px at 88% 64%,  rgba(184,148,94,.45) 0 60%, transparent 62%),
-    radial-gradient(circle 7px at 44% 44%,  rgba(110,138,111,.22) 0 60%, transparent 62%),
-    radial-gradient(circle 4px at 60% 86%,  rgba(168,68,60,.26) 0 60%, transparent 62%);
-  filter:blur(.4px); opacity:.75;
-}
-.gm-page-bg::after {
-  background:
-    radial-gradient(circle 3px at 8%  60%, rgba(92,61,78,.26), transparent 70%),
-    radial-gradient(circle 3px at 92% 30%, rgba(168,68,60,.26), transparent 70%),
-    radial-gradient(circle 3px at 36% 10%, rgba(184,148,94,.40), transparent 70%),
-    radial-gradient(circle 3px at 64% 70%, rgba(110,138,111,.22), transparent 70%);
-  mix-blend-mode:overlay; opacity:.6;
+    radial-gradient(ellipse 900px 700px at 18% 12%, rgba(110,138,111,.10), transparent 65%),
+    radial-gradient(ellipse 800px 600px at 88% 90%, rgba(92,61,78,.08), transparent 65%),
+    radial-gradient(ellipse 1100px 800px at 50% 50%, rgba(184,148,94,.05), transparent 75%);
 }
 .gm-page-glow {
-  position:fixed; left:0; right:0; height:42vh; z-index:0; pointer-events:none;
-  filter:blur(20px);
+  position:fixed; left:0; right:0; height:120px; z-index:0; pointer-events:none;
+  filter:blur(40px);
 }
-.gm-page-glow-top {
-  top:0;
-  background:radial-gradient(ellipse 60% 80% at 50% 0%, rgba(178,92,88,.12), transparent 70%);
-}
-.gm-page-glow-bot {
-  bottom:0;
-  background:radial-gradient(ellipse 60% 80% at 50% 100%, rgba(110,138,111,.10), transparent 70%);
-}
+.gm-page-glow-top { top:0; background:radial-gradient(ellipse 800px 100px at 50% 0%, rgba(110,138,111,.18), transparent 70%); }
+.gm-page-glow-bot { bottom:0; background:radial-gradient(ellipse 800px 100px at 50% 100%, rgba(92,61,78,.15), transparent 70%); }
 
 .gm-container {
-  max-width:1200px; margin:0 auto; padding:0 6px;
-  position:relative; z-index:2;
+  max-width:1200px; margin:0 auto; padding:0 8px; position:relative; z-index:1;
 }
 
-/* page-level 四角装饰 */
-.gm-page-corner { position:absolute; width:120px; height:120px; z-index:1; pointer-events:none; opacity:.9; }
-.gm-page-tl { top:6px;    left:6px; }
-.gm-page-tr { top:6px;    right:6px; }
-.gm-page-bl { bottom:6px; left:6px; }
-.gm-page-br { bottom:6px; right:6px; }
-
-/* ============ HERO ============ */
+/* ========== HERO ========== */
 .gm-hero {
-  text-align:center; padding:1.6rem 0 1.6rem;
-  position:relative;
-  margin-bottom:1.2rem;
-  min-height:140px;
-  background:
-    radial-gradient(ellipse 70% 50% at 50% 30%, rgba(224,228,220,.85), transparent 70%),
-    linear-gradient(180deg, rgba(224,228,220,.0), rgba(184,148,94,.08));
-  border-radius:6px;
-  box-shadow:
-    0 1px 0 rgba(224,228,220,.9) inset,
-    0 -1px 0 rgba(122,79,42,.14) inset,
-    0 12px 28px -18px rgba(42,37,32,.5),
-    0 2px 0 rgba(168,68,60,.05);
+  text-align:center; padding:1.2rem 0 1.4rem; position:relative;
+  border-bottom:1px solid rgba(110,138,111,.18);
+  margin-bottom:1.4rem;
 }
-.gm-hero::before, .gm-hero::after {
-  content:''; position:absolute; left:50%; transform:translateX(-50%);
-  height:1px; width:60%;
+.gm-sword {
+  position:absolute; top:6px; width:28px; height:120px;
+  opacity:.55; pointer-events:none;
 }
-.gm-hero::before { top:0; background:linear-gradient(90deg, transparent, rgba(168,68,60,.45), transparent); }
-.gm-hero::after  { bottom:0; background:linear-gradient(90deg, transparent, rgba(184,148,94,.70), transparent); }
+.gm-sword-left  { left:22%; transform:rotate(-5deg); }
+.gm-sword-right { right:22%; transform:rotate(5deg) scaleX(-1); }
 
-.gm-sword { position:absolute; top:6px; width:36px; height:130px; filter:drop-shadow(0 4px 6px rgba(42,37,32,.22)); }
-.gm-sword-left  { left:14%; transform:rotate(-6deg); }
-.gm-sword-right { right:14%; transform:rotate(6deg) scaleX(-1); }
-.gm-eyebrow { font-family:'JetBrains Mono',monospace; font-size:.95rem; letter-spacing:.42em; color:var(--plum); display:block; margin-bottom:.6rem; }
+.gm-eyebrow {
+  font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.4em;
+  color:var(--plum); opacity:.7;
+  display:block; margin-bottom:.5rem;
+}
 .gm-title {
-  font-family:'Noto Serif SC',serif; font-weight:900; font-size:clamp(2.8rem,6vw,4rem);
-  letter-spacing:.25em; margin:.4rem 0 .2rem; color:var(--ink);
-  text-shadow:
-    1px 1px 0 rgba(168,68,60,.14),
-    2px 2px 0 rgba(168,68,60,.10),
-    3px 3px 0 rgba(184,148,94,.14),
-    4px 6px 14px rgba(42,37,32,.16);
+  font-family:'Noto Serif SC',serif; font-weight:900;
+  font-size:clamp(2.4rem,5.2vw,3.4rem); letter-spacing:.28em;
+  margin:.3rem 0; color:var(--ink);
+  text-shadow:2px 2px 0 rgba(110,138,111,.18);
 }
-.gm-hand { font-family:'Ma Shan Zheng',cursive; font-size:1.6rem; color:var(--plum); margin:.6rem 0 1.2rem; letter-spacing:.12em; }
-.gm-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem; }
+.gm-hand {
+  font-family:'Ma Shan Zheng',cursive; font-size:1.4rem; color:var(--plum);
+  margin:.6rem 0 1rem; letter-spacing:.1em; opacity:.85;
+}
+.gm-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:.55rem; }
 .gm-chip {
-  display:inline-block; padding:.5rem 1.2rem;
-  background:rgba(224,228,220,.65);
-  border:1px solid var(--gold);
-  font-size:1rem;
-  box-shadow:0 2px 0 rgba(168,68,60,.14), 0 4px 10px -4px rgba(42,37,32,.30);
-  transition:transform .4s cubic-bezier(.16,1,.3,1);
+  display:inline-block; padding:.35rem 1rem;
+  background:rgba(255,253,242,.6); border:1px solid rgba(184,148,94,.4);
+  font-size:.85rem; color:var(--ink2);
 }
-.gm-chip:hover { transform:translateY(-2px) rotate(-1deg); }
-.gm-chip b { color:var(--plum); font-weight:700; }
+.gm-chip b { color:var(--vermilion); font-weight:700; }
 
-/* ============ 顶部 / 底部 饰带 ============ */
+/* ========== 顶部饰带 ========== */
 .gm-ribbon {
-  position:relative;
-  display:flex; align-items:center; justify-content:center;
-  gap:.55rem; padding:.55rem 0; margin:.4rem 0 .6rem;
-  background:
-    linear-gradient(90deg, transparent 0%, rgba(224,228,220,.55) 18%, rgba(224,228,220,.78) 50%, rgba(224,228,220,.55) 82%, transparent 100%);
-  border-top:1px dashed rgba(168,68,60,.30);
-  border-bottom:1px dashed rgba(168,68,60,.30);
-  overflow:hidden;
-  mix-blend-mode:multiply;
+  margin:0 auto 1.4rem; max-width:1100px;
+  position:relative; z-index:1;
 }
-.gm-ribbon-top { margin:0 0 1rem; transform:rotate(-.4deg); }
-.gm-ribbon-bot { margin:1rem 0 .4rem; transform:rotate(.5deg); }
-.gm-ribbon-line {
-  flex:0 0 22%; height:1px;
-  background:linear-gradient(90deg, transparent, rgba(168,68,60,.55), transparent);
-}
-.gm-ribbon-petal {
-  width:10px; height:10px; flex:0 0 auto;
-  background:radial-gradient(circle at 35% 35%, #B25C58 0%, #A8443C 55%, #5C3D4E 100%);
-  clip-path:polygon(50% 0%, 65% 30%, 100% 50%, 65% 70%, 50% 100%, 35% 70%, 0% 50%, 35% 30%);
-  opacity:.80; filter:drop-shadow(0 1px 0 rgba(168,68,60,.30));
-}
-.gm-ribbon-petal:nth-child(odd) { background:radial-gradient(circle at 35% 35%, #E0E4DC 0%, #B8945E 60%, #7A4E2A 100%); }
-.gm-ribbon-stamp {
-  font-family:'Ma Shan Zheng',cursive; font-size:1.1rem; color:#E0E4DC;
-  background:linear-gradient(135deg, #A8443C, #5C3D4E);
-  padding:2px 8px; border:1px solid #2A2520;
-  transform:rotate(-3deg);
-  box-shadow:0 2px 0 rgba(42,37,32,.4), inset 0 0 0 2px rgba(224,228,220,.18);
-  letter-spacing:.15em;
-}
-.gm-ribbon-stamp-2 { transform:rotate(2deg); margin-left:-.2rem; }
-.gm-ribbon-seal {
-  font-family:'Ma Shan Zheng',cursive; font-size:1rem; color:#E0E4DC;
-  background:conic-gradient(from 45deg, #5C3D4E, #A8443C, #5C3D4E);
-  padding:3px 12px; border:1.5px solid #2A2520;
-  letter-spacing:.25em;
-  box-shadow:
-    0 0 0 2px rgba(224,228,220,.4) inset,
-    0 3px 0 rgba(42,37,32,.35),
-    0 6px 14px -4px rgba(168,68,60,.35);
-  transform:rotate(-1deg);
-}
+.gm-ribbon svg { display:block; width:100%; height:36px; }
 
-/* ============ Tabs（5 区域 · active 突出）============ */
-.gm-tabs { display:flex; gap:.4rem; flex-wrap:wrap; justify-content:center; align-items:center; margin:0 0 1.2rem; padding-bottom:.4rem; }
-.gm-tab {
-  padding:.6rem 1.5rem;
-  background:rgba(224,228,220,.5);
-  border:1px solid var(--gold);
-  font-family:'Noto Serif SC',serif; font-size:1.05rem;
-  color:var(--ink2);
-  cursor:pointer; transition:all .25s; border-radius:2px;
-  opacity:.55;
-}
-.gm-tab:hover {
-  background:rgba(178,92,88,.18);
-  color:var(--plum);
-  opacity:.8;
-  transform:translateY(-1px);
-}
-.gm-tab.active {
-  background:var(--plum);
-  color:#E0E4DC;
-  border-color:var(--plum);
-  box-shadow:
-    0 0 0 1px var(--gold2) inset,
-    0 4px 12px rgba(168,68,60,.35),
-    0 0 18px rgba(168,68,60,.18);
-  font-weight:700;
-  opacity:1;
-  transform:translateY(-1px) scale(1.05);
-  outline:2px solid var(--gold);
-  outline-offset:3px;
-  border-width:5px;     /* 硬约束：active 卡片 5px 突出 */
-  padding:.4rem 1.3rem; /* 补偿边框增长，保持尺寸不抖 */
-}
-.gm-tab-ornament { display:inline-flex; align-items:center; width:40px; height:14px; }
-.gm-tab-ornament svg { width:100%; height:100%; }
-
-/* ============ 5 区域子图主标题条 ============ */
-.gm-region-banner {
-  position:relative;
-  display:flex; align-items:center; justify-content:center; gap:.6rem;
-  margin:0 0 .6rem;
-  padding:.3rem 0;
-}
-.gm-region-banner-line {
-  flex:0 0 24%; height:1px;
-  background:linear-gradient(90deg, transparent, rgba(168,68,60,.55), transparent);
-}
-.gm-region-banner-petal {
-  width:8px; height:8px; flex:0 0 auto;
-  background:radial-gradient(circle at 35% 35%, #B25C58 0%, #A8443C 55%, #5C3D4E 100%);
-  clip-path:polygon(50% 0%, 65% 30%, 100% 50%, 65% 70%, 50% 100%, 35% 70%, 0% 50%, 35% 30%);
-  opacity:.75;
-}
-.gm-region-banner-title {
-  font-family:'Ma Shan Zheng',cursive;
-  font-size:1.15rem; color:var(--plum);
-  letter-spacing:.22em;
-  text-shadow:1px 1px 0 rgba(184,148,94,.30);
-  padding:0 .4rem;
-}
-
-/* ============ HERO 主旨副标 ============ */
-.gm-hero-motto {
-  font-family:'Ma Shan Zheng',cursive;
-  font-size:clamp(1.1rem,1.8vw,1.35rem);
-  color:#5C3D4E;
-  letter-spacing:.28em;
-  margin:.2rem 0 1rem;
-  opacity:.85;
-  text-shadow:1px 1px 0 rgba(184,148,94,.25);
-}
-
-/* ============ 主区三栏 board（碰撞） ============ */
+/* ========== 主板块：左便签 + 中满堂花醉 + 右贴纸 ========== */
 .gm-board {
-  display:grid;
-  /* 地图居中 ~58%，左右各 21% 给便签+贴纸 */
-  grid-template-columns: 21% minmax(0,1fr) 21%;
-  gap:0;
-  align-items:flex-start;
-  margin:0 0 .8rem;
+  display:grid; grid-template-columns: 1fr 2.2fr 1fr;
+  gap:18px; margin:0 0 1.4rem;
+  align-items:start;
 }
-/* 左侧边栏：纸片贴在中央主区上，向左微凸 */
-.gm-side-left  { position:relative; z-index:3; margin-right:-26px; transform:rotate(-1.4deg); }
-.gm-side-right { position:relative; z-index:3; margin-left:-26px; transform:rotate(1.2deg); }
-.gm-center { position:relative; z-index:4; }
-
-/* 左侧便签 */
-.gm-side-paper {
+.gm-side {
   position:relative;
-  padding:18px 16px 16px 20px;
-  background:
-    linear-gradient(180deg, #E5E9E0 0%, #D6DCD0 100%);
-  border:1px solid var(--ink);
+}
+.gm-side-paper {
+  background:linear-gradient(180deg, #FFFBE8, #FFF6D6);
+  border:1px solid rgba(110,138,111,.25);
+  padding:18px 16px 20px; position:relative;
   box-shadow:
-    inset 0 0 0 2px #E5E9E0,
-    inset 0 0 0 3px var(--gold),
-    4px 6px 0 rgba(42,37,32,.40),
-    0 14px 30px -12px rgba(42,37,32,.35);
-  clip-path:polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
-  font-family:'Ma Shan Zheng',cursive;
-  color:var(--ink);
+    inset 0 0 0 1px rgba(110,138,111,.08),
+    0 4px 16px rgba(110,138,111,.10);
+  border-radius:1px;
 }
 .gm-side-paper::before {
   content:''; position:absolute; inset:0; pointer-events:none;
-  background:repeating-linear-gradient(0deg, transparent 0 22px, rgba(168,68,60,.06) 22px 23px);
-  mix-blend-mode:multiply;
+  background:repeating-linear-gradient(transparent, transparent 27px, rgba(168,68,60,.04) 28px);
 }
 .gm-side-tape {
-  position:absolute; top:-8px; left:18px; width:64px; height:18px;
-  background:linear-gradient(135deg, rgba(184,148,94,.50), rgba(224,228,220,.80));
-  border:1px solid rgba(168,68,60,.22);
-  transform:rotate(-4deg);
-  box-shadow:0 2px 4px rgba(42,37,32,.18);
-}
-.gm-side-tape-tl { left:18px; }
-.gm-side-stamp {
-  position:absolute; right:8px; top:6px;
-  width:30px; height:30px; line-height:30px; text-align:center;
-  font-family:'Ma Shan Zheng',cursive; font-size:1.1rem; color:#E0E4DC;
-  background:radial-gradient(circle at 30% 30%, #A8443C, #5C3D4E 70%);
-  border:1.5px solid #2A2520; border-radius:2px;
-  transform:rotate(8deg);
-  box-shadow:0 2px 0 rgba(42,37,32,.4), inset 0 0 0 2px rgba(224,228,220,.2);
-  letter-spacing:0;
-}
-.gm-side-verse { margin:0 0 2px; font-size:1.15rem; line-height:1.55; color:var(--plum); letter-spacing:.06em; }
-.gm-side-meta  { margin:0 0 6px; font-family:'JetBrains Mono',monospace; font-size:.66rem; color:var(--ink2); letter-spacing:.08em; }
-.gm-side-divider {
-  display:block; height:1px; margin:8px -4px;
-  background:linear-gradient(90deg, transparent, rgba(168,68,60,.50), transparent);
-}
-
-/* 右侧：统计 + 贴纸 */
-.gm-stat-card {
-  position:relative;
-  padding:14px 14px 12px;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(224,228,220,.95), transparent 70%),
-    linear-gradient(180deg, #E5E9E0 0%, #D6DCD0 100%);
-  border:1px solid var(--ink);
-  box-shadow:
-    inset 0 0 0 2px #E5E9E0,
-    inset 0 0 0 3px var(--gold),
-    4px 6px 0 rgba(42,37,32,.40),
-    0 14px 30px -12px rgba(42,37,32,.35);
-  clip-path:polygon(0 0, 100% 0, 100% 100%, 18px 100%, 0 calc(100% - 18px));
-  margin-bottom:14px;
-  font-family:'Noto Serif SC',serif;
-}
-.gm-stat-tag {
-  position:absolute; top:-10px; left:14px;
-  font-family:'Ma Shan Zheng',cursive; font-size:1rem; color:#E0E4DC;
-  background:linear-gradient(135deg, #5C3D4E, #A8443C);
-  padding:2px 10px; border:1px solid #2A2520; letter-spacing:.25em;
+  position:absolute; width:54px; height:18px;
+  background:rgba(110,138,111,.45);
   transform:rotate(-2deg);
-  box-shadow:0 2px 0 rgba(42,37,32,.4);
 }
-.gm-stat-row { display:flex; align-items:baseline; gap:.4rem; }
-.gm-stat-num { font-family:'Ma Shan Zheng',cursive; font-size:2.6rem; line-height:1; color:var(--plum); text-shadow:2px 2px 0 rgba(184,148,94,.32); }
-.gm-stat-label { font-size:1rem; color:var(--ink); letter-spacing:.15em; }
-.gm-stat-row-thin { margin-top:-2px; padding-left:6px; }
-.gm-stat-sub { font-family:'JetBrains Mono',monospace; font-size:.95rem; color:var(--ink2); }
-.gm-stat-sub-label { font-size:.75rem; color:var(--ink2); }
-.gm-stat-divider { display:block; height:1px; margin:10px -2px 8px; background:linear-gradient(90deg, transparent, rgba(168,68,60,.45), transparent); }
-.gm-stat-list { list-style:none; padding:0; margin:0; font-size:.85rem; color:var(--ink); }
-.gm-stat-list li { display:flex; align-items:center; gap:.4rem; padding:3px 0; border-bottom:1px dotted rgba(168,68,60,.16); }
-.gm-stat-list li:last-child { border-bottom:none; }
-.gm-stat-dot { width:8px; height:8px; border-radius:50%; box-shadow:0 0 0 1px rgba(42,37,32,.4); }
-.gm-stat-list em { color:var(--ink2); font-style:normal; opacity:.5; }
-.gm-stat-list b { margin-left:auto; font-family:'JetBrains Mono',monospace; color:var(--plum); font-weight:700; }
-
+.gm-side-tape-tl { top:-9px; left:14px; }
+.gm-side-tape-tr { top:-9px; right:14px; transform:rotate(2deg); }
+.gm-side-stamp {
+  position:absolute; top:14px; right:14px;
+  width:34px; height:34px; border-radius:50%;
+  border:1.5px solid var(--vermilion); color:var(--vermilion);
+  display:grid; place-items:center;
+  font-family:'Noto Serif SC',serif; font-size:14px; font-weight:700;
+  transform:rotate(-8deg); opacity:.7;
+}
+.gm-side-verse {
+  font-family:'Ma Shan Zheng',cursive; font-size:1.05rem;
+  color:var(--ink); line-height:1.7; margin:8px 0 2px;
+  text-align:center;
+}
+.gm-side-meta {
+  font-family:'JetBrains Mono',monospace; font-size:.7rem;
+  color:var(--ink2); opacity:.7; margin:0 0 4px; text-align:center;
+}
+.gm-side-divider {
+  display:block; height:1px; margin:6px 14px;
+  background:linear-gradient(90deg, transparent, rgba(110,138,111,.4), transparent);
+}
 .gm-stamp-card {
+  display:block; text-align:center; margin:0 auto 14px; padding:10px;
+  border:1.5px dashed rgba(110,138,111,.45);
+  background:rgba(240,228,200,.35);
   position:relative;
-  padding:18px 12px 14px;
-  background:
-    linear-gradient(135deg, rgba(224,228,220,.9), rgba(184,148,94,.16)),
-    repeating-linear-gradient(45deg, transparent 0 8px, rgba(168,68,60,.04) 8px 9px);
-  border:1px dashed var(--plum);
-  box-shadow:
-    inset 0 0 0 2px rgba(224,228,220,.6),
-    4px 6px 0 rgba(168,68,60,.22),
-    0 12px 26px -12px rgba(42,37,32,.35);
-  transform:rotate(-1.5deg);
 }
-.gm-stamp-card-tape {
-  position:absolute; top:-7px; right:18px; width:60px; height:16px;
-  background:linear-gradient(135deg, rgba(178,92,88,.65), rgba(92,61,78,.80));
-  border:1px solid rgba(42,37,32,.5);
-  transform:rotate(5deg);
-  box-shadow:0 2px 4px rgba(42,37,32,.22);
+.gm-stamp-card::before {
+  content:''; position:absolute; inset:6px; border:1px solid rgba(110,138,111,.3);
 }
-.gm-stamp-card-label {
-  display:block; text-align:center;
-  font-family:'Ma Shan Zheng',cursive; font-size:1.1rem; color:var(--plum);
-  letter-spacing:.25em; margin-bottom:10px;
+.gm-stamp-card strong {
+  font-family:'Noto Serif SC',serif; font-size:1.3rem; color:var(--vermilion);
+  display:block; letter-spacing:.4em;
 }
-.gm-stamp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
-.gm-stamp-chip {
-  position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
-  aspect-ratio:1/1;
-  background:linear-gradient(160deg, #E5E9E0 0%, #D6DCD0 100%);
-  border:1.5px solid var(--c1);
-  box-shadow:
-    inset 0 0 0 2px rgba(224,228,220,.8),
-    0 0 0 1px var(--c2),
-    2px 3px 0 rgba(42,37,32,.30);
-  color:var(--c1);
+.gm-stamp-sub {
+  font-family:'Ma Shan Zheng',cursive; font-size:.9rem; color:var(--ink2);
+  display:block; margin-top:4px;
 }
-.gm-stamp-chip:nth-child(1) { transform:rotate(-4deg); }
-.gm-stamp-chip:nth-child(2) { transform:rotate(2deg) translateY(-3px); }
-.gm-stamp-chip:nth-child(3) { transform:rotate(3deg); }
-.gm-stamp-chip b { font-family:'Ma Shan Zheng',cursive; font-size:1.3rem; line-height:1; }
-.gm-stamp-chip i { font-style:normal; font-size:.6rem; color:var(--ink2); margin-top:2px; letter-spacing:.05em; }
+.gm-stat-list { padding:0; margin:0; }
+.gm-stat-item {
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding:7px 4px; border-bottom:1px dashed rgba(110,138,111,.2);
+  font-family:'Noto Sans SC',sans-serif; font-size:.88rem;
+}
+.gm-stat-item:last-child { border-bottom:none; }
+.gm-stat-key { color:var(--ink2); }
+.gm-stat-item b { color:var(--vermilion); font-weight:700; font-size:1.05rem; }
 
-/* ============ 地图框（结构不动） ============ */
-.gm-map-frame {
-  position:relative; background:var(--paper);
-  border:2px solid var(--ink);
-  box-shadow:
-    inset 0 0 0 4px var(--paper),
-    inset 0 0 0 5px var(--gold),
-    0 8px 32px rgba(42,37,32,.38),
-    0 1px 0 rgba(224,228,220,.7);
-  overflow:hidden; border-radius:2px;
-  transform:rotate(-.25deg);
+/* ========== 满堂花醉主体（中间栏） ========== */
+.gm-flora {
+  background:linear-gradient(180deg, #FFFCF0, #FFF8E2);
+  border:1px solid rgba(110,138,111,.22);
+  padding:24px 28px 28px; position:relative;
+  box-shadow:inset 0 0 0 1px rgba(110,138,111,.05), 0 4px 20px rgba(110,138,111,.08);
+  min-height:520px;
 }
-.gm-corner { position:absolute; width:80px; height:80px; z-index:5; pointer-events:none; }
-.gm-corner-tl { top:0;    left:0; }
-.gm-corner-tr { top:0;    right:0; }
-.gm-corner-bl { bottom:0; left:0; }
-.gm-corner-br { bottom:0; right:0; }
+.gm-flora::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(circle 600px 200px at 30% 0%, rgba(168,68,60,.04), transparent 70%),
+    radial-gradient(circle 600px 200px at 70% 100%, rgba(110,138,111,.05), transparent 70%);
+}
+.gm-flora-header {
+  text-align:center; margin-bottom:18px; padding-bottom:14px;
+  border-bottom:1px solid rgba(110,138,111,.25);
+  position:relative;
+}
+.gm-flora-seal {
+  position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+  width:32px; height:32px; border-radius:50%;
+  background:var(--vermilion); color:#FFF6D6;
+  display:grid; place-items:center;
+  font-family:'Noto Serif SC',serif; font-weight:900; font-size:14px;
+  box-shadow:0 2px 8px rgba(168,68,60,.4);
+}
+.gm-flora-header h2 {
+  font-family:'Noto Serif SC',serif; font-weight:900; font-size:1.4rem;
+  letter-spacing:.25em; margin:.5rem 0 .2rem; color:var(--ink);
+}
+.gm-flora-sub {
+  font-family:'Ma Shan Zheng',cursive; font-size:1rem; color:var(--plum);
+  margin:0; opacity:.75; letter-spacing:.1em;
+}
+.gm-flora-list {
+  list-style:none; padding:0; margin:0;
+  display:grid; grid-template-columns:1fr 1fr; gap:8px 24px;
+  font-family:'Noto Serif SC',serif;
+  max-height:380px; overflow-y:auto;
+}
+.gm-flora-list li {
+  padding:10px 14px; border-left:2px solid var(--moss);
+  background:rgba(255,253,242,.5);
+  font-size:.9rem; line-height:1.6;
+}
+.gm-flora-list li .gm-flora-place {
+  font-family:'Noto Serif SC',serif; font-weight:700; color:var(--ink);
+  font-size:1rem; display:inline-block; margin-right:6px;
+}
+.gm-flora-list li .gm-flora-date {
+  font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--ink2);
+  margin-right:6px; opacity:.75;
+}
+.gm-flora-list li .gm-flora-text {
+  display:block; color:var(--ink2); font-family:'Ma Shan Zheng',cursive;
+  font-size:.95rem; margin-top:4px;
+}
+
+/* ========== 大地图区（移到底部） ========== */
+.gm-map-section { margin:0 0 1.4rem; }
+.gm-map-section-header {
+  text-align:center; margin-bottom:.6rem; padding-bottom:8px;
+  border-bottom:1px solid rgba(110,138,111,.25);
+}
+.gm-map-section-header h3 {
+  font-family:'Noto Serif SC',serif; font-weight:900; font-size:1.3rem;
+  letter-spacing:.3em; margin:0 0 4px; color:var(--ink);
+}
+.gm-map-section-sub {
+  font-family:'Ma Shan Zheng',cursive; font-size:1rem; color:var(--plum);
+  margin:0; opacity:.75; letter-spacing:.1em;
+}
+
+.gm-tabs {
+  display:flex; justify-content:center; gap:.6rem;
+  margin:0 0 1rem; flex-wrap:wrap;
+}
+.gm-tab {
+  padding:.5rem 1.4rem;
+  background:rgba(240,228,200,.45);
+  border:1px solid rgba(110,138,111,.4);
+  font-family:'Noto Serif SC',serif; font-size:.95rem;
+  color:var(--ink2); cursor:pointer; transition:all .25s;
+  border-radius:1px;
+}
+.gm-tab:hover { background:rgba(110,138,111,.12); color:var(--ink); }
+.gm-tab.active {
+  background:#F2E7C8; color:var(--ink);
+  border-color:var(--moss); border-width:2px;
+  font-weight:700; box-shadow:0 2px 10px rgba(110,138,111,.25);
+}
+
+.gm-map-frame {
+  position:relative; background:#F0E4C8;
+  border:1px solid var(--moss);
+  box-shadow:0 0 0 3px #F2E7C8, 0 6px 24px rgba(110,138,111,.15);
+  overflow:hidden;
+}
 .gm-map { width:100%; height:auto; display:block; }
 .city-marker { cursor:pointer; transition:transform .25s; }
 .city-marker:hover { transform:scale(1.15); }
 
-.gm-note-panel { position:absolute; top:30px; right:30px; width:min(420px,90%); max-height:calc(100% - 60px); overflow-y:auto; background:linear-gradient(180deg, #E5E9E0, #D6DCD0); border:2px solid var(--ink); box-shadow:inset 0 0 0 3px #E5E9E0, inset 0 0 0 4px var(--gold), 6px 6px 0 rgba(42,37,32,.42); z-index:10; font-family:'Noto Serif SC',serif; animation:gmNoteIn .4s cubic-bezier(.16,1,.3,1); }
-@keyframes gmNoteIn { from { opacity:0; transform:translateY(-12px) rotate(-1deg); } to { opacity:1; transform:rotate(-.4deg); } }
-.gm-note-panel::before { content:''; position:absolute; top:-9px; left:38%; width:60px; height:18px; background:rgba(178,92,88,.55); transform:rotate(-3deg); }
-.gm-note-header { display:flex; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px dashed var(--gold); background:rgba(224,228,220,.6); }
-.gm-note-city { font-family:'Noto Serif SC',serif; font-weight:900; font-size:1.45rem; color:var(--ink); letter-spacing:.12em; }
-.gm-note-count { font-family:'JetBrains Mono',monospace; font-size:.78rem; color:var(--plum); margin-left:auto; }
-.gm-note-close { background:#E5E9E0; border:1px solid var(--ink); color:var(--ink); font-size:1.1rem; cursor:pointer; width:24px; height:24px; line-height:1; padding:0; }
-.gm-note-close:hover { background:var(--plum); color:#E5E9E0; }
-.gm-note-content { padding:18px 20px 22px; }
-.gm-poem-card { position:relative; padding:14px 16px 14px 22px; margin-bottom:18px; background:rgba(184,148,94,.10); border-left:3px solid var(--gold); }
-.gm-poem-date { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--plum); margin-bottom:4px; letter-spacing:.05em; }
-.gm-poem-title { font-family:'Ma Shan Zheng',cursive; font-size:1.15rem; color:var(--plum); margin:0 0 8px; }
-.gm-poem-text { font-family:'Noto Serif SC',serif; font-size:.92rem; line-height:1.85; color:var(--ink); margin:0 0 6px; white-space:pre-line; }
-.gm-poem-note { font-size:.78rem; color:var(--ink2); font-style:italic; margin:0; padding-top:4px; border-top:1px dashed var(--line); }
-.gm-poem-nav { display:flex; justify-content:space-between; align-items:center; margin-top:6px; }
-.gm-poem-counter { font-family:'JetBrains Mono',monospace; font-size:.72rem; color:var(--ink2); }
-.gm-poem-btn { background:transparent; border:1px solid var(--ink); color:var(--ink); font-family:'Noto Sans SC',sans-serif; font-size:.72rem; padding:2px 8px; cursor:pointer; }
-.gm-poem-btn:hover { background:var(--ink); color:#E5E9E0; }
+.gm-note-panel {
+  position:absolute; top:24px; right:24px; width:min(380px,88%);
+  max-height:calc(100% - 48px); overflow-y:auto;
+  background:linear-gradient(180deg, #FFFBE8, #FFF6D6);
+  border:1px solid var(--moss);
+  box-shadow:0 6px 24px rgba(110,138,111,.2);
+  z-index:10; font-family:'Noto Serif SC',serif;
+  animation:gmNoteIn .4s cubic-bezier(.16,1,.3,1);
+}
+@keyframes gmNoteIn { from { opacity:0; transform:translateY(-10px) rotate(-.4deg); } to { opacity:1; transform:rotate(0); } }
+.gm-note-header {
+  display:flex; align-items:center; gap:8px; padding:12px 16px;
+  border-bottom:1px solid rgba(110,138,111,.3);
+  background:rgba(240,228,200,.3);
+}
+.gm-note-city {
+  font-family:'Noto Serif SC',serif; font-weight:900; font-size:1.2rem;
+  color:var(--ink); letter-spacing:.1em;
+}
+.gm-note-count {
+  font-family:'JetBrains Mono',monospace; font-size:.75rem;
+  color:var(--plum); margin-left:auto;
+}
+.gm-note-close {
+  background:#FFFBE8; border:1px solid var(--moss);
+  color:var(--ink); font-size:1rem; cursor:pointer;
+  width:22px; height:22px; line-height:1; padding:0;
+}
+.gm-note-close:hover { background:var(--moss); color:#FFF; }
+.gm-note-content { padding:14px 18px 18px; }
+.gm-poem-card {
+  position:relative; padding:10px 12px 10px 18px; margin-bottom:14px;
+  background:rgba(184,148,94,.08); border-left:2px solid var(--gold);
+}
+.gm-poem-date {
+  font-family:'JetBrains Mono',monospace; font-size:.68rem;
+  color:var(--plum); margin-bottom:3px;
+}
+.gm-poem-title {
+  font-family:'Ma Shan Zheng',cursive; font-size:1.05rem;
+  color:var(--vermilion); margin:0 0 6px;
+}
+.gm-poem-text {
+  font-family:'Noto Serif SC',serif; font-size:.9rem; line-height:1.8;
+  color:var(--ink); margin:0 0 4px; white-space:pre-line;
+}
+.gm-poem-note {
+  font-size:.75rem; color:var(--ink2); font-style:italic; margin:0;
+  padding-top:3px; border-top:1px dashed rgba(110,138,111,.2);
+}
+.gm-poem-nav {
+  display:flex; justify-content:space-between; align-items:center; margin-top:4px;
+}
+.gm-poem-counter { font-family:'JetBrains Mono',monospace; font-size:.7rem; color:var(--ink2); }
+.gm-poem-btn {
+  background:transparent; border:1px solid var(--moss);
+  color:var(--ink); font-family:'Noto Sans SC',sans-serif; font-size:.7rem;
+  padding:2px 8px; cursor:pointer;
+}
+.gm-poem-btn:hover { background:var(--moss); color:#FFF; }
 .gm-poem-btn:disabled { opacity:.3; cursor:not-allowed; }
 
-/* ============ 脚注（两行 · 倒二行 strike · 倒一行 草书加粗）============ */
-.gm-foot { margin-top:1.2rem; text-align:center; padding-bottom:.4rem; }
+/* ========== 脚注：两诗并列 + 草书 ========== */
+.gm-foot { margin-top:1.6rem; text-align:center; }
 .gm-foot-line1 {
-  font-family:'Noto Serif SC',serif; font-size:1.6rem;
-  color:#5C3D4E; margin:0 0 .5rem; letter-spacing:.18em; font-weight:600;
-  display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.6rem;
+  font-size:1.4rem; color:var(--ink); margin:0 0 .5rem;
+  display:flex; justify-content:center; align-items:center; gap:.6em;
+  flex-wrap:wrap;
 }
 .gm-foot-strike {
-  display:inline-block;
-  text-decoration:line-through;
-  text-decoration-color:#A8443C;   /* 赭朱红线（不消失）*/
-  text-decoration-thickness:3px;
-  opacity:.55;
+  color:#6A3030; text-decoration:line-through;
+  text-decoration-color:#A8443C; text-decoration-thickness:2.5px;
+  opacity:.6;
 }
 .gm-foot-arrow {
+  color:#A8443C; font-family:'Ma Shan Zheng',cursive;
+  font-size:1.2em; transform:rotate(0deg) scaleX(1.2);
   display:inline-block;
-  font-family:'Ma Shan Zheng',cursive;
-  font-size:2.4rem;
-  color:#A8443C;                    /* 赭朱草书 */
-  line-height:1;
-  transform:rotate(5deg) translateY(-2px);
-  text-shadow:1px 1px 0 rgba(168,68,60,.22);
-  animation:gmFootArrowPulse 1.8s ease-in-out infinite;
 }
-@keyframes gmFootArrowPulse {
-  0%, 100% { transform:rotate(5deg) translateY(-2px); opacity:.85; }
-  50%      { transform:rotate(8deg) translateY(-4px); opacity:1; }
+.gm-foot-second {
+  color:var(--ink); font-weight:600; opacity:.95;
 }
-.gm-foot-second { color:#2A2520; font-weight:600; }
-
-/* 倒一行：草书加粗居中（#1A1410 + 印版晕染 text-shadow） */
 .gm-foot-line2 {
-  font-family:'Ma Shan Zheng',cursive;
-  font-size:clamp(2.2rem,4vw,2.8rem);
-  font-weight:700;
-  color:#1A1410;
-  margin:0;
-  letter-spacing:.22em;
-  text-align:center;
+  font-family:'Ma Shan Zheng',cursive; font-size:clamp(2.2rem,4vw,2.8rem);
+  font-weight:700; color:#1A1410; margin:0; letter-spacing:.18em;
   text-shadow:
-    0 0 0.5px rgba(26,20,16,.95),
-    1px 1px 0 rgba(26,20,16,.55),
-    -0.6px -0.4px 0 rgba(26,20,16,.45),
-    2px 2px 3px rgba(26,20,16,.18),
-    3px 3px 6px rgba(26,20,16,.10),
-    -1px 0 2px rgba(60,60,60,.18),
-    1px -1px 2px rgba(60,60,60,.15);
-  -webkit-text-stroke:0.3px rgba(26,20,16,.4);
+    2px 0 1px rgba(255,255,255,.3),
+    -2px 0 1px rgba(0,0,0,.15),
+    0 2px 2px rgba(0,0,0,.18);
 }
 
-/* ============ 900px 断点：双栏 ============ */
 @media (max-width: 900px) {
-  .gm-board {
-    grid-template-columns: 1fr;
-    gap:14px;
-  }
-  .gm-side-left, .gm-side-right {
-    margin:0; transform:none;
-  }
-  .gm-stat-card { clip-path:none; }
-  .gm-side-paper { clip-path:none; }
-  .gm-ribbon-line { flex-basis:14%; }
-}
-
-/* ============ 768px 断点 ============ */
-@media (max-width: 768px) {
-  .gm-page { padding:24px 10px 16px; }
-  .gm-sword { width:24px; height:80px; }
-  .gm-note-panel { position:fixed; top:8%; left:5%; right:5%; width:auto; max-height:80vh; }
-  .gm-tabs { gap:.25rem; }
-  .gm-tab { padding:.45rem 1rem; font-size:.95rem; }
-  .gm-tab-ornament { width:24px; }
-  .gm-page-corner { width:80px; height:80px; opacity:.7; }
-  .gm-foot-line1 { font-size:1.2rem; }
-  .gm-ribbon { gap:.35rem; padding:.4rem 0; }
-  .gm-ribbon-line { display:none; }
-  .gm-ribbon-stamp, .gm-ribbon-seal { font-size:.85rem; padding:1px 6px; }
-  .gm-side { transform:none !important; margin:0 !important; }
-  .gm-stamp-grid { grid-template-columns:repeat(3,1fr); }
+  .gm-board { grid-template-columns:1fr; }
+  .gm-sword { display:none; }
 }
 </style>
 
 <script src="/data/china-regions.js"></script>
-
 <script>
 (function () {
 'use strict';
 
 let PLACES = [];
+let POEMS_FLAT = []; // 所有诗合并用于"满堂花醉三千客"列表
+
 fetch('/data/places.json').then(r => r.json()).then(d => {
   PLACES = (d || []).filter(p => p.visited !== false);
+  // 收集所有诗 → "满堂花醉三千客"列表
+  PLACES.forEach(p => {
+    const poems = getPoems(p);
+    poems.forEach(pm => {
+      POEMS_FLAT.push({
+        city: p.name, date: pm.date || '',
+        title: pm.poemTitle || '行迹',
+        text: pm.poem || ''
+      });
+    });
+  });
+  POEMS_FLAT.sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+  renderFloraList();
   renderRegion(CURRENT);
   updateCounters();
-  updateSideStats();
 }).catch(e => console.error(e));
 
 function getPoems(p) {
@@ -838,48 +584,29 @@ function getPoems(p) {
 
 function updateCounters() {
   document.getElementById('gm-count').textContent = PLACES.length;
-  document.getElementById('gm-poem-count').textContent = PLACES.reduce((s, p) => s + getPoems(p).length, 0);
+  document.getElementById('gm-poem-count').textContent = POEMS_FLAT.length;
+  document.getElementById('gm-stat-cities').textContent = PLACES.length;
+  document.getElementById('gm-stat-poems').textContent = POEMS_FLAT.length;
 }
 
-/* 5 区域 (nw/sw/ne/se/cc) 桶分 */
-function bucketOf(p) {
-  if (!window.CHINA_REGIONS) return null;
-  for (const k of Object.keys(CHINA_REGIONS)) {
-    const m = CHINA_REGIONS[k].meta;
-    if (p.x >= m.lonMin - 1 && p.x <= m.lonMax + 1 && p.y >= m.latMin - 1 && p.y <= m.latMax + 1) return k;
-  }
-  return null;
+function renderFloraList() {
+  const ol = document.getElementById('gm-flora-list');
+  ol.innerHTML = POEMS_FLAT.map(pm => {
+    const dateHtml = pm.date ? `<span class="gm-flora-date">${esc(pm.date)}</span>` : '';
+    const titleHtml = pm.title ? `《${esc(pm.title)}》` : '';
+    const text = pm.text.replace(/\n/g, '<br>');
+    return `<li><span class="gm-flora-place">${esc(pm.city)}</span>${dateHtml}<span class="gm-flora-text">${titleHtml}${text ? '· ' + text : ''}</span></li>`;
+  }).join('');
 }
 
-function updateSideStats() {
-  const sCities = document.getElementById('gm-stat-cities');
-  const sPoems  = document.getElementById('gm-stat-poems');
-  const s = { nw:0, sw:0, ne:0, se:0, cc:0 };
-  PLACES.forEach(p => { const b = bucketOf(p); if (b) s[b]++; });
-  if (sCities) sCities.textContent = PLACES.length;
-  if (sPoems)  sPoems.textContent  = PLACES.reduce((sum, p) => sum + getPoems(p).length, 0);
-  ['nw','sw','ne','se','cc'].forEach(k => {
-    const el = document.getElementById('gm-stat-' + k);
-    if (el) el.textContent = s[k];
-  });
-}
-
-let CURRENT = 'nw';
+let CURRENT = 'ne';
 const REGION_META = {
-  nw: { name:'西北', sub:'长河落日 · 驼铃霜雪' },
-  sw: { name:'西南', sub:'蜀道青天 · 雪峰列屏' },
-  ne: { name:'东北', sub:'白山黑水 · 人参鹿影' },
-  se: { name:'东南', sub:'烟雨江南 · 六朝金粉' },
-  cc: { name:'中原', sub:'十三朝古都 · 半部中国' }
+  nw: { name:'西北', desc:'长河落日·驼铃霜雪' },
+  sw: { name:'西南', desc:'蜀道青天·雪峰列屏' },
+  ne: { name:'东北', desc:'白山黑水·人参鹿影' },
+  se: { name:'东南', desc:'烟雨江南·六朝金粉' },
+  c:  { name:'中原', desc:'十三朝古都·半部中国' }
 };
-
-function syncRegionBanner(regionId) {
-  const el = document.getElementById('gm-region-banner-title');
-  if (!el) return;
-  const m = REGION_META[regionId];
-  if (!m) return;
-  el.textContent = m.name + ' · ' + m.sub;
-}
 
 document.querySelectorAll('.gm-tab').forEach(t => {
   t.addEventListener('click', () => {
@@ -887,56 +614,36 @@ document.querySelectorAll('.gm-tab').forEach(t => {
     t.classList.add('active');
     renderRegion(t.dataset.region);
     document.getElementById('gm-region-chip').textContent = '🗺 ' + REGION_META[t.dataset.region].name;
-    syncRegionBanner(t.dataset.region);
+    document.querySelector('.gm-map-section-sub').textContent = REGION_META[t.dataset.region].desc;
   });
 });
 
-/* 5 区域主题：Venus 古色（赭朱/胭脂/旧金/淡竹青/檀紫） */
-const REGION_THEME = {
-  nw: { land:'#D6C9A8', stroke:'#5C4A3E', accent:'#A8443C' },  /* 西北 · 赭朱 · 长河落日 */
-  sw: { land:'#C7B8A0', stroke:'#5C3D4E', accent:'#5C3D4E' },  /* 西南 · 檀紫 · 雪峰列屏 */
-  ne: { land:'#B8C4B0', stroke:'#2A2520', accent:'#6E8A6F' },  /* 东北 · 淡竹青 · 白山黑水 */
-  se: { land:'#D9CFC0', stroke:'#5C3D4E', accent:'#B25C58' },  /* 东南 · 胭脂 · 烟雨江南 */
-  cc: { land:'#C9A36A', stroke:'#2A2520', accent:'#A8443C' }   /* 中原 · 账黄 · 十三朝古都 */
-};
-
-/* 14 种装饰物类型（驼/牦牛/帆船/飞马/茶/月亮/桥/柳/花/钟/玺/岩/日/飞天） */
+// 装饰物：仅用深绿/墨青/赭石（不引红系）
 const REGION_DECOR = {
   nw: [
-    { type:'camel', x:300, y:340, label:'驼铃霜雪' },
-    { type:'sun',   x:700, y:160, label:'长河落日' },
-    { type:'rock',  x:600, y:480, label:'火焰山' },
-    { type:'moon',  x:780, y:280, label:'玉门月' },
-    { type:'fly',   x:420, y:560, label:'飞天' }
+    { type:'camel', x:340, y:380, label:'驼铃' },
+    { type:'sun',   x:680, y:200, label:'长河日' },
+    { type:'rock',  x:560, y:560, label:'火焰山' }
   ],
   sw: [
-    { type:'yak',   x:220, y:430, label:'牦牛' },
-    { type:'kite',  x:380, y:380, label:'雪峰' },
-    { type:'tea',   x:600, y:520, label:'茶道' },
-    { type:'flower',x:780, y:300, label:'蜀花' },
-    { type:'moon',  x:900, y:200, label:'峨眉月' }
+    { type:'mountain', x:400, y:300, label:'蜀道' },
+    { type:'tea',     x:600, y:500, label:'茶道' },
+    { type:'rock',    x:280, y:480, label:'雪山' }
   ],
   ne: [
-    { type:'fly',   x:380, y:380, label:'参鹿影' },
-    { type:'willow',x:600, y:200, label:'林海' },
-    { type:'kite',  x:750, y:480, label:'鹰' },
-    { type:'flower',x:300, y:560, label:'山花' },
-    { type:'sun',   x:200, y:200, label:'雪日' }
+    { type:'deer',     x:380, y:380, label:'麋鹿' },
+    { type:'ginseng',  x:550, y:280, label:'人参' },
+    { type:'willow',   x:280, y:540, label:'白桦' }
   ],
   se: [
-    { type:'willow',x:280, y:380, label:'西湖柳' },
-    { type:'bridge',x:560, y:480, label:'断桥' },
-    { type:'tea',   x:400, y:200, label:'龙井茶' },
-    { type:'kite',  x:680, y:300, label:'纸鸢' },
-    { type:'moon',  x:180, y:600, label:'钱塘月' },
-    { type:'sail',  x:780, y:560, label:'江帆' }
+    { type:'willow',  x:300, y:400, label:'烟柳' },
+    { type:'bridge',  x:560, y:500, label:'断桥' },
+    { type:'kite',    x:680, y:280, label:'纸鸢' }
   ],
-  cc: [
-    { type:'bell',  x:420, y:340, label:'大雁塔' },
+  c: [
+    { type:'bell',  x:420, y:340, label:'雁塔' },
     { type:'seal',  x:680, y:320, label:'碑林' },
-    { type:'kite',  x:520, y:480, label:'飞天' },
-    { type:'moon',  x:300, y:180, label:'月牙泉' },
-    { type:'tea',   x:580, y:600, label:'问道' }
+    { type:'kite',  x:520, y:480, label:'飞天' }
   ]
 };
 
@@ -944,22 +651,29 @@ function drawDecorItem(decor, theme) {
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const g = document.createElementNS(SVG_NS, 'g');
   g.setAttribute('filter', 'url(#ink-pen)');
-  g.setAttribute('opacity', '0.65');
+  g.setAttribute('opacity', '0.6');
   function line(x1, y1, x2, y2) {
     const l = document.createElementNS(SVG_NS, 'line');
-    l.setAttribute('x1', x1); l.setAttribute('y1', y1); l.setAttribute('x2', x2); l.setAttribute('y2', y2);
-    l.setAttribute('stroke', theme.stroke); l.setAttribute('stroke-width', '0.8');
+    l.setAttribute('x1', x1); l.setAttribute('y1', y1);
+    l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+    l.setAttribute('stroke', theme.stroke);
+    l.setAttribute('stroke-width', '0.8');
     return l;
   }
   function circle(cx, cy, r, fill) {
     const c = document.createElementNS(SVG_NS, 'circle');
     c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r);
-    c.setAttribute('fill', fill || 'none'); c.setAttribute('stroke', theme.stroke); c.setAttribute('stroke-width', '0.7');
+    c.setAttribute('fill', fill || 'none');
+    c.setAttribute('stroke', theme.stroke);
+    c.setAttribute('stroke-width', '0.7');
     return c;
   }
   function path(d, fill) {
     const p = document.createElementNS(SVG_NS, 'path');
-    p.setAttribute('d', d); p.setAttribute('fill', fill || 'none'); p.setAttribute('stroke', theme.stroke); p.setAttribute('stroke-width', '0.7');
+    p.setAttribute('d', d);
+    p.setAttribute('fill', fill || 'none');
+    p.setAttribute('stroke', theme.stroke);
+    p.setAttribute('stroke-width', '0.7');
     return p;
   }
   function text(content, x, y) {
@@ -969,18 +683,11 @@ function drawDecorItem(decor, theme) {
     t.setAttribute('font-size', '11');
     t.setAttribute('fill', theme.stroke);
     t.setAttribute('text-anchor', 'middle');
-    t.setAttribute('style', 'paint-order:stroke;stroke:#E0E4DC;stroke-width:2.5;pointer-events:none');
+    t.setAttribute('style', 'paint-order:stroke;stroke:#F2E7C8;stroke-width:2.5;pointer-events:none');
     t.textContent = content;
     return t;
   }
   switch (decor.type) {
-    case 'sail':
-      g.appendChild(path('M 0 0 L 22 0 L 10 -30 Z', theme.gold));
-      g.appendChild(line(11, -30, 11, 2));
-      g.appendChild(path('M 11 -26 Q 24 -14 11 -2', theme.accent));
-      g.appendChild(path('M -18 6 Q 0 16 36 6'));
-      g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(text(decor.label, 0, 32)); break;
     case 'camel':
       g.appendChild(path('M -22 0 Q -25 -10 -10 -12 Q 5 -15 18 -10 Q 28 -8 25 0 Z'));
       g.appendChild(line(-22, -3, -22, -16));
@@ -988,120 +695,90 @@ function drawDecorItem(decor, theme) {
       g.appendChild(line(8, 12, 10, 22));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
       g.appendChild(text(decor.label, 0, 38)); break;
-    case 'yak':
-      g.appendChild(circle(0, 0, 22));
-      g.appendChild(path('M -18 -8 Q -30 -22 -20 -30'));
-      g.appendChild(path('M 18 -8 Q 30 -22 20 -30'));
-      g.appendChild(line(-12, 14, -14, 26));
-      g.appendChild(line(12, 14, 14, 26));
+    case 'sun':
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        g.appendChild(line(Math.cos(a) * 18, Math.sin(a) * 18, 0, 0));
+      }
+      g.appendChild(circle(0, 0, 10, theme.stroke));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(text(decor.label, 0, 42)); break;
-    case 'kite':
-      g.appendChild(path('M 0 0 Q 6 -2 4 -16 Q 2 -28 0 -32 Q -2 -28 -4 -16 Q -6 -2 0 0'));
-      g.appendChild(path('M -3 -4 Q 0 -8 3 -4'));
-      g.appendChild(line(0, 0, 0, 8));
+      g.appendChild(text(decor.label, 0, 28)); break;
+    case 'rock':
+      g.appendChild(path('M -16 0 L -8 -10 L 2 -6 L 12 -14 L 18 -2 L 14 0 Z'));
+      g.appendChild(line(-4, -6, 6, -10));
+      g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
+      g.appendChild(text(decor.label, 0, 16)); break;
+    case 'mountain':
+      g.appendChild(path('M -20 4 L -10 -12 L 0 -4 L 8 -16 L 18 -2 L 20 4 Z'));
+      g.appendChild(path('M 4 -2 L 10 -8 L 16 -2'));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
       g.appendChild(text(decor.label, 0, 20)); break;
     case 'tea':
       g.appendChild(path('M -10 -2 L -8 -10 L 8 -10 L 10 -2 Z'));
       g.appendChild(path('M -8 -10 L -6 -18 L 6 -18 L 8 -10'));
       g.appendChild(line(2, -2, 2, 8));
-      g.appendChild(path('M -2 4 Q 0 6 2 4'));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
       g.appendChild(text(decor.label, 0, 22)); break;
-    case 'moon':
-      g.appendChild(circle(0, 0, 14, theme.gold));
-      g.appendChild(circle(4, -3, 12, '#E0E4DC'));
+    case 'deer':
+      g.appendChild(path('M -16 4 Q -12 -8 -4 -10 Q 4 -12 8 -6 Q 14 0 12 8 Q 0 12 -8 10 Z'));
+      g.appendChild(path('M 8 -8 L 14 -16 M 12 -10 L 18 -16'));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(text(decor.label, 0, 26)); break;
-    case 'rock':
-      g.appendChild(path('M -16 0 L -8 -10 L 2 -6 L 12 -14 L 18 -2 L 14 0 Z'));
-      g.appendChild(line(-4, -6, 6, -10));
+      g.appendChild(text(decor.label, 0, 24)); break;
+    case 'ginseng':
+      g.appendChild(line(0, 0, 0, -16, theme.stroke));
+      g.appendChild(circle(0, 0, 6, 'none'));
+      g.appendChild(circle(-3, -3, 1.5, theme.stroke));
+      g.appendChild(circle(2, -3, 1.5, theme.stroke));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
       g.appendChild(text(decor.label, 0, 16)); break;
-    case 'sun':
-      for (let i = 0; i < 8; i++) {
-        const a = (i / 8) * Math.PI * 2;
-        g.appendChild(line(Math.cos(a) * 18, Math.sin(a) * 18, 0, 0));
-      }
-      const s2 = line(0, 0, 0, 0);
-      s2.setAttribute('stroke', '#A8443C');
-      g.appendChild(s2);
-      g.appendChild(circle(0, 0, 10, '#A8443C'));
-      g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(text(decor.label, 0, 28)); break;
-    case 'bell':
-      g.appendChild(path('M -8 -10 L 8 -10 L 6 8 L -6 8 Z'));
-      g.appendChild(line(0, -10, 0, -18));
-      g.appendChild(circle(0, -18, 3));
-      g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(text(decor.label, 0, 22)); break;
-    case 'seal':
-      g.appendChild(path('M -8 -8 L 8 -8 L 8 8 L -8 8 Z', theme.accent));
-      g.appendChild(text('迹', 0, 4));
-      const sealT = text(decor.label, 0, 22);
-      g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(sealT); break;
     case 'willow':
-      g.appendChild(line(0, 0, 0, -22));
-      g.appendChild(circle(0, -24, 6));
-      g.appendChild(path('M 0 -20 Q -4 -10 -3 4'));
-      g.appendChild(path('M 0 -20 Q 4 -10 3 4'));
+      g.appendChild(line(0, 0, 0, -20));
+      g.appendChild(circle(0, -22, 5, 'none'));
+      g.appendChild(path('M 0 -18 Q -3 -8 -2 4'));
+      g.appendChild(path('M 0 -18 Q 3 -8 2 4'));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
       g.appendChild(text(decor.label, 0, 18)); break;
     case 'bridge':
-      g.appendChild(path('M -16 0 Q 0 -10 16 0'));
-      g.appendChild(line(-16, 0, -16, 4));
-      g.appendChild(line(16, 0, 16, 4));
+      g.appendChild(path('M -14 0 Q 0 -8 14 0'));
+      g.appendChild(line(-14, 0, -14, 4));
+      g.appendChild(line(14, 0, 14, 4));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
       g.appendChild(text(decor.label, 0, 16)); break;
-    case 'flower':
-      for (let i = 0; i < 5; i++) {
-        const a = (i / 5) * Math.PI * 2;
-        g.appendChild(circle(Math.cos(a) * 6, Math.sin(a) * 6, 5, theme.accent));
-      }
-      g.appendChild(circle(0, 0, 3, theme.gold));
+    case 'kite':
+      g.appendChild(path('M 0 0 Q 5 -2 3 -14 Q 1 -24 0 -28 Q -1 -24 -3 -14 Q -5 -2 0 0 Z'));
+      g.appendChild(path('M -2 -3 Q 0 -6 2 -3'));
+      g.appendChild(line(0, 0, 0, 6));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(text(decor.label, 0, 20)); break;
-    case 'fly':
-      const flyBody = document.createElementNS(SVG_NS, 'ellipse');
-      flyBody.setAttribute('cx', 0); flyBody.setAttribute('cy', 0);
-      flyBody.setAttribute('rx', 14); flyBody.setAttribute('ry', 5);
-      flyBody.setAttribute('fill', theme.accent); flyBody.setAttribute('fill-opacity', '0.4');
-      flyBody.setAttribute('stroke', theme.stroke); flyBody.setAttribute('stroke-width', '0.8');
-      g.appendChild(flyBody);
-      g.appendChild(circle(12, -2, 3, theme.accent));
-      g.appendChild(path('M 10 -2 Q 11 -4 12 -4'));
-      g.appendChild(line(8, -3, 5, -7));
-      g.appendChild(line(7, -2, 3, -6));
-      g.appendChild(line(6, -1, 1, -5));
-      g.appendChild(line(-9, 5, -10, 12));
-      g.appendChild(line(-3, 5, -4, 12));
-      g.appendChild(line(3, 5, 2, 12));
-      g.appendChild(line(9, 5, 8, 12));
-      g.appendChild(path('M -8 -5 L -18 -10 L -12 -2 Z', theme.accent));
-      g.appendChild(path('M -6 -4 L -16 -8 L -10 -1 Z', theme.accent));
-      g.appendChild(path('M -14 2 Q -18 0 -16 6'));
+      g.appendChild(text(decor.label, 0, 18)); break;
+    case 'bell':
+      g.appendChild(path('M -6 -8 L 6 -8 L 4 6 L -4 6 Z'));
+      g.appendChild(line(0, -8, 0, -16));
+      g.appendChild(circle(0, -16, 2, 'none'));
       g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
-      g.appendChild(text(decor.label, 0, 26)); break;
+      g.appendChild(text(decor.label, 0, 18)); break;
+    case 'seal':
+      g.appendChild(path('M -6 -6 L 6 -6 L 6 6 L -6 6 Z', theme.stroke));
+      g.appendChild(text('印', 0, 3));
+      g.setAttribute('transform', `translate(${decor.x}, ${decor.y})`);
+      g.appendChild(text(decor.label, 0, 18)); break;
   }
   return g;
 }
 
 function renderBgFlowers(theme) {
   const layer = document.getElementById('gm-bg-flowers');
+  if (!layer) return;
   layer.innerHTML = '';
-  const seed = theme.meta.id === 'nw' ? 1 : (theme.meta.id === 'sw' ? 2 : (theme.meta.id === 'ne' ? 3 : (theme.meta.id === 'se' ? 4 : 5)));
+  const seed = theme.meta.id === 'ne' ? 1 : (theme.meta.id === 'nw' ? 2 : (theme.meta.id === 'c' ? 3 : (theme.meta.id === 'sw' ? 4 : 5)));
   const r = (n) => Math.abs((Math.sin(n * 9301 + seed * 49297) * 233280)) % 1;
-  const w = theme.meta.w, h = theme.meta.h;
-  for (let i = 0; i < 12; i++) {
-    const cx = r(i + 1) * w;
-    const cy = r(i + 100) * h;
+  for (let i = 0; i < 10; i++) {
+    const cx = r(i + 1) * 900;
+    const cy = r(i + 100) * 720;
     const r2 = 2 + r(i + 200) * 3;
     const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', r2);
     c.setAttribute('fill', theme.accent);
-    c.setAttribute('opacity', '0.25');
+    c.setAttribute('opacity', '0.18');
     layer.appendChild(c);
   }
 }
@@ -1114,9 +791,9 @@ function renderProvinces(theme) {
     prov.paths.forEach(d => {
       const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       p.setAttribute('d', d);
-      p.setAttribute('fill', theme.land);
-      p.setAttribute('fill-opacity', '0.4');
-      p.setAttribute('stroke', theme.stroke);
+      p.setAttribute('fill', '#E5D9B6');
+      p.setAttribute('fill-opacity', '0.55');
+      p.setAttribute('stroke', '#5C3D4E');
       p.setAttribute('stroke-width', '0.9');
       p.setAttribute('stroke-linejoin', 'round');
       layer.appendChild(p);
@@ -1149,7 +826,7 @@ function renderTrajectory(theme) {
   const r = theme.meta;
   const visible = PLACES.filter(p => p.x >= r.lonMin - 1 && p.x <= r.lonMax + 1 && p.y >= r.latMin - 1 && p.y <= r.latMax + 1);
   if (visible.length < 2) return;
-  visible.sort((a, b) => (a.poems ? a.poems[0].date : a.date || '').localeCompare(b.poems ? a.poems[0].date : b.date || ''));
+  visible.sort((a, b) => (a.poems ? a.poems[0].date : a.date || '').localeCompare(b.poems ? b.poems[0].date : b.date || ''));
   for (let i = 0; i < visible.length - 1; i++) {
     const a = projectP(visible[i], r);
     const b = projectP(visible[i + 1], r);
@@ -1157,9 +834,12 @@ function renderTrajectory(theme) {
     const my = (a[1] + b[1]) / 2 + 20;
     const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     p.setAttribute('d', `M ${a[0]} ${a[1]} Q ${mx} ${my} ${b[0]} ${b[1]}`);
-    p.setAttribute('fill', 'none'); p.setAttribute('stroke', '#A8443C');
-    p.setAttribute('stroke-width', '1.5'); p.setAttribute('stroke-dasharray', '5,3');
-    p.setAttribute('opacity', '0.7'); p.setAttribute('marker-end', 'url(#arrow)');
+    p.setAttribute('fill', 'none');
+    p.setAttribute('stroke', '#5C3D4E');
+    p.setAttribute('stroke-width', '1.5');
+    p.setAttribute('stroke-dasharray', '5,3');
+    p.setAttribute('opacity', '0.6');
+    p.setAttribute('marker-end', 'url(#arrow)');
     layer.appendChild(p);
   }
 }
@@ -1172,48 +852,51 @@ function renderCityMarkers(theme) {
   PLACES.forEach(p => {
     if (p.x < r.lonMin - 1 || p.x > r.lonMax + 1 || p.y < r.latMin - 1 || p.y > r.latMax + 1) return;
     const [x, y] = projectP(p, r);
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('transform', `translate(${x}, ${y})`);
+    const outer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    outer.setAttribute('transform', `translate(${x}, ${y})`);
     const inner = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     inner.setAttribute('class', 'city-marker');
     inner.setAttribute('data-city', p.name);
+
     const c1 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     c1.setAttribute('r', '11');
     c1.setAttribute('fill', '#A8443C');
-    c1.setAttribute('stroke', '#2A2520');
+    c1.setAttribute('stroke', '#3D2914');
     c1.setAttribute('stroke-width', '1.5');
     c1.setAttribute('filter', 'url(#stamp)');
     inner.appendChild(c1);
     const c2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    c2.setAttribute('r', '3.5'); c2.setAttribute('fill', '#E0E4DC');
+    c2.setAttribute('r', '3.5');
+    c2.setAttribute('fill', '#F2E7C8');
     inner.appendChild(c2);
+
     const t1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     t1.setAttribute('x', 16); t1.setAttribute('y', -2);
     t1.setAttribute('font-family', "'Ma Shan Zheng',cursive");
     t1.setAttribute('font-size', '18');
-    t1.setAttribute('fill', '#2A2520');
+    t1.setAttribute('fill', '#3D2914');
     t1.setAttribute('font-weight', '700');
-    t1.setAttribute('style', 'paint-order:stroke;stroke:#E0E4DC;stroke-width:3.5;pointer-events:none');
+    t1.setAttribute('style', 'paint-order:stroke;stroke:#F2E7C8;stroke-width:3.5;pointer-events:none');
     t1.textContent = p.name;
     inner.appendChild(t1);
+
     inner.addEventListener('click', (e) => { e.stopPropagation(); openNote(p); });
-    g.appendChild(inner);
-    layer.appendChild(g);
+    outer.appendChild(inner);
+    layer.appendChild(outer);
   });
 }
 
 let CURRENT_POEM_IDX = 0;
 let CURRENT_CITY = null;
 let NOTE_OPENING = false;
-let LAST_OPEN_TS = 0;
 
 function openNote(city) {
-  if (!city) return;
-  const now = Date.now();
-  if (now - LAST_OPEN_TS < 200) return;
-  closeNote();
-  LAST_OPEN_TS = now;
+  if (!city || NOTE_OPENING) return;
   NOTE_OPENING = true;
+  if (CURRENT_CITY && CURRENT_CITY.name === city.name && document.getElementById('gm-note').style.display === 'block') {
+    NOTE_OPENING = false;
+    return;
+  }
   CURRENT_CITY = city;
   CURRENT_POEM_IDX = 0;
   renderNote();
@@ -1264,19 +947,16 @@ function renderRegion(regionId) {
   if (!window.CHINA_REGIONS) return;
   CURRENT = regionId;
   const r = CHINA_REGIONS[regionId].meta;
-  const theme = Object.assign({ meta: r }, REGION_THEME[regionId]);
+  const theme = { meta: r, stroke: '#5C3D4E', accent: '#6E8A6F' };
   closeNote();
   const svg = document.getElementById('gm-map');
   svg.setAttribute('viewBox', `0 0 ${r.w} ${r.h}`);
-  document.getElementById('gm-paper').setAttribute('width', r.w);
-  document.getElementById('gm-paper').setAttribute('height', r.h);
-  document.getElementById('gm-paper-texture').setAttribute('width', r.w);
-  document.getElementById('gm-paper-texture').setAttribute('height', r.h);
-  renderBgFlowers(theme);
   renderProvinces(theme);
   renderDecor(theme);
   renderTrajectory(theme);
   renderCityMarkers(theme);
+  // 统计：当前区域的省数
+  document.getElementById('gm-stat-provs').textContent = (CHINA_REGIONS[regionId] && CHINA_REGIONS[regionId].features && CHINA_REGIONS[regionId].features.length) || 0;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1286,10 +966,7 @@ document.addEventListener('DOMContentLoaded', () => {
       closeNote();
     }
   });
-  setTimeout(() => renderRegion('nw'), 100);
-  syncRegionBanner('nw');
+  setTimeout(() => renderRegion('ne'), 100);
 });
 })();
 </script>
-</content>
-</invoke>
