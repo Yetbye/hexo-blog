@@ -1,0 +1,58 @@
+name: Deploy Hexo to GitHub Pages
+
+# 触发条件：push 到 backup/site-snapshot-* 或 main 分支
+on:
+  push:
+    branches:
+      - main
+      - 'backup/site-snapshot-*'
+  workflow_dispatch:  # 也支持手动触发
+
+# 防止同分支多 workflow 抢资源
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+# 默认权限：read；部署步骤需要 write
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate static site
+        run: npx hexo generate
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
