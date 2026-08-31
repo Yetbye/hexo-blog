@@ -42,6 +42,14 @@ jobs:
           # public/ 已含所有内容，cn 健康即可
           ls public | head
 
+      - name: Verify deploy token is configured
+        run: |
+          if [ -z "$GH_PAGES_TOKEN" ]; then
+            echo "::error::GH_PAGES_TOKEN secret is not set. Please add it at https://github.com/Yetbye/hexo-blog/settings/secrets/actions/new (Name: GH_PAGES_TOKEN, Value: a PAT with 'repo' scope)"
+            exit 1
+          fi
+          echo "GH_PAGES_TOKEN is set (length: ${#GH_PAGES_TOKEN})"
+
       - name: Deploy to Yetbye/Yetbye.github.io (user site)
         uses: peaceiris/actions-gh-pages@v4
         with:
