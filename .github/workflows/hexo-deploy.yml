@@ -55,7 +55,9 @@ jobs:
         with:
           personal_token: ${{ secrets.GH_PAGES_TOKEN }}
           external_repository: Yetbye/Yetbye.github.io
-          publish_branch: main
+          # YetBye/Yetbye.github.io 仓库的 default_branch 是 master（GitHub Pages user site
+          # 创建于 master 分支早期，GitHub 默认未重命名），必须用 master 而不是 main
+          publish_branch: master
           publish_dir: ./public
           force_orphan: true
           commit_message: "deploy: hexo build ${{ github.sha }}"
