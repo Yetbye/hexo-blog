@@ -11,6 +11,11 @@
  *   notes.html             → /notes/
  *   gallery.html           → /gallery/
  *   gallery-blue.html      → /gallery/blue/   （首个 - 视为目录分隔）
+ *
+ * 论文博客：
+ *   source/docs/<Name>/index.html 同时发布到
+ *     /docs/<Name>/             (原 URL，笔记本跳转用)
+ *     /articles/<slug>/         (首页文章卡片直达，主题 post 布局)
  */
 'use strict';
 
@@ -28,29 +33,79 @@ const META = {
   'gallery-Impressionism': { title: 'Impressionism', top_img: '/image/gallery/Impressionism/cover.jpg' },
 };
 
+function slugify(name) { return name.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase(); }
+
+
+
 hexo.extend.generator.register('raw-html-pages', function () {
+  const out = [];
+
+  // 1) 常规 _pages-html/*.html
   const dir = path.join(hexo.source_dir, '_pages-html');
-  let files = [];
-  try { files = fs.readdirSync(dir).filter(f => f.endsWith('.html')); }
-  catch (e) { return []; }
+  try {
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.html'));
+    for (const f of files) {
+      const base = path.basename(f, '.html');
+      const i = base.indexOf('-');
+      const routePath = i === -1 ? base : base.slice(0, i) + '/' + base.slice(i + 1);
+      const content = fs.readFileSync(path.join(dir, f), 'utf8');
+      const meta = META[base] || {};
+      out.push({
+        path: `${routePath}/index.html`,
+        layout: ['page', 'post'],
+        data: {
+          layout: 'page',
+          title: meta.title || base,
+          content,
+          top_img: meta.top_img || '',
+          comments: false,
+        },
+      });
+    }
+  } catch (e) { /* 目录可为空 */ }
 
-  return files.map(f => {
-    const base = path.basename(f, '.html');
-    const i = base.indexOf('-');
-    const routePath = i === -1 ? base : base.slice(0, i) + '/' + base.slice(i + 1); // gallery-blue → gallery/blue
-    const content = fs.readFileSync(path.join(dir, f), 'utf8');
-    const meta = META[base] || {};
-    return {
-      path: `${routePath}/index.html`,
-      layout: ['page', 'post'],
-      data: {
-        layout: 'page',
-        title: meta.title || base,
-        content,
-        top_img: meta.top_img || '',
-        comments: false,
+  // 2) 论文博客 standalone HTML 注册到 /docs/<Name>/（保留原 URL，笔记本/合集页引用）
+  //   hexo 7 行为：generator 返回 `data: Buffer` 时，router 直接写 Buffer 到 public/，
+  //   不经主题 layout 渲染。Buffer data 在 router 阶段是「最后写入的 winning」，
+  //   但 _posts 渲染（hexo post processor 跑在 generator 之后）会覆盖同 path。
+  //   解决方案：同时注册 after_generate filter 强制覆盖 _posts 渲染的 butterfly 包装版。
+  const docsDir = path.join(hexo.source_dir, 'docs');
+  const blogsJson = path.join(docsDir, '_blogs.json');
+  if (fs.existsSync(blogsJson) && fs.existsSync(docsDir)) {
+    const blogs = JSON.parse(fs.readFileSync(blogsJson, 'utf8'));
+    const publicDir = hexo.public_dir;
 
-      },
-    };
-  });
+    for (const b of blogs) {
+      const htmlPath = path.join(docsDir, b.name, 'index.html');
+      if (!fs.existsSync(htmlPath)) continue;
+      const content = fs.readFileSync(htmlPath);
+      out.push({
+        path: `docs/${b.name}/index.html`,
+        data: content,
+      });
+    }
+
+    // hexo 7 行为：after_generate filter 触发时 _posts 渲染的 stream 写入还没完成，
+    // 同步/异步覆盖都会被后续流覆盖。唯一稳妥的时机是 process 退出前（hexo 全部 batchWrite 完成之后）。
+    // 用 process.on('beforeExit') 同步执行覆盖（fs.writeFileSync 同步，beforeExit 同步回调不会被打断）。
+    process.on('beforeExit', () => {
+      let n = 0;
+      for (const b of blogs) {
+        const htmlPath = path.join(docsDir, b.name, 'index.html');
+        if (!fs.existsSync(htmlPath)) continue;
+        const content = fs.readFileSync(htmlPath);
+        const target = path.join(publicDir, 'docs', b.name, 'index.html');
+        try {
+          fs.mkdirSync(path.dirname(target), { recursive: true });
+          fs.writeFileSync(target, content);
+          n++;
+        } catch (e) {
+          console.error('[raw-html-pages] 覆盖失败', target, e.message);
+        }
+      }
+      if (n > 0) console.log(`[raw-html-pages] beforeExit 覆盖 ${n} 个论文详情页`);
+    });
+  }
+
+  return out;
 });

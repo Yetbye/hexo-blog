@@ -29,6 +29,8 @@ menu:
   调色盘: /gallery/ || fas fa-images
   小纸条: /shuoshuo/ || fas fa-sticky-note
   # 友链: /flinks/ || fas fa-link
+  # 论文精读已作为常规文章接入首页（see source/_posts/2026-08-31-*.md + notebooks.json）
+  # 旧独立合辑页 source/docs/index.html 保留作为详情跳转聚合，不放菜单
   关于我: /about/ || fas fa-heart
 
 

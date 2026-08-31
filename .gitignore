@@ -6,6 +6,6 @@ node_modules/
 public/
 .deploy*/
 _multiconfig.yml
-# 论文库（668MB junction），不入博客仓库
+# 论文库（668MB，含未引用的裁剪调试图），不入博客仓库；
+# 部署子集由 scripts/build-docs-deploy.py 物化到 source/docs/（WebP 压缩后 ~33MB）
 docs/
-source/docs/

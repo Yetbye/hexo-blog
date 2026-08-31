@@ -1,5 +1,42 @@
 [
   {
+    "name": "论文精读",
+    "slug": "paper-reading",
+    "icon": "fas fa-book-open-reader",
+    "subtitle": "自回归视频扩散 / 分布匹配蒸馏 论文深度精读（25 篇）",
+    "articles": [
+      {
+        "title": "从双向扩散到快速自回归视频扩散模型 | CausVid 论文精读",
+        "slug": "causvid",
+        "date": "2026-08-31",
+        "icon": "fas fa-book-open",
+        "url": "/docs/CausVid/"
+      },
+      {
+        "title": "Self Forcing：弥合自回归视频扩散的训练-测试鸿沟",
+        "slug": "selfforcing",
+        "date": "2026-08-31",
+        "icon": "fas fa-book-open",
+        "url": "/docs/SelfForcing/"
+      },
+      {
+        "title": "DMD: 分布匹配蒸馏 — 一步扩散的数学之美",
+        "slug": "dmd",
+        "date": "2026-08-31",
+        "icon": "fas fa-book-open",
+        "url": "/docs/DMD/"
+      },
+      {
+        "title": "LongLive: 实时交互式长视频生成",
+        "slug": "longlive",
+        "date": "2026-08-31",
+        "icon": "fas fa-book-open",
+        "url": "/docs/LongLive/"
+      }
+    ],
+    "redirect": "/docs/"
+  },
+  {
     "name": "DL-cards",
     "slug": "DL-cards",
     "icon": "fas fa-brain",

@@ -13,17 +13,72 @@
 
     <!-- ================== HERO ================== -->
     <header class="gm-hero">
-      <!-- 双剑饰（极简化，剑身更细，弱化剑柄/护手） -->
-      <svg class="gm-sword gm-sword-left" viewBox="0 0 40 200" aria-hidden="true">
-        <line x1="20" y1="6" x2="20" y2="166" stroke="#3D2914" stroke-width="0.8" stroke-opacity="0.55"/>
-        <line x1="14" y1="166" x2="26" y2="166" stroke="#3D2914" stroke-width="0.6" stroke-opacity="0.5"/>
-        <line x1="20" y1="166" x2="20" y2="194" stroke="#3D2914" stroke-width="0.7" stroke-opacity="0.55"/>
+      <!-- 四角花枝：传统卷轴边的花板 -->
+      <svg class="gm-corner gm-corner-tl" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M0,0 L80,0 M0,0 L0,80 M0,0 L48,12 M0,0 L12,48" stroke="#5C3D4E" stroke-width="1.4" fill="none" stroke-opacity="0.7"/>
+        <path d="M28,6 Q40,18 32,30 Q24,42 36,52 M14,16 Q26,28 18,38" stroke="#5C3D4E" stroke-width="0.9" fill="none" stroke-opacity="0.55"/>
+        <circle cx="14" cy="14" r="2.6" fill="#A8443C" fill-opacity="0.55"/>
+        <circle cx="38" cy="32" r="2.2" fill="#A8443C" fill-opacity="0.45"/>
+        <path d="M52,8 L56,4 L60,8 M58,2 L58,14" stroke="#5C3D4E" stroke-width="0.8" stroke-opacity="0.6"/>
       </svg>
-      <svg class="gm-sword gm-sword-right" viewBox="0 0 40 200" aria-hidden="true">
-        <line x1="20" y1="6" x2="20" y2="166" stroke="#3D2914" stroke-width="0.8" stroke-opacity="0.55"/>
-        <line x1="14" y1="166" x2="26" y2="166" stroke="#3D2914" stroke-width="0.6" stroke-opacity="0.5"/>
-        <line x1="20" y1="166" x2="20" y2="194" stroke="#3D2914" stroke-width="0.7" stroke-opacity="0.55"/>
+      <svg class="gm-corner gm-corner-tr" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M80,0 L0,0 M80,0 L80,80 M80,0 L32,12 M80,0 L68,48" stroke="#5C3D4E" stroke-width="1.4" fill="none" stroke-opacity="0.7"/>
+        <path d="M52,6 Q40,18 48,30 Q56,42 44,52 M66,16 Q54,28 62,38" stroke="#5C3D4E" stroke-width="0.9" fill="none" stroke-opacity="0.55"/>
+        <circle cx="66" cy="14" r="2.6" fill="#A8443C" fill-opacity="0.55"/>
+        <circle cx="42" cy="32" r="2.2" fill="#A8443C" fill-opacity="0.45"/>
+        <path d="M28,8 L24,4 L20,8 M22,2 L22,14" stroke="#5C3D4E" stroke-width="0.8" stroke-opacity="0.6"/>
       </svg>
+      <svg class="gm-corner gm-corner-bl" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M0,80 L80,80 M0,80 L0,0 M0,80 L48,68 M0,80 L12,32" stroke="#5C3D4E" stroke-width="1.4" fill="none" stroke-opacity="0.7"/>
+        <path d="M28,74 Q40,62 32,50 Q24,38 36,28 M14,64 Q26,52 18,42" stroke="#5C3D4E" stroke-width="0.9" fill="none" stroke-opacity="0.55"/>
+        <circle cx="14" cy="66" r="2.6" fill="#A8443C" fill-opacity="0.55"/>
+        <circle cx="38" cy="48" r="2.2" fill="#A8443C" fill-opacity="0.45"/>
+        <path d="M52,72 L56,76 L60,72 M58,86 L58,66" stroke="#5C3D4E" stroke-width="0.8" stroke-opacity="0.6"/>
+      </svg>
+      <svg class="gm-corner gm-corner-br" viewBox="0 0 80 80" aria-hidden="true">
+        <path d="M80,80 L0,80 M80,80 L80,0 M80,80 L32,68 M80,80 L68,32" stroke="#5C3D4E" stroke-width="1.4" fill="none" stroke-opacity="0.7"/>
+        <path d="M52,74 Q40,62 48,50 Q56,38 44,28 M66,64 Q54,52 62,42" stroke="#5C3D4E" stroke-width="0.9" fill="none" stroke-opacity="0.55"/>
+        <circle cx="66" cy="66" r="2.6" fill="#A8443C" fill-opacity="0.55"/>
+        <circle cx="42" cy="48" r="2.2" fill="#A8443C" fill-opacity="0.45"/>
+        <path d="M28,72 L24,76 L20,72 M22,86 L22,66" stroke="#5C3D4E" stroke-width="0.8" stroke-opacity="0.6"/>
+      </svg>
+
+      <!-- 双剑饰：剑身加粗、护手/剑首/剑穗完整——传统纹饰剑 -->
+      <svg class="gm-sword gm-sword-left" viewBox="0 0 60 240" aria-hidden="true">
+        <!-- 剑首（顶部小圆） -->
+        <circle cx="30" cy="10" r="4" fill="none" stroke="#3D2914" stroke-width="1.4" stroke-opacity="0.75"/>
+        <circle cx="30" cy="10" r="1.6" fill="#A8443C" fill-opacity="0.7"/>
+        <!-- 剑首下短杆（帽） -->
+        <line x1="30" y1="14" x2="30" y2="22" stroke="#3D2914" stroke-width="1.6" stroke-opacity="0.75"/>
+        <!-- 剑身（加粗） -->
+        <line x1="30" y1="22" x2="30" y2="190" stroke="#3D2914" stroke-width="2.4" stroke-opacity="0.85"/>
+        <!-- 剑身中脊细线 -->
+        <line x1="30" y1="28" x2="30" y2="186" stroke="#5C3D4E" stroke-width="0.6" stroke-opacity="0.5"/>
+        <!-- 护手（横档） -->
+        <line x1="14" y1="190" x2="46" y2="190" stroke="#3D2914" stroke-width="2.2" stroke-opacity="0.8"/>
+        <circle cx="14" cy="190" r="2.4" fill="none" stroke="#3D2914" stroke-width="1.2" stroke-opacity="0.7"/>
+        <circle cx="46" cy="190" r="2.4" fill="none" stroke="#3D2914" stroke-width="1.2" stroke-opacity="0.7"/>
+        <!-- 剑柄 -->
+        <line x1="30" y1="190" x2="30" y2="216" stroke="#3D2914" stroke-width="1.6" stroke-opacity="0.75"/>
+        <!-- 剑穗（握把下方的红流苏） -->
+        <path d="M30,216 Q26,224 28,232 M30,216 Q34,224 32,232 M30,216 L30,236" stroke="#A8443C" stroke-width="1.4" fill="none" stroke-opacity="0.7"/>
+      </svg>
+      <svg class="gm-sword gm-sword-right" viewBox="0 0 60 240" aria-hidden="true">
+        <circle cx="30" cy="10" r="4" fill="none" stroke="#3D2914" stroke-width="1.4" stroke-opacity="0.75"/>
+        <circle cx="30" cy="10" r="1.6" fill="#A8443C" fill-opacity="0.7"/>
+        <line x1="30" y1="14" x2="30" y2="22" stroke="#3D2914" stroke-width="1.6" stroke-opacity="0.75"/>
+        <line x1="30" y1="22" x2="30" y2="190" stroke="#3D2914" stroke-width="2.4" stroke-opacity="0.85"/>
+        <line x1="30" y1="28" x2="30" y2="186" stroke="#5C3D4E" stroke-width="0.6" stroke-opacity="0.5"/>
+        <line x1="14" y1="190" x2="46" y2="190" stroke="#3D2914" stroke-width="2.2" stroke-opacity="0.8"/>
+        <circle cx="14" cy="190" r="2.4" fill="none" stroke="#3D2914" stroke-width="1.2" stroke-opacity="0.7"/>
+        <circle cx="46" cy="190" r="2.4" fill="none" stroke="#3D2914" stroke-width="1.2" stroke-opacity="0.7"/>
+        <line x1="30" y1="190" x2="30" y2="216" stroke="#3D2914" stroke-width="1.6" stroke-opacity="0.75"/>
+        <path d="M30,216 Q26,224 28,232 M30,216 Q34,224 32,232 M30,216 L30,236" stroke="#A8443C" stroke-width="1.4" fill="none" stroke-opacity="0.7"/>
+      </svg>
+
+      <!-- 上下分割线（板块结构） -->
+      <div class="gm-hero-rule gm-hero-rule-top"></div>
+      <div class="gm-hero-rule gm-hero-rule-bot"></div>
 
       <span class="gm-eyebrow">MAPPA SINICA · 满堂花醉三千客</span>
       <h1 class="gm-title">行 迹</h1>
@@ -231,16 +286,36 @@
 
 /* ========== HERO ========== */
 .gm-hero {
-  text-align:center; padding:1.2rem 0 1.4rem; position:relative;
-  border-bottom:1px solid rgba(110,138,111,.18);
-  margin-bottom:1.4rem;
+  text-align:center;
+  padding:2.4rem 0 1.8rem;
+  position:relative;
+  border-top:1px solid rgba(110,138,111,.22);
+  border-bottom:1px solid rgba(110,138,111,.22);
+  margin-bottom:1.6rem;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255,247,228,.55), transparent 70%);
 }
+.gm-hero-rule {
+  position:absolute; left:18%; right:18%; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(110,138,111,.45) 20%, rgba(110,138,111,.45) 80%, transparent);
+}
+.gm-hero-rule-top { top:6px; }
+.gm-hero-rule-bot { bottom:6px; }
+.gm-corner {
+  position:absolute; width:54px; height:54px; pointer-events:none;
+  opacity:.85;
+}
+.gm-corner-tl { top:14px; left:18px; }
+.gm-corner-tr { top:14px; right:18px; }
+.gm-corner-bl { bottom:14px; left:18px; }
+.gm-corner-br { bottom:14px; right:18px; }
 .gm-sword {
-  position:absolute; top:6px; width:28px; height:120px;
-  opacity:.55; pointer-events:none;
+  position:absolute; top:30px; width:36px; height:144px;
+  opacity:.95; pointer-events:none; z-index:1;
+  filter:drop-shadow(0 1px 0 rgba(110,138,111,.18));
 }
-.gm-sword-left  { left:22%; transform:rotate(-5deg); }
-.gm-sword-right { right:22%; transform:rotate(5deg) scaleX(-1); }
+.gm-sword-left  { left:9%; transform:rotate(-6deg); }
+.gm-sword-right { right:9%; transform:rotate(6deg) scaleX(-1); }
 
 .gm-eyebrow {
   font-family:'JetBrains Mono',monospace; font-size:.72rem; letter-spacing:.4em;
@@ -808,15 +883,19 @@ function renderDecor(theme) {
 }
 
 function projectP(p, r) {
-  const phi = p.y * Math.PI / 180;
-  const phiMin = r.latMin * Math.PI / 180, phiMax = r.latMax * Math.PI / 180;
-  const yMerc = Math.log(Math.tan(Math.PI/4 + phi/2));
-  const yMin = Math.log(Math.tan(Math.PI/4 + phiMin/2));
-  const yMax = Math.log(Math.tan(Math.PI/4 + phiMax/2));
-  return [
-    (p.x - r.lonMin) / (r.lonMax - r.lonMin) * r.w,
-    (yMax - yMerc) / (yMax - yMin) * r.h
-  ];
+  // 等距矩形投影：与 china-regions.js 端 project(lo, la) 完全一致。
+  // W=900 H=720 是固定画布尺寸，viewBox 由 r.vbX/vbY/r.w/r.h 自动扩，
+  // 原始 W×H 投影区固定在 viewBox 内 (pad=30, pad) 起始、(W+30, H+30) 终止。
+  const W = 900, H = 720, pad = 30;
+  const lonSpan = r.lonMax - r.lonMin;
+  const latSpan = r.latMax - r.latMin;
+  const scale = Math.min(W / lonSpan, H / latSpan);
+  const offsetX = (W - lonSpan * scale) / 2;
+  const offsetY = (H - latSpan * scale) / 2;
+  const x = (p.x - r.lonMin) * scale + offsetX;
+  const y = (r.latMax - p.y) * scale + offsetY;
+  // 原始画布 (0..W, 0..H) 在 viewBox 内位于 (vbX+pad, vbY+pad) 起始
+  return [r.vbX + pad + x, r.vbY + pad + y];
 }
 
 function renderTrajectory(theme) {
@@ -824,7 +903,7 @@ function renderTrajectory(theme) {
   layer.innerHTML = '';
   if (!window.CHINA_REGIONS || !CHINA_REGIONS[theme.meta.id]) return;
   const r = theme.meta;
-  const visible = PLACES.filter(p => p.x >= r.lonMin - 1 && p.x <= r.lonMax + 1 && p.y >= r.latMin - 1 && p.y <= r.latMax + 1);
+  const visible = PLACES.filter(p => p.x >= r.lonMin && p.x <= r.lonMax && p.y >= r.latMin && p.y <= r.latMax);
   if (visible.length < 2) return;
   visible.sort((a, b) => (a.poems ? a.poems[0].date : a.date || '').localeCompare(b.poems ? b.poems[0].date : b.date || ''));
   for (let i = 0; i < visible.length - 1; i++) {
@@ -850,7 +929,7 @@ function renderCityMarkers(theme) {
   if (!window.CHINA_REGIONS || !CHINA_REGIONS[theme.meta.id]) return;
   const r = theme.meta;
   PLACES.forEach(p => {
-    if (p.x < r.lonMin - 1 || p.x > r.lonMax + 1 || p.y < r.latMin - 1 || p.y > r.latMax + 1) return;
+    if (p.x < r.lonMin || p.x > r.lonMax || p.y < r.latMin || p.y > r.latMax) return;
     const [x, y] = projectP(p, r);
     const outer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     outer.setAttribute('transform', `translate(${x}, ${y})`);
@@ -950,7 +1029,9 @@ function renderRegion(regionId) {
   const theme = { meta: r, stroke: '#5C3D4E', accent: '#6E8A6F' };
   closeNote();
   const svg = document.getElementById('gm-map');
-  svg.setAttribute('viewBox', `0 0 ${r.w} ${r.h}`);
+  const vbx = r.vbX != null ? r.vbX : 0;
+  const vby = r.vbY != null ? r.vbY : 0;
+  svg.setAttribute('viewBox', `${vbx} ${vby} ${r.w} ${r.h}`);
   renderProvinces(theme);
   renderDecor(theme);
   renderTrajectory(theme);

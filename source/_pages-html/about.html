@@ -3,7 +3,35 @@
   <div class="va-container">
     <div class="va-seigaiha" aria-hidden="true"></div>
     <div class="va-corner va-corner-tl" aria-hidden="true"></div>
+    <div class="va-corner va-corner-tr" aria-hidden="true"></div>
+    <div class="va-corner va-corner-bl" aria-hidden="true"></div>
     <div class="va-corner va-corner-br" aria-hidden="true"></div>
+
+    <!-- 双剑饰 -->
+    <svg class="va-sword va-sword-left" viewBox="0 0 60 240" aria-hidden="true">
+      <circle cx="30" cy="10" r="4" fill="none" stroke="#3D2914" stroke-width="1.4" stroke-opacity="0.7"/>
+      <circle cx="30" cy="10" r="1.6" fill="#A8443C" fill-opacity="0.7"/>
+      <line x1="30" y1="14" x2="30" y2="22" stroke="#3D2914" stroke-width="1.6" stroke-opacity="0.7"/>
+      <line x1="30" y1="22" x2="30" y2="190" stroke="#3D2914" stroke-width="2.4" stroke-opacity="0.8"/>
+      <line x1="30" y1="28" x2="30" y2="186" stroke="#5C3D4E" stroke-width="0.6" stroke-opacity="0.45"/>
+      <line x1="14" y1="190" x2="46" y2="190" stroke="#3D2914" stroke-width="2.2" stroke-opacity="0.75"/>
+      <circle cx="14" cy="190" r="2.4" fill="none" stroke="#3D2914" stroke-width="1.2" stroke-opacity="0.65"/>
+      <circle cx="46" cy="190" r="2.4" fill="none" stroke="#3D2914" stroke-width="1.2" stroke-opacity="0.65"/>
+      <line x1="30" y1="190" x2="30" y2="216" stroke="#3D2914" stroke-width="1.6" stroke-opacity="0.7"/>
+      <path d="M30,216 Q26,224 28,232 M30,216 Q34,224 32,232 M30,216 L30,236" stroke="#A8443C" stroke-width="1.4" fill="none" stroke-opacity="0.7"/>
+    </svg>
+    <svg class="va-sword va-sword-right" viewBox="0 0 60 240" aria-hidden="true">
+      <circle cx="30" cy="10" r="4" fill="none" stroke="#3D2914" stroke-width="1.4" stroke-opacity="0.7"/>
+      <circle cx="30" cy="10" r="1.6" fill="#A8443C" fill-opacity="0.7"/>
+      <line x1="30" y1="14" x2="30" y2="22" stroke="#3D2914" stroke-width="1.6" stroke-opacity="0.7"/>
+      <line x1="30" y1="22" x2="30" y2="190" stroke="#3D2914" stroke-width="2.4" stroke-opacity="0.8"/>
+      <line x1="30" y1="28" x2="30" y2="186" stroke="#5C3D4E" stroke-width="0.6" stroke-opacity="0.45"/>
+      <line x1="14" y1="190" x2="46" y2="190" stroke="#3D2914" stroke-width="2.2" stroke-opacity="0.75"/>
+      <circle cx="14" cy="190" r="2.4" fill="none" stroke="#3D2914" stroke-width="1.2" stroke-opacity="0.65"/>
+      <circle cx="46" cy="190" r="2.4" fill="none" stroke="#3D2914" stroke-width="1.2" stroke-opacity="0.65"/>
+      <line x1="30" y1="190" x2="30" y2="216" stroke="#3D2914" stroke-width="1.6" stroke-opacity="0.7"/>
+      <path d="M30,216 Q26,224 28,232 M30,216 Q34,224 32,232 M30,216 L30,236" stroke="#A8443C" stroke-width="1.4" fill="none" stroke-opacity="0.7"/>
+    </svg>
 
     <div class="va-col">
       <!-- Hero -->
@@ -116,7 +144,13 @@
 .va-corner::before { content:''; position:absolute; inset:0; border:2px solid var(--plum); opacity:.32; }
 .va-corner::after  { content:''; position:absolute; inset:6px; border:1px solid var(--sakura); opacity:.42; }
 .va-corner-tl { top:8px; left:8px; } .va-corner-tl::before,.va-corner-tl::after { border-right:0; border-bottom:0; }
+.va-corner-tr { top:8px; right:8px; } .va-corner-tr::before,.va-corner-tr::after { border-left:0; border-bottom:0; }
+.va-corner-bl { bottom:8px; left:8px; } .va-corner-bl::before,.va-corner-bl::after { border-right:0; border-top:0; }
 .va-corner-br { bottom:8px; right:8px; } .va-corner-br::before,.va-corner-br::after { border-left:0; border-top:0; }
+.va-sword { position:absolute; top:34px; width:30px; height:120px; pointer-events:none; z-index:2; opacity:.9; }
+.va-sword-left  { left:5%; transform:rotate(-5deg); }
+.va-sword-right { right:5%; transform:rotate(5deg) scaleX(-1); }
+@media (max-width:780px){ .va-sword { display:none; } }
 
 /* Hero（水平居中） */
 .va-hero { position:relative; z-index:1; text-align:center; padding:2.8rem 1rem 2rem; }

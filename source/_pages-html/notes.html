@@ -230,7 +230,8 @@
           '</a></li>';
       }).join('');
       if (!items) items = '<li class="ik-empty-tip">这一册还空着，等一个开头。</li>';
-      var nbHref = '/notes/' + encodeURIComponent(nb.slug) + '/';
+      // 「论文精读」笔记本：卡片直接跳合集页 /docs/，而不是笔记本详情页
+      var nbHref = nb.redirect || ('/notes/' + encodeURIComponent(nb.slug) + '/');
       return '' +
         '<article class="ik-book" style="cursor:pointer" onclick="if(!event.target.closest(\'a\'))location.href=\'' + nbHref + '\'">' +
         '  <div class="ik-head">' +
