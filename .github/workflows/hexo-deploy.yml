@@ -1,6 +1,6 @@
-name: Deploy Hexo to GitHub Pages
+name: Build Hexo and push to user site
 
-# 触发条件：push 到 backup/site-snapshot-* 或 main 分支
+# 触发条件：push 到任何分支（默认 main）时自动构建并推送到 user site
 on:
   push:
     branches:
@@ -8,12 +8,11 @@ on:
       - 'backup/site-snapshot-*'
   workflow_dispatch:  # 也支持手动触发
 
-# 防止同分支多 workflow 抢资源
 concurrency:
-  group: pages
+  group: deploy
   cancel-in-progress: false
 
-# 默认权限：read；部署步骤需要 write
+# 默认 read；部署步骤需要 write（推送 Yetbye.github.io 仓库的权限来自 GH_PAGES_TOKEN secret）
 permissions:
   contents: write
 
@@ -34,25 +33,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Generate static site
+      - name: Generate static site (public/)
         run: npx hexo generate
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Prepare deploy
+        run: |
+          # 拷贝必要的辅助资源（与 hexo-blog 同级目录里可能需要）
+          # public/ 已含所有内容，cn 健康即可
+          ls public | head
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to Yetbye/Yetbye.github.io (user site)
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: ./public
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          personal_token: ${{ secrets.GH_PAGES_TOKEN }}
+          external_repository: Yetbye/Yetbye.github.io
+          publish_branch: main
+          publish_dir: ./public
+          force_orphan: true
+          commit_message: "deploy: hexo build ${{ github.sha }}"
